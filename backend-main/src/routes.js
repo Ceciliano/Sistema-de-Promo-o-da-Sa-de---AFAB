@@ -32,8 +32,8 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
-var convertLimitToInt = function (req, res, next) {
-  req.query.limit = parseInt(req.query.limit);
+const convertLimitToInt = function(req, res, next) {
+  req.query.limit = parseInt(req.query.limit, 10);
   next();
 };
 

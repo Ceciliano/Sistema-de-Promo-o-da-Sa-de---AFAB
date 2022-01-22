@@ -6,6 +6,7 @@ const childProcess = require('child_process');
 async function awaitWarning() {
   return new Promise(resolve => {
     setTimeout(() => {
+      // eslint-disable-next-line no-console
       console.log('\nPROJECT GENERATOR\n');
       resolve();
     });
