@@ -55,10 +55,10 @@ class StudentController {
       order,
       limit,
       offset: (page - 1) * limit,
-    }).catch((error) => {
+    }).catch(error => {
       console.log(error);
       res.status(400).send(error);
-  });
+    });
 
     return res.json({
       students: data.rows,
@@ -69,7 +69,22 @@ class StudentController {
   }
 
   async store(req, res) {
-    const { name, email, weight, height, birthday } = req.body;
+    const {
+      name,
+      email,
+      weight,
+      height,
+      birthday,
+      atividades,
+      naturalidade,
+      religiao,
+      raca,
+      estadocivil,
+      escolaridade,
+      rendafamiliar,
+      doencascronicas,
+      niveldependencia,
+    } = req.body;
 
     const birthdayParsed = parseISO(birthday);
 
@@ -78,6 +93,15 @@ class StudentController {
       email,
       weight,
       height,
+      atividades,
+      naturalidade,
+      religiao,
+      raca,
+      estadocivil,
+      escolaridade,
+      rendafamiliar,
+      doencascronicas,
+      niveldependencia,
       birthday: new Date(
         Date.UTC(
           birthdayParsed.getFullYear(),
