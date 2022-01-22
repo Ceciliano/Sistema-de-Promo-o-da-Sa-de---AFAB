@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import Dashboard from '~/pages/Dashboard';
-import HelpOrder from '~/pages/HelpOrder';
 import Plan from '~/pages/Plan';
 import PlanEdit from '~/pages/Plan/Edit';
 import Registration from '~/pages/Registration';
@@ -9,9 +8,6 @@ import SignIn from '~/pages/SignIn';
 import Student from '~/pages/Student';
 import StudentShowEdit from '~/pages/Student/ShowEdit';
 import Route from './Route';
-
-
-
 
 export default function Routes() {
   return (
@@ -26,7 +22,6 @@ export default function Routes() {
       <Route path="/plans" exact component={Plan} isPrivate />
       <Route path="/plans/edit" component={PlanEdit} isPrivate />
       <Route path="/registrations" component={Registration} isPrivate />
-      <Route path="/help-orders" component={HelpOrder} isPrivate />
     </Switch>
   );
 }

@@ -410,7 +410,7 @@ export default function Student({ history, location }) {
                           </button>
                           <button
                             disabled={loadingPage ? 1 : 0}
-                            className="edit-button"
+                            className="neutral-button"
                             type="button"
                             onClick={() => {
                               handleShowModalEdit(s);

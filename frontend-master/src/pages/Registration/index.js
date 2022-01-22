@@ -19,9 +19,6 @@ import api from '~/services/api';
 import LoadingIndicator from '~/components/LoadingIndicator';
 
 import Modal from '~/components/Modal';
-import CreateForm from './Form/Create';
-// import EditForm from './Form/Edit';
-
 import {
   Content,
   Header,
@@ -31,7 +28,10 @@ import {
   DivBoxRow,
   Loading,
   ButtonActive,
-} from './styles';
+} from '~/styles/styles';
+
+import CreateForm from './Form/Create';
+// import EditForm from './Form/Edit';
 
 export default function Registration({ location }) {
   const limit = 20;
@@ -485,13 +485,13 @@ export default function Registration({ location }) {
                         <td className="text-center">
                           <button
                             disabled={loadingPage ? 1 : 0}
-                            className="edit-button"
+                            className="neutral-button"
                             type="button"
                             onClick={() => {
                               handleShowModalEdit(s);
                             }}
                           >
-                            editar
+                            Editar
                           </button>
                           <button
                             disabled={loadingPage ? 1 : 0}
@@ -501,7 +501,7 @@ export default function Registration({ location }) {
                               handleDeleteRegistration(s);
                             }}
                           >
-                            apagar
+                            Apagar
                           </button>
                         </td>
                       </tr>

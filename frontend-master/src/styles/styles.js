@@ -23,6 +23,14 @@ export const Header = styled.div`
   }
 `;
 
+export const ButtonActive = styled.button`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  border: 0;
+  color: var(--text-color);
+`;
+
 export const TableBox = styled.div`
   margin-top: 25px;
   background: #fff;
@@ -104,14 +112,14 @@ export const TableBox = styled.div`
         }
 
         &.edit-button {
-          color: var(--color-info-dark);
+          color: var(--color-success-dark);
 
           &:hover {
             color: var(--color-info);
           }
 
           &[disabled] {
-            color: rgba(255, 0, 0, 1);
+            color: rgba(0, 0, 0, 0.3);
             cursor: not-allowed;
           }
         }

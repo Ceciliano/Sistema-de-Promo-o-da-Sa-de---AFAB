@@ -15,8 +15,6 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 
 import LoadingIndicator from '~/components/LoadingIndicator';
-import Create from './Modal/Create';
-
 import {
   Content,
   Header,
@@ -25,7 +23,9 @@ import {
   EmptyTable,
   DivBoxRow,
   Loading,
-} from './styles';
+} from '~/styles/styles';
+
+import Create from './Modal/Create';
 
 export default function Plan({ history, location }) {
   const limit = 20;
@@ -359,13 +359,13 @@ export default function Plan({ history, location }) {
                         <td className="text-right">{s.formatedPrice}</td>
                         <td className="text-center">
                           <button
-                            className="edit-button"
+                            className="neutral-button"
                             type="button"
                             onClick={() => {
                               handleShowEdit(s);
                             }}
                           >
-                            editar
+                            Editar
                           </button>
                           <button
                             className="delete-button"
@@ -374,7 +374,7 @@ export default function Plan({ history, location }) {
                               handleDeletePlan(s);
                             }}
                           >
-                            apagar
+                            Apagar
                           </button>
                         </td>
                       </tr>
