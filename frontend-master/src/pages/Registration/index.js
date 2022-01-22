@@ -465,7 +465,7 @@ export default function Registration({ location }) {
                             : 'Ambas'}
                         </ButtonActive>
                       </th>
-                      <th width="100" />
+                      <th width="120" />
                     </tr>
                   </thead>
                   <tbody>

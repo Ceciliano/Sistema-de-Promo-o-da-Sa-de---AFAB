@@ -348,7 +348,7 @@ export default function Plan({ history, location }) {
                         />
                         Valor p/ Mês
                       </th>
-                      <th width="100" />
+                      <th width="120" />
                     </tr>
                   </thead>
                   <tbody>

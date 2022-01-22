@@ -5,6 +5,8 @@ import { Form, Input } from '@rocketseat/unform';
 import { differenceInYears, format, subYears } from 'date-fns';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import ReactSelect from '~/components/ReactSelect';
+
 import * as Yup from 'yup';
 
 import api from '~/services/api';
@@ -129,7 +131,7 @@ export default function Create({ handleClose, handleSave }) {
           <hr />
 
           <div className="content">
-            <label>Nome Completo</label>
+            <label>*Nome Completo</label>
             <Input type="text" name="name" placeholder="John Doe" />
 
             <label>Endereço de e-mail</label>
@@ -138,7 +140,7 @@ export default function Create({ handleClose, handleSave }) {
             <DivBoxRow>
               <DivBoxColumn>
                 <label>
-                  Idade {age ? <span className="age">{age} anos</span> : null}
+                  *Idade {age ? <span className="age">{age} anos</span> : null}
                 </label>
                 <DatePicker name="birthday" onChange={handleDatePickerChange} />
               </DivBoxColumn>
@@ -155,6 +157,60 @@ export default function Create({ handleClose, handleSave }) {
                 <InputMaskUnform name="height" mask="9.99" type="text" />
               </DivBoxColumn>
             </DivBoxRow>
+
+            <label>Atividades grupais de saúde</label>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Dança, Passeios, Artesanato, Musculação"
+            />
+
+            <DivBoxRow>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="naturalidade"
+                  label="Naturalidade"
+                  options={[
+                    { id: 'teste', title: 'teste' },
+                    { id: 'teste1', title: 'teste1' },
+                  ]}
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>*Religião/crença</label>
+                <Input type="text" name="name" placeholder="" />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>Raça/cor</label>
+                <Input type="text" name="name" placeholder="John Doe" />
+              </DivBoxColumn>
+            </DivBoxRow>
+
+            <DivBoxRow>
+              <DivBoxColumn>
+                <label>*Estado Civil</label>
+                <Input type="text" name="name" placeholder="John Doe" />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>*Escolaridade</label>
+                <Input type="text" name="name" placeholder="John Doe" />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>*Renda familiar</label>
+                <Input type="text" name="name" placeholder="John Doe" />
+              </DivBoxColumn>
+            </DivBoxRow>
+
+            <label>*Doenças crônicas</label>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
+            />
+            <label>
+              *Nível de dependência para Atividades Básicas para Vida
+            </label>
+            <Input type="text" name="name" placeholder="John Doe" />
           </div>
         </Form>
       </ModalContent>

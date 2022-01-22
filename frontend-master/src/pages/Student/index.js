@@ -378,7 +378,7 @@ export default function Student({ history, location }) {
                         />
                         Idade
                       </th>
-                      <th width="150" />
+                      <th width="180" />
                     </tr>
                   </thead>
                   <tbody>
@@ -396,7 +396,7 @@ export default function Student({ history, location }) {
                               handleShowEdit(s);
                             }}
                           >
-                            Aplicar
+                            Consulta
                           </button>
                           <button
                             disabled={loadingPage ? 1 : 0}
