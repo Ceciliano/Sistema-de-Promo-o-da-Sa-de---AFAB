@@ -16,10 +16,7 @@ import api from '~/services/api';
 
 import LoadingIndicator from '~/components/LoadingIndicator';
 
-import Create from './Modal/Create';
 import Modal from '~/components/Modal';
-import EditForm from './Form/Edit';
-
 import {
   Content,
   Header,
@@ -28,8 +25,9 @@ import {
   EmptyTable,
   DivBoxRow,
   Loading,
-  Alert,
-} from './styles';
+} from '~/styles/styles';
+import Create from './Modal/Create';
+import EditForm from './Form/Edit';
 
 export default function Student({ history, location }) {
   const limit = 20;
@@ -165,7 +163,7 @@ export default function Student({ history, location }) {
     if (
       // eslint-disable-next-line no-alert
       window.confirm(
-        'Tem certeza que deseja excluir o estudante?\nEsta ação é irreversível!'
+        'Tem certeza que deseja excluir a Idosa?\nEsta ação é irreversível!'
       )
     ) {
       try {
@@ -380,8 +378,7 @@ export default function Student({ history, location }) {
                         />
                         Idade
                       </th>
-                      <th width="100" />
-                      <th width="50">modal</th>
+                      <th width="150" />
                     </tr>
                   </thead>
                   <tbody>
@@ -399,7 +396,7 @@ export default function Student({ history, location }) {
                               handleShowEdit(s);
                             }}
                           >
-                            editar
+                            Aplicar
                           </button>
                           <button
                             disabled={loadingPage ? 1 : 0}
@@ -409,10 +406,8 @@ export default function Student({ history, location }) {
                               handleDeleteStudent(s);
                             }}
                           >
-                            apagar
+                            Apagar
                           </button>
-                        </td>
-                        <td className="text-center">
                           <button
                             disabled={loadingPage ? 1 : 0}
                             className="edit-button"
@@ -421,7 +416,7 @@ export default function Student({ history, location }) {
                               handleShowModalEdit(s);
                             }}
                           >
-                            edit
+                            Editar
                           </button>
                         </td>
                       </tr>

@@ -111,6 +111,18 @@ export const TableBox = styled.div`
           }
 
           &[disabled] {
+            color: rgba(255, 0, 0, 1);
+            cursor: not-allowed;
+          }
+        }
+        &.neutral-button {
+          color: var(--color-info-dark);
+
+          &:hover {
+            color: var(--color-info);
+          }
+
+          &[disabled] {
             color: rgba(0, 0, 0, 0.3);
             cursor: not-allowed;
           }

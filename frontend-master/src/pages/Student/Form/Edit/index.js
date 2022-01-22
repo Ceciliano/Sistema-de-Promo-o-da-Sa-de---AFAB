@@ -105,7 +105,7 @@ export default function EditForm({ handleSave, handleClose, oldStudent }) {
           context={{ age }}
         >
           <header>
-            <h1>Edição de aluno</h1>
+            <h1>Editar Idosa</h1>
             <Buttons>
               <ButtonClose
                 type="button"

@@ -108,7 +108,7 @@ export default function Create({ handleClose, handleSave }) {
           context={{ age }}
         >
           <header>
-            <h1>Cadastro de aluno</h1>
+            <h1>Cadastrar Idosa</h1>
             <div className="buttons">
               <button
                 type="button"
