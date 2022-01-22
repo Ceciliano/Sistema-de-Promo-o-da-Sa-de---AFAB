@@ -21,6 +21,15 @@ module.exports = {
         ),
         created_at: new Date(),
         updated_at: new Date(),
+        atividades: null,
+        naturalidade: null,
+        religiao: null,
+        raca: null,
+        estadocivil: null,
+        escolaridade: null,
+        rendafamiliar: null,
+        doencascronicas: null,
+        niveldependencia: null,
       };
     });
 

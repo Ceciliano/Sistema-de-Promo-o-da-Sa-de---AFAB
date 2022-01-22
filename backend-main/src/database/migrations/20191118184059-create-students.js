@@ -38,47 +38,47 @@ module.exports = {
       },
       atividades: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       naturalidade: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       religiao: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       raca: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       estadocivil: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       escolaridade: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       rendafamiliar: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       doencascronicas: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
       niveldependencia: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: false,
       },
     });
