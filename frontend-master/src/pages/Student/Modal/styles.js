@@ -125,6 +125,7 @@ export const DivBoxColumn = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 200px;
+  width: 100%;
 
   label {
     display: block;

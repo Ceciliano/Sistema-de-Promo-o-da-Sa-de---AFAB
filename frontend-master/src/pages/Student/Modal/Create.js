@@ -161,39 +161,72 @@ export default function Create({ handleClose, handleSave }) {
             <label>Atividades grupais de saúde</label>
             <Input
               type="text"
-              name="name"
+              name="atividades"
               placeholder="Dança, Passeios, Artesanato, Musculação"
             />
 
             <DivBoxRow>
               <DivBoxColumn>
-                <ReactSelect
+                <label>Naturalidade</label>
+                <Input
+                  type="text"
                   name="naturalidade"
-                  label="Naturalidade"
+                  placeholder="Brasileira"
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="religiao"
+                  label="*Religião/crença"
                   options={[
-                    { id: 'teste', title: 'teste' },
-                    { id: 'teste1', title: 'teste1' },
+                    { id: 'catolica', title: 'Católica' },
+                    { id: 'evangelica', title: 'Evangélica' },
+                    { id: 'espirita', title: 'Espírita' },
+                    { id: 'testemunhadejeova', title: 'Testemunha de Jeová' },
+                    { id: 'outras', title: 'Outras' },
                   ]}
                 />
               </DivBoxColumn>
               <DivBoxColumn>
-                <label>*Religião/crença</label>
-                <Input type="text" name="name" placeholder="" />
-              </DivBoxColumn>
-              <DivBoxColumn>
-                <label>Raça/cor</label>
-                <Input type="text" name="name" placeholder="John Doe" />
+                <ReactSelect
+                  name="raca"
+                  label="Raça/cor"
+                  options={[
+                    { id: 'branca', title: 'Branca' },
+                    { id: 'negra', title: 'Negra' },
+                    { id: 'mulata', title: 'Parda/mulata' },
+                    { id: 'amarela', title: 'Amarela' },
+                    { id: 'indigena', title: 'Indígena ou de origem indígena' },
+                  ]}
+                />
               </DivBoxColumn>
             </DivBoxRow>
 
             <DivBoxRow>
               <DivBoxColumn>
-                <label>*Estado Civil</label>
-                <Input type="text" name="name" placeholder="John Doe" />
+                <ReactSelect
+                  name="estadocivil"
+                  label="*Estado Civil"
+                  options={[
+                    { id: 'solteira', title: 'Solteira' },
+                    { id: 'casada', title: 'Casada' },
+                    { id: 'divorciada', title: 'Divorciada' },
+                    { id: 'viuva', title: 'Viúva' },
+                  ]}
+                />
               </DivBoxColumn>
               <DivBoxColumn>
-                <label>*Escolaridade</label>
-                <Input type="text" name="name" placeholder="John Doe" />
+                <ReactSelect
+                  name="escolaridade"
+                  label="Escolaridade"
+                  options={[
+                    { id: 'nenhuma', title: 'Nenhuma' },
+                    { id: 'ensinofundamental', title: 'Ensino Fundamental' },
+                    { id: 'ensinomedio', title: 'Ensino Médio' },
+                    { id: 'tecnico', title: 'Ensino Médio - Técnico' },
+                    { id: 'ensinosuperior', title: 'Ensino Superior' },
+                  ]}
+                />
               </DivBoxColumn>
               <DivBoxColumn>
                 <label>*Renda familiar</label>
@@ -210,7 +243,11 @@ export default function Create({ handleClose, handleSave }) {
             <label>
               *Nível de dependência para Atividades Básicas para Vida
             </label>
-            <Input type="text" name="name" placeholder="John Doe" />
+            <Input
+              type="text"
+              name="name"
+              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+            />
           </div>
         </Form>
       </ModalContent>
