@@ -36,6 +36,51 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      atividades: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      naturalidade: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      religiao: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      raca: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      estadocivil: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      escolaridade: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      rendafamiliar: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      doencascronicas: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
+      niveldependencia: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+      },
     });
   },
 

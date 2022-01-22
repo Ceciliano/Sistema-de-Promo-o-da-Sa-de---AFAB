@@ -288,7 +288,7 @@ export default function Student({ history, location }) {
               <MdSearch color="#444" size={16} />
               <input
                 type="text"
-                placeholder="Buscar aluno"
+                placeholder="Buscar Idosa"
                 onChange={handleQueryChange}
               />
             </label>
