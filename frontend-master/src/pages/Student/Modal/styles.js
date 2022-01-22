@@ -15,12 +15,11 @@ export const Container = styled.div`
 export const ModalContent = styled.section`
   position: relative;
   background: #fefefe;
-  margin: 15% auto;
+  margin: 30px auto;
   padding: 20px;
   border: 1px solid #888;
   border-radius: 4px;
   width: 80%;
-  max-width: 700px;
   height: auto;
 
   display: flex;

@@ -14,7 +14,8 @@ import api from '~/services/api';
 import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
 
-import { Container, ModalContent, DivBoxRow, DivBoxColumn } from './styles';
+import { DivBoxRow, DivBoxColumn } from '~/styles/styles';
+import { Container, ModalContent } from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -229,15 +230,22 @@ export default function Create({ handleClose, handleSave }) {
                 />
               </DivBoxColumn>
               <DivBoxColumn>
-                <label>*Renda familiar</label>
-                <Input type="text" name="name" placeholder="John Doe" />
+                <ReactSelect
+                  name="rendafamiliar"
+                  label="*Renda familiar"
+                  options={[
+                    { id: 'ate2sm', title: 'Até 2 SM' },
+                    { id: 'de2a5sm', title: 'De 2 a 5 SM' },
+                    { id: 'maisde5sm', title: 'Mais de 5 SM' },
+                  ]}
+                />
               </DivBoxColumn>
             </DivBoxRow>
 
             <label>*Doenças crônicas</label>
             <Input
               type="text"
-              name="name"
+              name="doencascronicas"
               placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
             />
             <label>
@@ -245,7 +253,7 @@ export default function Create({ handleClose, handleSave }) {
             </label>
             <Input
               type="text"
-              name="name"
+              name="niveldependencia"
               placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
             />
           </div>

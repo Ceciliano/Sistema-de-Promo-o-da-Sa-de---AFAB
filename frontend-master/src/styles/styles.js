@@ -243,6 +243,31 @@ export const DivBoxRow = styled.div`
   }
 `;
 
+export const DivBoxColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  label {
+    display: block;
+    align-self: flex-start;
+
+    span {
+      text-transform: none;
+
+      &.age {
+        margin-left: 25px;
+        font-weight: normal;
+      }
+    }
+  }
+
+  & + div {
+    padding-left: 20px;
+  }
+`;
+
 export const Alert = styled.div`
   width: 80%;
   margin: 25px auto 0;
