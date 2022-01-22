@@ -34,10 +34,10 @@ export default function SignIn() {
       <span className="logo">GYMPOINT</span>
       <Form schema={schema} onSubmit={handleSubmit}>
         <label htmlFor="email">Seu e-mail</label>
-        <Input type="email" name="email" placeholder="Email" />
+        <Input type="email" name="email" placeholder="Email" value="admin@gympoint.com" />
 
         <label htmlFor="password">Sua senha</label>
-        <Input type="password" name="password" placeholder="Senha" />
+        <Input type="password" name="password" placeholder="Senha" value="123456"/>
 
         <button type="submit">
           {loading ? 'Carregando...' : 'Entrar no sistema'}
