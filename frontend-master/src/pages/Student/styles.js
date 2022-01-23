@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 export const Container = styled.div`
   position: fixed;
@@ -112,6 +112,75 @@ export const ModalContent = styled.section`
   }
 `;
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    svg {
+      margin-right: 10px;
+    }
+
+    border: 0;
+    padding: 0 10px;
+    margin-left: 10px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+`;
+
+export const ButtonClose = styled.button`
+  background: var(--text-color-light);
+
+  &:hover {
+    background: var(--text-color-dark);
+  }
+
+  &[disabled]:hover {
+    background: var(--text-color-light);
+  }
+`;
+
+export const ButtonSave = styled.button`
+  background: var(--color-primary);
+
+  ${props =>
+    props.saving &&
+    css`
+      svg {
+        animation: ${rotate} 2s linear infinite;
+      }
+    `}
+
+  &:hover {
+    background: var(--color-primary-dark);
+  }
+
+  &[disabled]:hover {
+    background: var(--color-primary);
+  }
+`;
+
 export const DivBoxRow = styled.div`
   display: flex;
   align-items: flex-start;
@@ -124,7 +193,6 @@ export const DivBoxColumn = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 200px;
-  width: 100%;
 
   label {
     display: block;

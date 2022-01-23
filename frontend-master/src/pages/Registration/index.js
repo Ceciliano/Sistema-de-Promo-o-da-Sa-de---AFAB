@@ -31,7 +31,7 @@ import {
 } from '~/styles/styles';
 
 import CreateForm from './Form/Create';
-// import EditForm from './Form/Edit';
+import EditForm from './Form/Edit';
 
 export default function Registration({ location }) {
   const limit = 20;
@@ -324,7 +324,7 @@ export default function Registration({ location }) {
 
   return (
     <>
-      {/* <Modal visible={selectRegistrationToEdit !== null}>
+      <Modal visible={selectRegistrationToEdit !== null}>
         {selectRegistrationToEdit ? (
           <EditForm
             oldRegistration={selectRegistrationToEdit}
@@ -339,7 +339,7 @@ export default function Registration({ location }) {
             handleClose={() => setSelectedRegistrationToEdit(null)}
           />
         ) : null}
-      </Modal> */}
+      </Modal>
 
       <Modal visible={showCreate}>
         <CreateForm

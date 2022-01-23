@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 import { differenceInYears, format, subYears } from 'date-fns';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
-import { toast } from 'react-toastify';
 import ReactSelect from '~/components/ReactSelect';
-
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 import api from '~/services/api';
@@ -15,7 +14,13 @@ import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
 
 import { DivBoxRow, DivBoxColumn } from '~/styles/styles';
-import { Container, ModalContent } from '../styles';
+import {
+  Container,
+  ModalContent,
+  Buttons,
+  ButtonSave,
+  ButtonClose,
+} from '../styles';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -44,27 +49,15 @@ const schema = Yup.object().shape({
   niveldependencia: Yup.string(),
 });
 
-export default function Create({ handleClose, handleSave }) {
-  const newStudent = {
-    name: '',
-    email: '',
-    birthday: new Date(),
-    height: '',
-    weight: '',
-    atividades: '',
-    naturalidade: '',
-    religiao: '',
-    raca: '',
-    estadocivil: '',
-    escolaridade: '',
-    rendafamiliar: '',
-    doencascronicas: '',
-    niveldependencia: '',
-    age: null,
+export default function EditForm({ handleSave, handleClose, oldStudent }) {
+  const student = {
+    ...oldStudent,
+    birthday: new Date(oldStudent.birthday),
+    height: Number(oldStudent.height / 100).toFixed(2),
+    weight: `00${Number(oldStudent.weight / 100).toFixed(2)}`.substr(-6),
   };
-  const [student, setStudent] = useState(newStudent);
   const [errorApi, setErrorApi] = useState(null);
-  const [age, setAge] = useState(null);
+  const [age, setAge] = useState(student.age);
 
   useEffect(() => {
     if (errorApi) {
@@ -74,19 +67,14 @@ export default function Create({ handleClose, handleSave }) {
           errorApi.response.data.messages[0].errors[0]
         ) {
           toast.error(
-            `Aluno não cadastrado: ${errorApi.response.data.messages[0].errors[0]}`
+            `Aluno não atualizado: ${errorApi.response.data.messages[0].errors[0]}`
           );
         }
       } else {
-        toast.error(`Aluno não cadastrado: ${errorApi}`);
+        toast.error(`Aluno não atualizado: ${errorApi}`);
       }
     }
   }, [errorApi]);
-
-  async function handleInternalClose() {
-    await setStudent(newStudent);
-    handleClose();
-  }
 
   async function handleInternalSave(data) {
     try {
@@ -97,11 +85,9 @@ export default function Create({ handleClose, handleSave }) {
         birthday: format(data.birthday, 'yyyy-MM-dd'),
       };
 
-      const response = await api.post('/students', data);
+      const response = await api.put(`/students/${student.id}`, data);
 
       handleSave(response.data);
-
-      handleInternalClose();
     } catch (error) {
       console.tron.log(error);
       setErrorApi(error);
@@ -122,28 +108,27 @@ export default function Create({ handleClose, handleSave }) {
           context={{ age }}
         >
           <header>
-            <h1>Cadastrar Idosa</h1>
-            <div className="buttons">
-              <button
+            <h1>Editar Idosa</h1>
+            <Buttons>
+              <ButtonClose
                 type="button"
                 className="close"
-                onClick={handleInternalClose}
+                onClick={() => handleClose()}
               >
                 <MdKeyboardArrowLeft color="#fff" size={16} />
                 Voltar
-              </button>
-
-              <button type="submit" className="save">
+              </ButtonClose>
+              <ButtonSave type="submit" className="save">
                 <MdDone color="#fff" size={16} />
-                Salvar
-              </button>
-            </div>
+                Atualizar
+              </ButtonSave>
+            </Buttons>
           </header>
 
           <hr />
 
           <div className="content">
-            <label>*Nome Completo</label>
+            <label>Nome Completo</label>
             <Input type="text" name="name" placeholder="John Doe" />
 
             <label>Endereço de e-mail</label>
@@ -152,7 +137,7 @@ export default function Create({ handleClose, handleSave }) {
             <DivBoxRow>
               <DivBoxColumn>
                 <label>
-                  *Idade {age ? <span className="age">{age} anos</span> : null}
+                  Idade {age ? <span className="age">{age} anos</span> : null}
                 </label>
                 <DatePicker name="birthday" onChange={handleDatePickerChange} />
               </DivBoxColumn>
@@ -169,7 +154,6 @@ export default function Create({ handleClose, handleSave }) {
                 <InputMaskUnform name="height" mask="9.99" type="text" />
               </DivBoxColumn>
             </DivBoxRow>
-
             <label>Atividades grupais de saúde</label>
             <Input
               type="text"
@@ -274,7 +258,23 @@ export default function Create({ handleClose, handleSave }) {
   );
 }
 
-Create.propTypes = {
+EditForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
+  oldStudent: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    birthday: PropTypes.string,
+    weight: PropTypes.number,
+    height: PropTypes.number,
+    atividades: PropTypes.number,
+    naturalidade: PropTypes.number,
+    religiao: PropTypes.number,
+    raca: PropTypes.number,
+    estadocivil: PropTypes.number,
+    escolaridade: PropTypes.number,
+    rendafamiliar: PropTypes.number,
+    doencascronicas: PropTypes.number,
+    niveldependencia: PropTypes.number,
+  }).isRequired,
 };

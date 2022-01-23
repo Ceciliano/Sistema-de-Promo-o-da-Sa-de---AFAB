@@ -27,7 +27,7 @@ import {
   Loading,
 } from '~/styles/styles';
 import Create from './Modal/Create';
-import EditForm from './Form/Edit';
+import EditForm from './Form';
 
 export default function Student({ history, location }) {
   const limit = 20;
