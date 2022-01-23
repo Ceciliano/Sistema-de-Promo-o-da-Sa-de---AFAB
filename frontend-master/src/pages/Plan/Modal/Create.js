@@ -8,25 +8,25 @@ import * as Yup from 'yup';
 
 import api from '~/services/api';
 
-import InputMaskUnform from '~/components/InputMaskUnform';
-
 import { Container, ModalContent, DivBoxRow, DivBoxColumn } from '~/styles/styles';
 
-const schema = Yup.object().shape({
+var schema = Yup.object().shape({
   title: Yup.string()
     .min(3, 'O Título deve ter no mínimo três letras')
-    .required('O Título é obrigatório')
+    .required('O Título é obrigatório'),
+  respostas: Yup.array().of(
+    Yup.object().shape({
+      title: Yup.string(),
+    })
+  )
 });
 
 export default function Create({ handleClose, handleSave }) {
 
-  const newPlan = {
-    title: ''
-  }
+  const newPlan = { title: '', respostas:[{ title: '' }] }
 
   const [plan, setPlan] = useState(newPlan);
   const [errorApi, setErrorApi] = useState(null);
-  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (errorApi) {
@@ -50,6 +50,14 @@ export default function Create({ handleClose, handleSave }) {
     handleClose();
   }
 
+  async function handleAddInput() {
+    await setPlan({...plan, respostas: [...plan.respostas, newPlan.respostas[0]]});
+  }
+
+  async function handleLessInput(_item) {
+    console(_item);
+  }
+
   async function handleInternalSave(data) {
     try {
       const response = await api.post('/plans', data);
@@ -68,7 +76,6 @@ export default function Create({ handleClose, handleSave }) {
           schema={schema}
           initialData={plan}
           onSubmit={handleInternalSave}
-          context={{ total }}
         >
           <header>
             <h1>Cadastro de Comportamentos/Aspectos</h1>
@@ -94,6 +101,34 @@ export default function Create({ handleClose, handleSave }) {
           <div className="content">
             <label>Pergunta do Comportamentos/Aspectos</label>
             <Input type="text" name="title" />
+            <DivBoxRow>
+              {plan.respostas.map(function(object, i){
+                  return(
+                      <><DivBoxColumn>
+                      <label>Resposta {i + 1}</label>
+                      <Input type="text" name={`respostas.${i}.title`} />
+                      </DivBoxColumn><DivBoxColumn>
+                        <button
+                          className="less"
+                          type="button"
+                          onClick={i=>handleLessInput(i)}
+                        >
+                          -
+                        </button>
+                      </DivBoxColumn></>
+                    );
+              })}
+              
+              <DivBoxColumn>
+                <button
+                  className="add"
+                  type="button"
+                  onClick={handleAddInput}
+                >
+                  +
+                </button>
+              </DivBoxColumn>
+            </DivBoxRow>
           </div>
         </Form>
       </ModalContent>
