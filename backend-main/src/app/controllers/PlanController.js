@@ -1,5 +1,6 @@
 import { Op } from 'sequelize';
 import Plan from '../models/Plan';
+import Respostas from '../models/Respostas';
 
 class PlanController {
   async index(req, res) {
@@ -32,10 +33,16 @@ class PlanController {
   }
 
   async store(req, res) {
-    const { title } = req.body;
-
+    const { title, respostas } = req.body;
     const newRecord = await Plan.create({
       title,
+    });
+
+    respostas.map(key => {
+      Respostas.create({
+        title: key.title,
+        plan_id: newRecord.dataValues.id,
+      });
     });
 
     return res.json(newRecord);

@@ -96,8 +96,6 @@ class RegistrationController {
   async store(req, res) {
     const { student_id, plan_id, start_date } = req.body;
 
-    const student = await Student.findByPk(student_id);
-
     const plan = await Plan.findByPk(plan_id);
 
     const startDateParsed = parseISO(start_date);

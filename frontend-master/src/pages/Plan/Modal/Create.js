@@ -23,7 +23,7 @@ var schema = Yup.object().shape({
 
 export default function Create({ handleClose, handleSave }) {
 
-  const newPlan = { title: '', respostas:[{ title: '' }] }
+  const newPlan = { title: '', respostas:[{ title: '' },{ title: '' }] }
 
   const [plan, setPlan] = useState(newPlan);
   const [errorApi, setErrorApi] = useState(null);
@@ -46,16 +46,17 @@ export default function Create({ handleClose, handleSave }) {
   }, [errorApi]);
 
   async function handleInternalClose() {
-    await setPlan(newPlan);
+    setPlan(newPlan);
     handleClose();
   }
 
   async function handleAddInput() {
-    await setPlan({...plan, respostas: [...plan.respostas, newPlan.respostas[0]]});
+    setPlan({ ...plan, respostas: [...plan.respostas, newPlan.respostas[0]] });
   }
 
   async function handleLessInput(_item) {
-    console(_item);
+    plan.respostas.splice(_item, 1);
+    setPlan({ ...plan });
   }
 
   async function handleInternalSave(data) {
@@ -104,30 +105,28 @@ export default function Create({ handleClose, handleSave }) {
             <DivBoxRow>
               {plan.respostas.map(function(object, i){
                   return(
-                      <><DivBoxColumn>
-                      <label>Resposta {i + 1}</label>
-                      <Input type="text" name={`respostas.${i}.title`} />
-                      </DivBoxColumn><DivBoxColumn>
-                        <button
-                          className="less"
-                          type="button"
-                          onClick={i=>handleLessInput(i)}
-                        >
-                          -
-                        </button>
-                      </DivBoxColumn></>
+                      <DivBoxColumn key={i}>
+                        <label>Resposta {i + 1}</label>
+                        <Input type="text" name={`respostas.${i}.title`} />
+                      </DivBoxColumn>
                     );
               })}
-              
-              <DivBoxColumn>
-                <button
-                  className="add"
-                  type="button"
-                  onClick={handleAddInput}
-                >
-                  +
-                </button>
-              </DivBoxColumn>
+              {plan.respostas.length > 2 &&
+                  <button
+                    className="less"
+                    type="button"
+                    onClick={()=>handleLessInput(plan.respostas.length-1)}
+                  >
+                    -
+                  </button>
+              }
+              <button
+                className="add"
+                type="button"
+                onClick={handleAddInput}
+              >
+                +
+              </button>
             </DivBoxRow>
           </div>
         </Form>

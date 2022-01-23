@@ -181,8 +181,6 @@ export default function Plan({ history, location }) {
 
   function handleSortOrder(field, order) {
     let tempTitleOrder = titleOrder;
-    let tempDurationOrder = durationOrder;
-    let tempPriceOrder = priceOrder;
 
     if (field === 'title') {
       if (order === tempTitleOrder) {
