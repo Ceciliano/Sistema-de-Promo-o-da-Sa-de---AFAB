@@ -60,13 +60,34 @@ class PlanController {
   async update(req, res) {
     const plan = await Plan.findByPk(req.params.id);
 
-    const { title } = req.body;
+    const { title, respostas } = req.body;
 
     await plan.update({
       title,
     });
+    await Respostas.destroy({ where: { plan_id: plan.dataValues.id } });
+    await Promise.all(
+      respostas.map(async key => {
+        await Respostas.create({
+          title: key.title,
+          plan_id: plan.dataValues.id,
+        });
+      })
+    );
 
-    return res.json(plan);
+    const response = await Plan.findOne({
+      where: {
+        id: req.params.id,
+      },
+      include: [
+        {
+          model: Respostas,
+          as: 'respostas',
+        },
+      ],
+    });
+
+    return res.json(response);
   }
 
   async delete(req, res) {

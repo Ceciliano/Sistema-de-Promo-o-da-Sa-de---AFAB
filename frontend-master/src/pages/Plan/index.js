@@ -211,7 +211,7 @@ export default function Plan({ history, location }) {
                   plans.map(s => (s.id === res.data.id ? res.data : s))
                 );
                 setSelectedPlanToEdit(null);
-                toast.success(`Aluno alterado com sucesso! Nome: ${res.data.name}`);
+                toast.success(`Aluno alterado com sucesso! Nome: ${res.data.title}`);
               })}
             handleClose={() => setSelectedPlanToEdit(null)}
           />
