@@ -68,7 +68,7 @@ export default createGlobalStyle`
     margin: 0 auto;
     width: 124px;
     img {
-      width: 85px;
+      width: 120px;
       display: inline-block;
       position: relative;
       top: 0;
