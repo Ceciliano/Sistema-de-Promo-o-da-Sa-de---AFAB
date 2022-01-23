@@ -33,19 +33,43 @@ const schema = Yup.object().shape({
   height: Yup.number()
     .min(1.0, 'A Altura deve ser no mínimo de 1 metro')
     .required('A Altura é obrigatória'),
+  atividades: Yup.string(),
+  naturalidade: Yup.string(),
+  religiao: Yup.string(),
+  raca: Yup.string(),
+  estadocivil: Yup.string(),
+  escolaridade: Yup.string(),
+  rendafamiliar: Yup.string(),
+  doencascronicas: Yup.string(),
+  niveldependencia: Yup.string(),
 });
 
 export default function Create({ handleClose, handleSave }) {
-  const [student, setStudent] = useState({
+  const newStudent = {
     name: '',
     email: '',
     birthday: new Date(),
     height: '',
     weight: '',
+    atividades: '',
+    naturalidade: '',
+    religiao: '',
+    raca: '',
+    estadocivil: '',
+    escolaridade: '',
+    rendafamiliar: '',
+    doencascronicas: '',
+    niveldependencia: '',
     age: null,
-  });
+  };
+  const [student, setStudent] = useState(newStudent);
   const [errorApi, setErrorApi] = useState(null);
   const [age, setAge] = useState(null);
+  const [religiao, _setReligiao] = useState();
+
+  function handleReligiaoChange(_religiao) {
+    _setReligiao(_religiao);
+  }
 
   useEffect(() => {
     if (errorApi) {
@@ -65,15 +89,7 @@ export default function Create({ handleClose, handleSave }) {
   }, [errorApi]);
 
   async function handleInternalClose() {
-    await setStudent({
-      name: '',
-      email: '',
-      birthday: new Date(),
-      height: 0,
-      weight: 0,
-      age: null,
-    });
-
+    await setStudent(newStudent);
     handleClose();
   }
 
@@ -179,6 +195,7 @@ export default function Create({ handleClose, handleSave }) {
                 <ReactSelect
                   name="religiao"
                   label="*Religião/crença"
+                  onChange={handleReligiaoChange}
                   options={[
                     { id: 'catolica', title: 'Católica' },
                     { id: 'evangelica', title: 'Evangélica' },

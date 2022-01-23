@@ -16,6 +16,15 @@ class Student extends Model {
             return differenceInYears(new Date(), this.birthday);
           },
         },
+        atividades: Sequelize.STRING,
+        naturalidade: Sequelize.STRING,
+        religiao: Sequelize.STRING,
+        raca: Sequelize.STRING,
+        estadocivil: Sequelize.STRING,
+        escolaridade: Sequelize.STRING,
+        rendafamiliar: Sequelize.STRING,
+        doencascronicas: Sequelize.STRING,
+        niveldependencia: Sequelize.STRING,
       },
       { sequelize }
     );
