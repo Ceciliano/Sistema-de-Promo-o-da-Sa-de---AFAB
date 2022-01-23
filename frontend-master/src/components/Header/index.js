@@ -7,8 +7,7 @@ import { signOut } from '~/store/modules/auth/actions';
 
 import { Container, Content, ButtonBox } from './styles';
 
-import logoLeft from '~/assets/logo/logo-l@1x.png';
-import logoRight from '~/assets/logo/logo-r@1x.png';
+import logo from '~/assets/logo/logo@1x.png';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -23,10 +22,9 @@ export default function Header() {
         <nav>
           <Link to="/dashboard">
             <span className="logo">
-              <img src={logoLeft} alt="" />
-              <img src={logoRight} alt="" />
+              <img src={logo} alt="" />
             </span>
-            <span className="logoText">GYMPOINT</span>
+            <span className="logoText">Sistema de Promoção da Saúde - AFAB</span>
           </Link>
           <NavLink to="/students">Idosas</NavLink>
           <NavLink to="/plans">Comportamentos e Aspectos</NavLink>

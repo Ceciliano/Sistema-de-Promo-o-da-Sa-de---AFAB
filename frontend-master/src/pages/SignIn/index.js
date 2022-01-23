@@ -6,8 +6,7 @@ import * as Yup from 'yup';
 
 import { signInRequest } from '~/store/modules/auth/actions';
 
-import logoLeft from '~/assets/logo/logo-l@2x.png';
-import logoRight from '~/assets/logo/logo-r@2x.png';
+import logo from '~/assets/logo/logo@1x.png';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -28,10 +27,9 @@ export default function SignIn() {
   return (
     <>
       <div className="logo">
-        <img src={logoLeft} alt="" />
-        <img src={logoRight} alt="" />
+        <img src={logo} alt="" />
       </div>
-      <span className="logo">GYMPOINT</span>
+      <span className="logo">Sistema de Promoção da Saúde AFAB</span>
       <Form schema={schema} onSubmit={handleSubmit}>
         <label htmlFor="email">Seu e-mail</label>
         <Input type="email" name="email" placeholder="Email" value="admin@gympoint.com" />
