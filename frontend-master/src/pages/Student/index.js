@@ -400,16 +400,6 @@ export default function Student({ history, location }) {
                           </button>
                           <button
                             disabled={loadingPage ? 1 : 0}
-                            className="delete-button"
-                            type="button"
-                            onClick={() => {
-                              handleDeleteStudent(s);
-                            }}
-                          >
-                            Apagar
-                          </button>
-                          <button
-                            disabled={loadingPage ? 1 : 0}
                             className="neutral-button"
                             type="button"
                             onClick={() => {
@@ -417,6 +407,16 @@ export default function Student({ history, location }) {
                             }}
                           >
                             Editar
+                          </button>
+                          <button
+                            disabled={loadingPage ? 1 : 0}
+                            className="delete-button"
+                            type="button"
+                            onClick={() => {
+                              handleDeleteStudent(s);
+                            }}
+                          >
+                            Apagar
                           </button>
                         </td>
                       </tr>
