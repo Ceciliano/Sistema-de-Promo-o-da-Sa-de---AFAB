@@ -14,8 +14,7 @@ import api from '~/services/api';
 import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
 
-import { DivBoxRow, DivBoxColumn } from '~/styles/styles';
-import { Container, ModalContent } from '../styles';
+import { DivBoxRow, DivBoxColumn, Container, ModalContent } from '~/styles/styles';
 
 const schema = Yup.object().shape({
   name: Yup.string()

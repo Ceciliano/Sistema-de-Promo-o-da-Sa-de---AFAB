@@ -24,7 +24,6 @@ import {
   DivBoxRow,
   Loading,
 } from '~/styles/styles';
-
 import Create from './Modal/Create';
 
 export default function Plan({ history, location }) {
@@ -48,16 +47,10 @@ export default function Plan({ history, location }) {
     page = 1,
     query = '',
     title = 'asc',
-    duration = '',
-    price = '',
   } = {}) {
     const response = await api.get(
-      `/plans?page=${page}&limit=${limit}&q=${query}&title=${title}&duration=${duration}&price=${price}`
+      `/plans?page=${page}&limit=${limit}&q=${query}&title=${title}`
     );
-    const currencyFormat = new Intl.NumberFormat('pt', {
-      style: 'currency',
-      currency: 'EUR',
-    });
 
     const {
       plans: _plans,
@@ -69,12 +62,7 @@ export default function Plan({ history, location }) {
     setIsFirstPage(Number(page) === 1);
     setIsLastPage(Number(page) === _lastPage);
 
-    setPlans(
-      _plans.map(p => ({
-        ...p,
-        formatedPrice: currencyFormat.format(p.price / 100),
-      }))
-    );
+    setPlans(_plans);
     setTotal(_total);
     setCurrentPage(_page);
     setLoading(false);
@@ -208,37 +196,10 @@ export default function Plan({ history, location }) {
         tempTitleOrder = 'desc';
       }
     }
-    if (field === 'duration') {
-      if (order === tempDurationOrder) {
-        setDurationOrder('');
-        tempDurationOrder = '';
-      } else if (order === 'asc') {
-        setDurationOrder('asc');
-        tempDurationOrder = 'asc';
-      } else {
-        setDurationOrder('desc');
-        tempDurationOrder = 'desc';
-      }
-    }
-    if (field === 'price') {
-      if (order === tempPriceOrder) {
-        setPriceOrder('');
-        tempPriceOrder = '';
-      } else if (order === 'asc') {
-        setPriceOrder('asc');
-        tempPriceOrder = 'asc';
-      } else {
-        setPriceOrder('desc');
-        tempPriceOrder = 'desc';
-      }
-    }
-
     loadPlans({
       page: currentPage,
       query: currentQuery,
       title: tempTitleOrder,
-      duration: tempDurationOrder,
-      price: tempPriceOrder,
     });
   }
 
@@ -320,33 +281,7 @@ export default function Plan({ history, location }) {
                           size={20}
                           onClick={() => handleSortOrder('title', 'asc')}
                         />
-                        Título
-                      </th>
-                      <th width="150" className="text-center">
-                        <MdArrowUpward
-                          color={durationOrder === 'desc' ? '#000' : '#ccc'}
-                          size={20}
-                          onClick={() => handleSortOrder('duration', 'desc')}
-                        />
-                        <MdArrowDownward
-                          color={durationOrder === 'asc' ? '#000' : '#ccc'}
-                          size={20}
-                          onClick={() => handleSortOrder('duration', 'asc')}
-                        />
-                        Duração
-                      </th>
-                      <th width="200" className="text-center">
-                        <MdArrowUpward
-                          color={priceOrder === 'desc' ? '#000' : '#ccc'}
-                          size={20}
-                          onClick={() => handleSortOrder('price', 'desc')}
-                        />
-                        <MdArrowDownward
-                          color={priceOrder === 'asc' ? '#000' : '#ccc'}
-                          size={20}
-                          onClick={() => handleSortOrder('price', 'asc')}
-                        />
-                        Valor p/ Mês
+                        PERGUNTA DO COMPORTAMENTOS/ASPECTOS
                       </th>
                       <th width="120" />
                     </tr>
@@ -355,8 +290,6 @@ export default function Plan({ history, location }) {
                     {plans.map(s => (
                       <tr key={s.id}>
                         <td>{s.title}</td>
-                        <td className="text-center">{s.duration}</td>
-                        <td className="text-right">{s.formatedPrice}</td>
                         <td className="text-center">
                           <button
                             className="neutral-button"

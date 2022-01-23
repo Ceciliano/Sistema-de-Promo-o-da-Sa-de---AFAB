@@ -10,7 +10,7 @@ import api from '~/services/api';
 
 import InputMaskUnform from '~/components/InputMaskUnform';
 
-import { Container, ModalContent, DivBoxRow, DivBoxColumn } from './styles';
+import { Container, ModalContent, DivBoxRow, DivBoxColumn } from '~/styles/styles';
 
 const schema = Yup.object().shape({
   title: Yup.string()
@@ -98,7 +98,7 @@ export default function Create({ handleClose, handleSave }) {
           context={{ total }}
         >
           <header>
-            <h1>Cadastro de plano</h1>
+            <h1>Cadastro de Comportamentos/Aspectos</h1>
             <div className="buttons">
               <button
                 type="button"
@@ -119,7 +119,7 @@ export default function Create({ handleClose, handleSave }) {
           <hr />
 
           <div className="content">
-            <label>Título do Plano</label>
+            <label>Pergunta do Comportamentos/Aspectos</label>
             <Input type="text" name="title" />
             <DivBoxRow>
               <DivBoxColumn>
