@@ -367,14 +367,22 @@ export default function Student({ history, location }) {
                       </th>
                       <th className="text-left">
                         <MdArrowUpward
-                          color={doencascronicasOrder === 'desc' ? '#000' : '#ccc'}
+                          color={
+                            doencascronicasOrder === 'desc' ? '#000' : '#ccc'
+                          }
                           size={20}
-                          onClick={() => handleSortOrder('doencascronicas', 'desc')}
+                          onClick={() =>
+                            handleSortOrder('doencascronicas', 'desc')
+                          }
                         />
                         <MdArrowDownward
-                          color={doencascronicasOrder === 'asc' ? '#000' : '#ccc'}
+                          color={
+                            doencascronicasOrder === 'asc' ? '#000' : '#ccc'
+                          }
                           size={20}
-                          onClick={() => handleSortOrder('doencascronicas', 'asc')}
+                          onClick={() =>
+                            handleSortOrder('doencascronicas', 'asc')
+                          }
                         />
                         Doenças crônicas
                       </th>

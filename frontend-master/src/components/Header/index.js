@@ -32,8 +32,6 @@ export default function Header() {
         </nav>
 
         <aside>
-          <Notifications />
-
           <ButtonBox>
             <button type="button" onClick={handleSignOut}>
               Sair
