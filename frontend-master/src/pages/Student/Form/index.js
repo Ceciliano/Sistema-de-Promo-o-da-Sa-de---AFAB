@@ -41,7 +41,7 @@ const schema = Yup.object().shape({
   niveldependencia: Yup.string(),
 });
 
-export default function EditForm({ handleSave, handleClose, oldStudent }) {
+export default function EditForm({ title, handleSave, handleClose, oldStudent }) {
   const newStudent = {
     name: '',
     email: '',
@@ -118,7 +118,7 @@ export default function EditForm({ handleSave, handleClose, oldStudent }) {
           context={{ age }}
         >
           <header>
-            <h1>Editar Idosa</h1>
+            <h1>{title}</h1>
             <Buttons>
               <ButtonClose
                 type="button"
@@ -269,9 +269,10 @@ export default function EditForm({ handleSave, handleClose, oldStudent }) {
 }
 
 EditForm.propTypes = {
+  title: PropTypes.string,
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
-  selectStudent: PropTypes.shape({
+  oldStudent: PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string,
     birthday: PropTypes.string,
@@ -286,5 +287,5 @@ EditForm.propTypes = {
     rendafamiliar: PropTypes.string,
     doencascronicas: PropTypes.string,
     niveldependencia: PropTypes.string,
-  }).isRequired,
+  }),
 };

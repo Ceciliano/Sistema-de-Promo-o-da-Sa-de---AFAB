@@ -132,7 +132,9 @@ export default function Student({ history, location }) {
     return await api.put(`/students/${id}`, data);
   }
 
-  function createSucessStudent(student) {
+  function createSucessStudent(res) {
+    const student = res.data;
+    
     setCurrentQuery('');
     setCurrentPage(1);
     setIsFirstPage(true);
@@ -246,6 +248,7 @@ export default function Student({ history, location }) {
       <Modal visible={selectStudentToEdit !== null}>
         {selectStudentToEdit ? (
           <Form
+            title='Alterar Cadastro Idosa'
             oldStudent={selectStudentToEdit}
             handleSave={_student => 
               updateStundent(selectStudentToEdit.id, _student).then(res =>{
@@ -261,7 +264,7 @@ export default function Student({ history, location }) {
       </Modal>
 
       <Modal visible={showCreate}>
-        <Form handleClose={handleClose} handleSave={_student => 
+        <Form title='Cadastrar Idosa' handleClose={handleClose} handleSave={_student => 
           createStundent(_student).then(createSucessStudent).then(handleClose)}
         />
       </Modal>

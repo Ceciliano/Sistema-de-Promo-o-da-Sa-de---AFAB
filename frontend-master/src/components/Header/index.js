@@ -1,13 +1,9 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
-
-import Notifications from '~/components/Notifications';
-import { signOut } from '~/store/modules/auth/actions';
-
-import { Container, Content, ButtonBox } from './styles';
-
+import { Link, NavLink } from 'react-router-dom';
 import logo from '~/assets/logo/logo@1x.png';
+import { signOut } from '~/store/modules/auth/actions';
+import { ButtonBox, Container, Content } from './styles';
 
 export default function Header() {
   const dispatch = useDispatch();

@@ -12,7 +12,9 @@ class Plan extends Model {
     return this;
   }
 
-  // static associate(models) {}
+  static associate(models) {
+    this.hasMany(models.Respostas, { as: 'respostas', foreignKey: 'plan_id' });
+  }
 }
 
 export default Plan;

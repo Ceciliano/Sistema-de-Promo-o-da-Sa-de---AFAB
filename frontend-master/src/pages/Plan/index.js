@@ -1,30 +1,20 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect, useRef } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  MdAdd,
-  MdSearch,
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-  MdArrowDownward,
-  MdArrowUpward,
+  MdAdd, MdArrowDownward,
+  MdArrowUpward, MdKeyboardArrowLeft,
+  MdKeyboardArrowRight, MdSearch
 } from 'react-icons/md';
 import { toast } from 'react-toastify';
-
-import api from '~/services/api';
-
 import LoadingIndicator from '~/components/LoadingIndicator';
+import Modal from '~/components/Modal';
+import api from '~/services/api';
 import {
-  Content,
-  Header,
-  TableBox,
-  ButtonPagination,
-  EmptyTable,
-  DivBoxRow,
-  Loading,
+  ButtonPagination, Content, DivBoxRow, EmptyTable, Header, Loading, TableBox
 } from '~/styles/styles';
-import Create from './Modal/Create';
+import Form from './Form';
+
 
 export default function Plan({ history, location }) {
   const limit = 20;
@@ -38,6 +28,7 @@ export default function Plan({ history, location }) {
   const [total, setTotal] = useState(0);
   const [plans, setPlans] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
+  const [selectPlanToEdit, setSelectedPlanToEdit] = useState(null);
 
   const [titleOrder, setTitleOrder] = useState('asc');
   const [durationOrder, setDurationOrder] = useState('');
@@ -125,7 +116,9 @@ export default function Plan({ history, location }) {
     setShowCreate(false);
   }
 
-  function handleCreatePlan(plan) {
+  function createSucessPlan(res) {
+    const plan = res.data;
+    
     setCurrentQuery('');
     setCurrentPage(1);
     setIsFirstPage(true);
@@ -144,6 +137,14 @@ export default function Plan({ history, location }) {
     setPlans([...oldPlans, plan]);
 
     toast.success(`Plano cadastrado com sucesso! Título: ${plan.title}`);
+  }
+
+  async function createPlan(data) {
+    return api.post('/plans', data);
+  }
+
+  async function updatePlan(id, data) {
+    return await api.put(`/plans/${id}`, data);
   }
 
   async function handleDeletePlan(plan) {
@@ -171,14 +172,6 @@ export default function Plan({ history, location }) {
     }
   }
 
-  function handleShowEdit(plan) {
-    console.tron.log('handleShowEdit', plan);
-    history.push('/plans/edit', {
-      plan,
-      currentPage,
-    });
-  }
-
   function handleSortOrder(field, order) {
     let tempTitleOrder = titleOrder;
 
@@ -201,16 +194,36 @@ export default function Plan({ history, location }) {
     });
   }
 
+  function handleShowModalEdit(plan) {
+    setSelectedPlanToEdit(plan);
+  }
+
   return (
     <>
-      <TransitionGroup component={null}>
-        {showCreate && (
-          <CSSTransition classNames="dialog" timeout={300}>
-            <Create handleClose={handleClose} handleSave={handleCreatePlan} />
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+      <Modal visible={selectPlanToEdit !== null}>
+        {selectPlanToEdit ? (
+          <Form
+            title='Alterar Cadastro Comportamentos/Aspectos'
+            oldPlan={selectPlanToEdit}
+            handleSave={_plan => 
+              updatePlan(selectPlanToEdit.id, _plan).then(res =>{
+                setPlans(
+                  plans.map(s => (s.id === res.data.id ? res.data : s))
+                );
+                setSelectedPlanToEdit(null);
+                toast.success(`Aluno alterado com sucesso! Nome: ${res.data.name}`);
+              })}
+            handleClose={() => setSelectedPlanToEdit(null)}
+          />
+        ) : null}
+      </Modal>
 
+      <Modal visible={showCreate}>
+        <Form title='Cadastro de Comportamentos/Aspectos' handleClose={handleClose} handleSave={_plan => 
+          createPlan(_plan).then(createSucessPlan).then(handleClose)}
+        />
+      </Modal>
+      
       <Content>
         <Header>
           <h1>Gerenciando Comportamentos/Aspectos</h1>
@@ -293,7 +306,7 @@ export default function Plan({ history, location }) {
                             className="neutral-button"
                             type="button"
                             onClick={() => {
-                              handleShowEdit(s);
+                              handleShowModalEdit(s);
                             }}
                           >
                             Editar

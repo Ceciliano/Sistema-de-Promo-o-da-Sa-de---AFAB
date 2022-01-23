@@ -19,9 +19,18 @@ class PlanController {
           [Op.like]: `%${query}%`,
         },
       },
+      include: [
+        {
+          model: Respostas,
+          as: 'respostas',
+        },
+      ],
       order,
       limit,
       offset: (page - 1) * limit,
+    }).catch(error => {
+      console.log(error);
+      res.status(400).send(error);
     });
 
     return res.json({

@@ -1,14 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-
-import api from '~/services/api';
-
-import { Container, ModalContent, DivBoxRow, DivBoxColumn } from '~/styles/styles';
+import { Container, DivBoxColumn, DivBoxRow, ModalContent } from '~/styles/styles';
 
 var schema = Yup.object().shape({
   title: Yup.string()
@@ -21,11 +18,9 @@ var schema = Yup.object().shape({
   )
 });
 
-export default function Create({ handleClose, handleSave }) {
-
+export default function EditForm({ title, handleSave, handleClose, oldPlan }) {
   const newPlan = { title: '', respostas:[{ title: '' },{ title: '' }] }
-
-  const [plan, setPlan] = useState(newPlan);
+  const [plan, setPlan] = useState(oldPlan? oldPlan:newPlan);
   const [errorApi, setErrorApi] = useState(null);
 
   useEffect(() => {
@@ -45,11 +40,6 @@ export default function Create({ handleClose, handleSave }) {
     }
   }, [errorApi]);
 
-  async function handleInternalClose() {
-    setPlan(newPlan);
-    handleClose();
-  }
-
   async function handleAddInput() {
     setPlan({ ...plan, respostas: [...plan.respostas, newPlan.respostas[0]] });
   }
@@ -61,9 +51,7 @@ export default function Create({ handleClose, handleSave }) {
 
   async function handleInternalSave(data) {
     try {
-      const response = await api.post('/plans', data);
-      handleSave(response.data);
-      handleInternalClose();
+      handleSave(data);
     } catch (error) {
       console.tron.log(error);
       setErrorApi(error);
@@ -79,12 +67,12 @@ export default function Create({ handleClose, handleSave }) {
           onSubmit={handleInternalSave}
         >
           <header>
-            <h1>Cadastro de Comportamentos/Aspectos</h1>
+            <h1>{title}</h1>
             <div className="buttons">
               <button
                 type="button"
                 className="close"
-                onClick={handleInternalClose}
+                onClick={() => handleClose()}
               >
                 <MdKeyboardArrowLeft color="#fff" size={16} />
                 Voltar
@@ -135,7 +123,12 @@ export default function Create({ handleClose, handleSave }) {
   );
 }
 
-Create.propTypes = {
+EditForm.propTypes = {
+  title: PropTypes.string,
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
+  selectPlan: PropTypes.shape({
+    title: PropTypes.string,
+    respostas: PropTypes.array,
+  })
 };
