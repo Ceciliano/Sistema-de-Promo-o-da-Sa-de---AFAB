@@ -400,6 +400,7 @@ export const DivBoxRow = styled.div`
 
     display: flex;
     align-items: center;
+    text-align: center;
     margin: 0 10px 0;
     padding: 0 10px;
     height: 36px;
@@ -413,6 +414,54 @@ export const DivBoxRow = styled.div`
     transition: background 0.2s;
     &:hover {
       background: var(--color-primary-dark);
+    }
+
+    &.edit-button {
+      background: var(--color-success-dark);
+      min-width: 30px;
+      align-self: self-end;
+      margin-bottom: 4px;
+
+      &:hover {
+        background: var(--color-info);
+      }
+
+      &[disabled] {
+        color: rgba(0, 0, 0, 0.3);
+        cursor: not-allowed;
+      }
+    }
+
+    &.neutral-button {
+      background: var(--color-info-dark);
+      min-width: 30px;
+      align-self: self-end;
+      margin-bottom: 4px;
+      
+      &:hover {
+        background: var(--color-info);
+      }
+
+      &[disabled] {
+        color: rgba(0, 0, 0, 0.3);
+        cursor: not-allowed;
+      }
+    }
+    
+    &.delete-button {
+      background: var(--color-error-dark);
+      min-width: 30px;
+      align-self: self-end;
+      margin-bottom: 4px;
+
+      &:hover {
+        background: var(--color-error);
+      }
+
+      &[disabled] {
+        color: rgba(0, 0, 0, 0.3);
+        cursor: not-allowed;
+      }
     }
   }
 

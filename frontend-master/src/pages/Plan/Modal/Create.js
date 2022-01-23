@@ -113,7 +113,7 @@ export default function Create({ handleClose, handleSave }) {
               })}
               {plan.respostas.length > 2 &&
                   <button
-                    className="less"
+                    className="delete-button"
                     type="button"
                     onClick={()=>handleLessInput(plan.respostas.length-1)}
                   >
@@ -121,7 +121,7 @@ export default function Create({ handleClose, handleSave }) {
                   </button>
               }
               <button
-                className="add"
+                className="neutral-button"
                 type="button"
                 onClick={handleAddInput}
               >
