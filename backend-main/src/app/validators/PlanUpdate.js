@@ -5,8 +5,6 @@ const Yup = require('yup');
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
     title: Yup.string().min(1),
-    duration: Yup.number().min(0),
-    price: Yup.number().min(0),
   });
 
   try {

@@ -5,12 +5,6 @@ const Yup = require('yup');
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
     title: Yup.string().required(),
-    duration: Yup.number()
-      .min(0)
-      .required(),
-    price: Yup.number()
-      .min(0)
-      .required(),
   });
 
   try {
