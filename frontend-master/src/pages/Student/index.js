@@ -1,33 +1,19 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState, useEffect, useRef } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  MdAdd,
-  MdSearch,
-  MdKeyboardArrowLeft,
-  MdKeyboardArrowRight,
-  MdArrowDownward,
-  MdArrowUpward,
+  MdAdd, MdArrowDownward,
+  MdArrowUpward, MdKeyboardArrowLeft,
+  MdKeyboardArrowRight, MdSearch
 } from 'react-icons/md';
 import { toast } from 'react-toastify';
-
-import api from '~/services/api';
-
 import LoadingIndicator from '~/components/LoadingIndicator';
-
 import Modal from '~/components/Modal';
+import api from '~/services/api';
 import {
-  Content,
-  Header,
-  TableBox,
-  ButtonPagination,
-  EmptyTable,
-  DivBoxRow,
-  Loading,
+  ButtonPagination, Content, DivBoxRow, EmptyTable, Header, Loading, TableBox
 } from '~/styles/styles';
-import Create from './Modal/Create';
-import EditForm from './Form';
+import Form from './Form';
 
 export default function Student({ history, location }) {
   const limit = 20;
@@ -138,7 +124,15 @@ export default function Student({ history, location }) {
     setShowCreate(false);
   }
 
-  function handleCreateStudent(student) {
+  async function createStundent(data) {
+    return api.post('/students', data);
+  }
+
+  async function updateStundent(id, data) {
+    return await api.put(`/students/${id}`, data);
+  }
+
+  function createSucessStudent(student) {
     setCurrentQuery('');
     setCurrentPage(1);
     setIsFirstPage(true);
@@ -251,29 +245,26 @@ export default function Student({ history, location }) {
     <>
       <Modal visible={selectStudentToEdit !== null}>
         {selectStudentToEdit ? (
-          <EditForm
+          <Form
             oldStudent={selectStudentToEdit}
-            handleSave={_student => {
-              setStudents(
-                students.map(s => (s.id === _student.id ? _student : s))
-              );
-              setSelectedStudentToEdit(null);
-            }}
+            handleSave={_student => 
+              updateStundent(selectStudentToEdit.id, _student).then(res =>{
+                setStudents(
+                  students.map(s => (s.id === res.data.id ? res.data : s))
+                );
+                setSelectedStudentToEdit(null);
+                toast.success(`Aluno alterado com sucesso! Nome: ${res.data.name}`);
+              })}
             handleClose={() => setSelectedStudentToEdit(null)}
           />
         ) : null}
       </Modal>
 
-      <TransitionGroup component={null}>
-        {showCreate && (
-          <CSSTransition classNames="dialog" timeout={300}>
-            <Create
-              handleClose={handleClose}
-              handleSave={handleCreateStudent}
-            />
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+      <Modal visible={showCreate}>
+        <Form handleClose={handleClose} handleSave={_student => 
+          createStundent(_student).then(createSucessStudent).then(handleClose)}
+        />
+      </Modal>
 
       <Content>
         <Header>

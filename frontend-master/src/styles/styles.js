@@ -209,6 +209,7 @@ export const Alert = styled.div`
 `;
 
 export const Container = styled.div`
+  width: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -494,6 +495,7 @@ export const DivBoxColumn = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 200px;
+  width: 100%;
 
   label {
     display: block;

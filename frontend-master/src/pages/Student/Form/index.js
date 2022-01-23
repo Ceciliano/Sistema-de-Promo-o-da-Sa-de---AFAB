@@ -1,26 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 import { differenceInYears, format, subYears } from 'date-fns';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
-import ReactSelect from '~/components/ReactSelect';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-
-import api from '~/services/api';
-
 import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
-
-import { 
-  DivBoxRow, 
-  DivBoxColumn, 
-  Container,
-  ModalContent,
-  Buttons,
-  ButtonSave,
-  ButtonClose,} from '~/styles/styles';
+import ReactSelect from '~/components/ReactSelect';
+import {
+  ButtonClose, Buttons,
+  ButtonSave, Container, DivBoxColumn, DivBoxRow, ModalContent
+} from '~/styles/styles';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -50,11 +42,31 @@ const schema = Yup.object().shape({
 });
 
 export default function EditForm({ handleSave, handleClose, oldStudent }) {
+  const newStudent = {
+    name: '',
+    email: '',
+    birthday: new Date(),
+    height: '',
+    weight: '',
+    atividades: '',
+    naturalidade: '',
+    religiao: '',
+    raca: '',
+    estadocivil: '',
+    escolaridade: '',
+    rendafamiliar: '',
+    doencascronicas: '',
+    niveldependencia: '',
+    age: null,
+  };
+  
+  const selectStudent = oldStudent? oldStudent:newStudent;
+  
   const student = {
-    ...oldStudent,
-    birthday: new Date(oldStudent.birthday),
-    height: Number(oldStudent.height / 100).toFixed(2),
-    weight: `00${Number(oldStudent.weight / 100).toFixed(2)}`.substr(-6),
+    ...selectStudent,
+    birthday: new Date(selectStudent.birthday),
+    height: Number(selectStudent.height / 100).toFixed(2),
+    weight: `00${Number(selectStudent.weight / 100).toFixed(2)}`.substr(-6),
   };
   const [errorApi, setErrorApi] = useState(null);
   const [age, setAge] = useState(student.age);
@@ -85,9 +97,7 @@ export default function EditForm({ handleSave, handleClose, oldStudent }) {
         birthday: format(data.birthday, 'yyyy-MM-dd'),
       };
 
-      const response = await api.put(`/students/${student.id}`, data);
-
-      handleSave(response.data);
+      handleSave(data);
     } catch (error) {
       console.tron.log(error);
       setErrorApi(error);
@@ -261,7 +271,7 @@ export default function EditForm({ handleSave, handleClose, oldStudent }) {
 EditForm.propTypes = {
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
-  oldStudent: PropTypes.shape({
+  selectStudent: PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string,
     birthday: PropTypes.string,
