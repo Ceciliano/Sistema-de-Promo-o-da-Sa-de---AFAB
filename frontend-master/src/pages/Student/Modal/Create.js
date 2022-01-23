@@ -65,11 +65,6 @@ export default function Create({ handleClose, handleSave }) {
   const [student, setStudent] = useState(newStudent);
   const [errorApi, setErrorApi] = useState(null);
   const [age, setAge] = useState(null);
-  const [religiao, _setReligiao] = useState();
-
-  function handleReligiaoChange(_religiao) {
-    _setReligiao(_religiao);
-  }
 
   useEffect(() => {
     if (errorApi) {
@@ -195,7 +190,6 @@ export default function Create({ handleClose, handleSave }) {
                 <ReactSelect
                   name="religiao"
                   label="*Religião/crença"
-                  onChange={handleReligiaoChange}
                   options={[
                     { id: 'catolica', title: 'Católica' },
                     { id: 'evangelica', title: 'Evangélica' },

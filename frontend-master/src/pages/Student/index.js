@@ -46,18 +46,18 @@ export default function Student({ history, location }) {
   const [loadingPage, setLoadingPage] = useState(false);
 
   const [nameOrder, setNameOrder] = useState('asc');
-  const [emailOrder, setEmailOrder] = useState('');
+  const [doencascronicasOrder, setDoencascronicasOrder] = useState('');
   const [birthdayOrder, setBirthdayOrder] = useState('');
 
   async function loadStudents({
     page = 1,
     query = '',
     name = 'asc',
-    email = '',
+    doencascronicas = '',
     birthday = '',
   } = {}) {
     const response = await api.get(
-      `/students?page=${page}&limit=${limit}&q=${query}&name=${name}&email=${email}&birthday=${birthday}`
+      `/students?page=${page}&limit=${limit}&q=${query}&name=${name}&doencascronicas=${doencascronicas}&birthday=${birthday}`
     );
 
     const {
@@ -109,7 +109,7 @@ export default function Student({ history, location }) {
         page,
         query: currentQuery,
         name: nameOrder,
-        email: emailOrder,
+        doencascronicas: doencascronicasOrder,
         birthday: birthdayOrder,
       });
     }
@@ -124,7 +124,7 @@ export default function Student({ history, location }) {
         page,
         query: currentQuery,
         name: nameOrder,
-        email: emailOrder,
+        doencascronicas: doencascronicasOrder,
         birthday: birthdayOrder,
       });
     }
@@ -145,7 +145,7 @@ export default function Student({ history, location }) {
     setIsLastPage(total + 1 <= limit);
     setTotal(total + 1);
     setNameOrder('');
-    setEmailOrder('');
+    setDoencascronicasOrder('');
     setBirthdayOrder('');
 
     const oldStudents = students;
@@ -194,7 +194,7 @@ export default function Student({ history, location }) {
 
   function handleSortOrder(field, order) {
     let tempNameOrder = nameOrder;
-    let tempEmailOrder = emailOrder;
+    let tempDoencascronicasOrder = doencascronicasOrder;
     let tempBirthdayOrder = birthdayOrder;
 
     if (field === 'name') {
@@ -209,16 +209,16 @@ export default function Student({ history, location }) {
         tempNameOrder = 'desc';
       }
     }
-    if (field === 'email') {
-      if (order === tempEmailOrder) {
-        setEmailOrder('');
-        tempEmailOrder = '';
+    if (field === 'doencascronicas') {
+      if (order === tempDoencascronicasOrder) {
+        setDoencascronicasOrder('');
+        tempDoencascronicasOrder = '';
       } else if (order === 'asc') {
-        setEmailOrder('asc');
-        tempEmailOrder = 'asc';
+        setDoencascronicasOrder('asc');
+        tempDoencascronicasOrder = 'asc';
       } else {
-        setEmailOrder('desc');
-        tempEmailOrder = 'desc';
+        setDoencascronicasOrder('desc');
+        tempDoencascronicasOrder = 'desc';
       }
     }
     if (field === 'birthday') {
@@ -238,7 +238,7 @@ export default function Student({ history, location }) {
       page: currentPage,
       query: currentQuery,
       name: tempNameOrder,
-      email: tempEmailOrder,
+      doencascronicas: tempDoencascronicasOrder,
       birthday: tempBirthdayOrder,
     });
   }
@@ -352,20 +352,7 @@ export default function Student({ history, location }) {
                         />
                         Nome
                       </th>
-                      <th width="300" className="text-left">
-                        <MdArrowUpward
-                          color={emailOrder === 'desc' ? '#000' : '#ccc'}
-                          size={20}
-                          onClick={() => handleSortOrder('email', 'desc')}
-                        />
-                        <MdArrowDownward
-                          color={emailOrder === 'asc' ? '#000' : '#ccc'}
-                          size={20}
-                          onClick={() => handleSortOrder('email', 'asc')}
-                        />
-                        E-mail
-                      </th>
-                      <th width="100">
+                      <th width="150">
                         <MdArrowUpward
                           color={birthdayOrder === 'desc' ? '#000' : '#ccc'}
                           size={20}
@@ -378,6 +365,19 @@ export default function Student({ history, location }) {
                         />
                         Idade
                       </th>
+                      <th className="text-left">
+                        <MdArrowUpward
+                          color={doencascronicasOrder === 'desc' ? '#000' : '#ccc'}
+                          size={20}
+                          onClick={() => handleSortOrder('doencascronicas', 'desc')}
+                        />
+                        <MdArrowDownward
+                          color={doencascronicasOrder === 'asc' ? '#000' : '#ccc'}
+                          size={20}
+                          onClick={() => handleSortOrder('doencascronicas', 'asc')}
+                        />
+                        Doenças crônicas
+                      </th>
                       <th width="180" />
                     </tr>
                   </thead>
@@ -385,8 +385,8 @@ export default function Student({ history, location }) {
                     {students.map(s => (
                       <tr key={s.id}>
                         <td>{s.name}</td>
-                        <td>{s.email}</td>
                         <td className="text-center">{s.age}</td>
+                        <td>{s.doencascronicas}</td>
                         <td className="text-center">
                           <button
                             disabled={loadingPage ? 1 : 0}

@@ -9,20 +9,20 @@ class StudentController {
       page = 1,
       limit = 10,
       name = '',
-      email = '',
+      doencascronicas = '',
       birthday = '',
       active = 2,
     } = req.query;
 
     const order = [];
-    if (name) {
-      order.push(['name', name]);
-    }
-    if (email) {
-      order.push(['email', email]);
+    if (doencascronicas) {
+      order.push(['doencascronicas', doencascronicas]);
     }
     if (birthday) {
       order.push(['birthday', birthday]);
+    }
+    if (name) {
+      order.push(['name', name]);
     }
     if (!order.length) {
       order.push(['name', 'asc']);
