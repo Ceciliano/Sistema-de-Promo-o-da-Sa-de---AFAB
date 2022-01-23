@@ -117,13 +117,37 @@ class StudentController {
   async update(req, res) {
     const student = await Student.findByPk(req.params.id);
 
-    const { name, email, weight, height, birthday } = req.body;
+    const {
+      name,
+      email,
+      weight,
+      height,
+      birthday,
+      atividades,
+      naturalidade,
+      religiao,
+      raca,
+      estadocivil,
+      escolaridade,
+      rendafamiliar,
+      doencascronicas,
+      niveldependencia,
+    } = req.body;
 
     await student.update({
       name,
       email,
       weight,
       height,
+      atividades,
+      naturalidade,
+      religiao,
+      raca,
+      estadocivil,
+      escolaridade,
+      rendafamiliar,
+      doencascronicas,
+      niveldependencia,
       birthday,
     });
 
