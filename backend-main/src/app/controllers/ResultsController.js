@@ -20,14 +20,19 @@ class ResultsController {
           [Op.like]: `%${query}%`,
         },
       },
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       include: [
         {
           model: Respostas,
           as: 'respostas',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'plan_id'],
+          },
           include: [
             {
               model: Plan,
               as: 'plan',
+              attributes: { exclude: ['createdAt', 'updatedAt'] },
             },
           ],
         },
