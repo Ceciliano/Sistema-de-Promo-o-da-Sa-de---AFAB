@@ -130,7 +130,7 @@ export default function ShowEdit({ history, location }) {
   return (
     <>
      <Modal visible={showCreate}>
-        <ConsultForm title='Cadastrar Idosa' handleClose={handleClose} handleSave={_student => 
+        <ConsultForm title='Consultar' name={student.name} handleClose={handleClose} handleSave={_student => 
           createStundent(_student).then(createSucessStudent).then(handleClose)}
         />
       </Modal>

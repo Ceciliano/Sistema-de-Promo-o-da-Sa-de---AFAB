@@ -1,18 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Form, Input } from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import LoadingIndicator from '~/components/LoadingIndicator';
 import * as Yup from 'yup';
 import AssyncSelect from '~/components/AssyncSelect';
 import api from '~/services/api';
-import { Container, DivBoxColumn, DivBoxRow, ModalContent } from '~/styles/styles';
+import { Container, DivBoxColumn, DivBoxRow, ModalContent, Loading } from '~/styles/styles';
 
 var schema = Yup.object().shape({
-  title: Yup.string()
-    .min(3, 'O Título deve ter no mínimo três letras')
-    .required('O Título é obrigatório'),
   respostas: Yup.array().of(
     Yup.object().shape({
       id: Yup.number(),
@@ -20,10 +18,16 @@ var schema = Yup.object().shape({
   )
 });
 
-export default function ConsultForm({ title, handleSave, handleClose, oldResults }) {
-  const newResults = { title: '', respostas:[{ title: '' }] }
-  const [results, setResults] = useState(oldResults? oldResults:newResults);
+export default function ConsultForm({ title, name, handleSave, handleClose, oldConsults }) {
+  const newConsults = { title: '', respostas:[{ title: '' }] }
+  const [consults, setConsults] = useState(oldConsults? oldConsults:newConsults);
+  const [perguntas, setPerguntas] = useState([{title:'teste'}]);
   const [errorApi, setErrorApi] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadPerguntas();
+  }, []);
 
   useEffect(() => {
     if (errorApi) {
@@ -42,6 +46,16 @@ export default function ConsultForm({ title, handleSave, handleClose, oldResults
     }
   }, [errorApi]);
 
+  async function loadPerguntas() {
+    const response = await api.get(`/plans?page=1&limit=100&q=&name=`);
+    const {
+      plans: _plans,
+    } = response.data;
+
+    setPerguntas(_plans);
+    setLoading(false);
+  }
+
   async function handleInternalSave(data) {
     try {
       handleSave(data);
@@ -51,24 +65,9 @@ export default function ConsultForm({ title, handleSave, handleClose, oldResults
     }
   }
 
-  function getPromisse(inputValue) {
-    return new Promise((resolve, reject) => {
-      api
-        .get(`/plans?page=1&limit=100&q=${inputValue}&active=0`)
-        .then(result => {
-          const { plans } = result.data;
-          if (plans.length > 0) {
-            resolve(plans.map(s => ({ value: s.id, label: s.title })));
-          }
-        })
-        .catch(error => reject(error));
-    });
-  }
-
   function handleComportamentosChange(data) {
     return new Promise((resolve, reject) => {
-      api
-        .get(`/respostas?page=1&limit=100&q=${data}&active=0`)
+      api.get(`/respostas?page=1&limit=100&q=${data}&active=0`)
         .then(result => {
           const { respostas } = result.data;
           if (respostas.length > 0) {
@@ -79,21 +78,12 @@ export default function ConsultForm({ title, handleSave, handleClose, oldResults
     });
   }
 
-  async function handleAddInput() {
-    setResults({ ...results, respostas: [...results.respostas, newResults.respostas[0]] });
-  }
-
-  async function handleLessInput(_item) {
-    results.respostas.splice(_item, 1);
-    setResults({ ...results });
-  }
-
   return (
     <Container>
       <ModalContent>
         <Form
           schema={schema}
-          initialData={results}
+          initialData={consults}
           onSubmit={handleInternalSave}
         >
           <header>
@@ -118,50 +108,31 @@ export default function ConsultForm({ title, handleSave, handleClose, oldResults
           <hr />
 
           <div className="content">
-            <label>Resultado</label>
-            <Input type="text" name="title" />
-            <DivBoxRow>
-            {results.respostas.length > 0 && 
-              <DivBoxColumn>
-                {results.respostas.map(function(object, i){
-                  return(
-                    <DivBoxRow key={i}>
+            <h1>{name}</h1>
+            {loading ? (
+              <Loading>
+                <LoadingIndicator size={40} />
+              </Loading>
+            ) : (
+              <>
+                {perguntas.map(p => (
+                  <DivBoxRow key={p.id}>
+                    <DivBoxRow>
                       <DivBoxColumn>
-                        <AssyncSelect
-                          name="student_id"
-                          label="Pergunta do Comportamentos/Aspectos"
-                          promiseOptions={getPromisse}
-                          onChange={handleComportamentosChange}
-                        />
+                        {p.title}
                       </DivBoxColumn>
                       <DivBoxColumn>
                         <AssyncSelect
-                          name={`respostas.${i}.id`}
+                          name={`respostas.${0}.id`}
                           label="Resposta"
                           promiseOptions={handleComportamentosChange}
                         />
                       </DivBoxColumn>
                     </DivBoxRow>
-                  )
-                })}
-              </DivBoxColumn>}
-                {results.respostas.length > 1 &&
-                    <button
-                      className="delete-button"
-                      type="button"
-                      onClick={()=>handleLessInput(results.respostas.length-1)}
-                    >
-                      -
-                    </button>
-                }
-                <button
-                  className="neutral-button"
-                  type="button"
-                  onClick={handleAddInput}
-                >
-                  +
-                </button>
-            </DivBoxRow>
+                  </DivBoxRow>
+                ))}
+              </>
+            )}
           </div>
         </Form>
       </ModalContent>
