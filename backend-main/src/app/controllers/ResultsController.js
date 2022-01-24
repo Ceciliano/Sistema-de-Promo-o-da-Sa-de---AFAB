@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import Results from '../models/Results';
 import Respostas from '../models/Respostas';
+import Plan from '../models/Plan';
 
 class ResultsController {
   async index(req, res) {
@@ -23,6 +24,12 @@ class ResultsController {
         {
           model: Respostas,
           as: 'respostas',
+          include: [
+            {
+              model: Plan,
+              as: 'plan',
+            },
+          ],
         },
       ],
       order,
@@ -42,10 +49,12 @@ class ResultsController {
   }
 
   async store(req, res) {
-    const { title } = req.body;
+    const { title, respostas } = req.body;
     const newRecord = await Results.create({
       title,
     });
+
+    await newRecord.addRespostas(respostas);
 
     return res.json(newRecord);
   }

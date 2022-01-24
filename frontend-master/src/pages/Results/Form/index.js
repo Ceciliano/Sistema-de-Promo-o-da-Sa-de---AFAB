@@ -110,7 +110,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
             <label>Resultado</label>
             <Input type="text" name="title" />
             <DivBoxRow>
-            {results.respostas && results.respostas.length > 0 && 
+            {results.respostas.length > 0 && 
               <DivBoxColumn>
                 {results.respostas.map(function(object, i){
                   return(
@@ -132,7 +132,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
                   )
                 })}
               </DivBoxColumn>}
-                {results.respostas && results.respostas.length > 1 &&
+                {results.respostas.length > 1 &&
                     <button
                       className="delete-button"
                       type="button"
@@ -159,5 +159,9 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
 EditForm.propTypes = {
   title: PropTypes.string,
   handleClose: PropTypes.func.isRequired,
-  handleSave: PropTypes.func.isRequired
+  handleSave: PropTypes.func.isRequired,
+  selectResults: PropTypes.shape({
+    title: PropTypes.string,
+    respostas: PropTypes.array,
+  })
 };

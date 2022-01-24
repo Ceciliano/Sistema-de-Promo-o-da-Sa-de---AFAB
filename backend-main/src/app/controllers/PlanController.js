@@ -75,10 +75,7 @@ class PlanController {
       })
     );
 
-    const response = await Plan.findOne({
-      where: {
-        id: req.params.id,
-      },
+    const response = await Plan.findByPk(req.params.id, {
       include: [
         {
           model: Respostas,
