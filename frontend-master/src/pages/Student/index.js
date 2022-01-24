@@ -258,10 +258,6 @@ export default function Student({ history, location }) {
     });
   }
 
-  function handleShowModalEdit(student) {
-    setSelectedStudentToEdit(student);
-  }
-
   return (
     <>
       <Modal visible={selectStudentToEdit !== null}>

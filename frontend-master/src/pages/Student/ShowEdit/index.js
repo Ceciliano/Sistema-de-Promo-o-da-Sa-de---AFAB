@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
-import { parseISO, differenceInYears, subYears } from 'date-fns';
+import { differenceInYears, parseISO, subYears } from 'date-fns';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { MdDone, MdExposure, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-
-import api from '~/services/api';
-
 import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
-import CheckInTable from './Table/ChekInsTable';
+import Modal from '~/components/Modal';
 import ReactSelect from '~/components/ReactSelect';
+import api from '~/services/api';
+import ConsultForm from './Consult';
+import { Container, DivBoxColumn, DivBoxRow } from './styles';
+import CheckInTable from './Table/ChekInsTable';
 
-import { Container, DivBoxRow, DivBoxColumn } from './styles';
 
 const schema = Yup.object().shape({
   name: Yup.string()
@@ -55,6 +55,7 @@ export default function ShowEdit({ history, location }) {
   });
 
   const [age, setAge] = useState(student.age);
+  const [showCreate, setShowCreate] = useState(false);
 
   function handleDatePickerChange(date) {
     setAge(differenceInYears(new Date(), date));
@@ -110,277 +111,300 @@ export default function ShowEdit({ history, location }) {
     }
   }
 
+  async function handleShowCreate() {
+    setShowCreate(true);
+  }
+
+  function handleClose() {
+    setShowCreate(false);
+  }
+
+  async function createStundent(data) {
+    return api.post('/students', data);
+  }
+
+  function createSucessStudent(res) {
+    toast.success(`Idosa cadastrada com sucesso! Nome: ${student.name}`);
+  }
+  
   return (
-    <Container>
-      <Form
-        schema={schema}
-        initialData={student}
-        onSubmit={handleSubmit}
-        context={{ age }}
-      >
-        <header>
-          <h1>Consulta/Dados</h1>
-          <div className="buttons">
-            <button type="button" className="close" onClick={handleGoBack}>
-              <MdKeyboardArrowLeft color="#fff" size={16} />
-              Voltar
-            </button>
+    <>
+     <Modal visible={showCreate}>
+        <ConsultForm title='Cadastrar Idosa' handleClose={handleClose} handleSave={_student => 
+          createStundent(_student).then(createSucessStudent).then(handleClose)}
+        />
+      </Modal>
+      <Container>
+        <Form
+          schema={schema}
+          initialData={student}
+          onSubmit={handleSubmit}
+          context={{ age }}
+        >
+          <header>
+            <h1>Consulta/Dados</h1>
+            <div className="buttons">
+              <button type="button" className="close" onClick={handleGoBack}>
+                <MdKeyboardArrowLeft color="#fff" size={16} />
+                Voltar
+              </button>
 
-            <button type="button" className="consult">
-              <MdExposure color="#fff" size={16} />
-              Consultar
-            </button>
+              <button type="button" className="consult" onClick={handleShowCreate}>
+                <MdExposure color="#fff" size={16} />
+                Consultar
+              </button>
 
-            <button type="submit" className="save">
-              <MdDone color="#fff" size={16} />
-              Salvar
-            </button>
-          </div>
-        </header>
+              <button type="submit" className="save">
+                <MdDone color="#fff" size={16} />
+                Salvar
+              </button>
+            </div>
+          </header>
 
-        <hr />
-
-        <div className="content">
-          <DivBoxColumn>
-            <label>Nome Completo</label>
-            <Input
-              type="text"
-              name="name"
-              placeholder="John Doe"
-              
-            />
-
-            <label>E-mail</label>
-            <Input
-              type="email"
-              name="email"
-              placeholder="exemplo@email.com"
-              
-            />
-          </DivBoxColumn>
-
-          <DivBoxRow>
-            <DivBoxColumn>
-              <label>
-                Telefone
-              </label>
-              <InputMaskUnform
-                name="telefone"
-                mask="(99)99999-9999"
-                type="text"
-                
-              />
-            </DivBoxColumn>
-
-            <DivBoxColumn>
-              <label>
-                Idade {age ? <span className="age">{age} anos</span> : null}
-              </label>
-              <DatePicker
-                name="birthday"
-                defaultValue={student.birthday}
-                onChange={handleDatePickerChange}
-                
-              />
-            </DivBoxColumn>
-
-            <DivBoxColumn>
-              <label>
-                Peso <span>(em kg)</span>
-              </label>
-              <InputMaskUnform
-                name="weight"
-                mask="999.9"
-                type="text"
-                
-              />
-            </DivBoxColumn>
-
-            <DivBoxColumn>
-              <label>Altura</label>
-              <InputMaskUnform
-                name="height"
-                mask="9.99"
-                type="text"
-                
-              />
-            </DivBoxColumn>
-          </DivBoxRow>
-          <DivBoxColumn>
-            <label>Atividades grupais de saúde</label>
-              <Input
-                type="text"
-                name="atividades"
-                placeholder="Dança, Passeios, Artesanato, Musculação"
-                
-              />
-          </DivBoxColumn>
-
-          <DivBoxRow>
-            <DivBoxColumn>
-              <label>Naturalidade</label>
-              <Input
-                type="text"
-                name="naturalidade"
-                placeholder="Brasileira"
-                
-              />
-            </DivBoxColumn>
-            <DivBoxColumn>
-              <ReactSelect
-                name="religiao"
-                label="*Religião/crença"
-                options={[
-                  { id: 'catolica', title: 'Católica' },
-                  { id: 'evangelica', title: 'Evangélica' },
-                  { id: 'espirita', title: 'Espírita' },
-                  { id: 'testemunhadejeova', title: 'Testemunha de Jeová' },
-                  { id: 'outras', title: 'Outras' },
-                ]}
-                
-              />
-            </DivBoxColumn>
-            <DivBoxColumn>
-              <ReactSelect
-                name="raca"
-                label="Raça/cor"
-                options={[
-                  { id: 'branca', title: 'Branca' },
-                  { id: 'negra', title: 'Negra' },
-                  { id: 'mulata', title: 'Parda/mulata' },
-                  { id: 'amarela', title: 'Amarela' },
-                  { id: 'indigena', title: 'Indígena ou de origem indígena' },
-                ]}
-                
-              />
-            </DivBoxColumn>
-          </DivBoxRow>
-
-          <DivBoxRow>
-            <DivBoxColumn>
-              <ReactSelect
-                name="estadocivil"
-                label="*Estado Civil"
-                options={[
-                  { id: 'solteira', title: 'Solteira' },
-                  { id: 'casada', title: 'Casada' },
-                  { id: 'divorciada', title: 'Divorciada' },
-                  { id: 'viuva', title: 'Viúva' },
-                ]}
-                
-              />
-            </DivBoxColumn>
-            <DivBoxColumn>
-              <ReactSelect
-                name="escolaridade"
-                label="Escolaridade"
-                options={[
-                  { id: 'nenhuma', title: 'Nenhuma' },
-                  { id: 'ensinofundamental', title: 'Ensino Fundamental' },
-                  { id: 'ensinomedio', title: 'Ensino Médio' },
-                  { id: 'tecnico', title: 'Ensino Médio - Técnico' },
-                  { id: 'ensinosuperior', title: 'Ensino Superior' },
-                ]}
-                
-              />
-            </DivBoxColumn>
-            <DivBoxColumn>
-              <ReactSelect
-                name="rendafamiliar"
-                label="*Renda familiar"
-                options={[
-                  { id: 'ate2sm', title: 'Até 2 SM' },
-                  { id: 'de2a5sm', title: 'De 2 a 5 SM' },
-                  { id: 'maisde5sm', title: 'Mais de 5 SM' },
-                ]}
-                
-              />
-            </DivBoxColumn>
-          </DivBoxRow>
-        <DivBoxColumn>
-          <label>*Doenças crônicas</label>
-          <Input
-            type="text"
-            name="doencascronicas"
-            placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
-            
-          />
-          <label>
-            *Nível de dependência para Atividades Básicas para Vida
-          </label>
-          <Input
-            type="text"
-            name="niveldependencia"
-            placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-            
-          />
-        </DivBoxColumn>
-      </div>
-      <div className="content" style={{padding: '0px 30px'}}>
-        <DivBoxColumn>  
           <hr />
-          <h2>
-            Comportamento anterior:
-          </h2>
-          <label>
-            *Atividades de cuidado Corporal/estético
-          </label>
-          <Input
-            type="text"
-            name="atividadescuidado"
-            placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-            
-          />
-          </DivBoxColumn>
-          <DivBoxRow>
+
+          <div className="content">
             <DivBoxColumn>
-              <label>
-                *Atividades de saúde
-              </label>
+              <label>Nome Completo</label>
               <Input
                 type="text"
-                name="atividadessaude"
-                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                name="name"
+                placeholder="John Doe"
+                
+              />
+
+              <label>E-mail</label>
+              <Input
+                type="email"
+                name="email"
+                placeholder="exemplo@email.com"
                 
               />
             </DivBoxColumn>
+
+            <DivBoxRow>
+              <DivBoxColumn>
+                <label>
+                  Telefone
+                </label>
+                <InputMaskUnform
+                  name="telefone"
+                  mask="(99)99999-9999"
+                  type="text"
+                  
+                />
+              </DivBoxColumn>
+
+              <DivBoxColumn>
+                <label>
+                  Idade {age ? <span className="age">{age} anos</span> : null}
+                </label>
+                <DatePicker
+                  name="birthday"
+                  defaultValue={student.birthday}
+                  onChange={handleDatePickerChange}
+                  
+                />
+              </DivBoxColumn>
+
+              <DivBoxColumn>
+                <label>
+                  Peso <span>(em kg)</span>
+                </label>
+                <InputMaskUnform
+                  name="weight"
+                  mask="999.9"
+                  type="text"
+                  
+                />
+              </DivBoxColumn>
+
+              <DivBoxColumn>
+                <label>Altura</label>
+                <InputMaskUnform
+                  name="height"
+                  mask="9.99"
+                  type="text"
+                  
+                />
+              </DivBoxColumn>
+            </DivBoxRow>
             <DivBoxColumn>
-              <label>
-                *Disponibilidade de tempo
-              </label>
-              <Input
-                type="text"
-                name="disponibilidadetempo"
-                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                
-              />
+              <label>Atividades grupais de saúde</label>
+                <Input
+                  type="text"
+                  name="atividades"
+                  placeholder="Dança, Passeios, Artesanato, Musculação"
+                  
+                />
             </DivBoxColumn>
-          </DivBoxRow>
+
+            <DivBoxRow>
+              <DivBoxColumn>
+                <label>Naturalidade</label>
+                <Input
+                  type="text"
+                  name="naturalidade"
+                  placeholder="Brasileira"
+                  
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="religiao"
+                  label="*Religião/crença"
+                  options={[
+                    { id: 'catolica', title: 'Católica' },
+                    { id: 'evangelica', title: 'Evangélica' },
+                    { id: 'espirita', title: 'Espírita' },
+                    { id: 'testemunhadejeova', title: 'Testemunha de Jeová' },
+                    { id: 'outras', title: 'Outras' },
+                  ]}
+                  
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="raca"
+                  label="Raça/cor"
+                  options={[
+                    { id: 'branca', title: 'Branca' },
+                    { id: 'negra', title: 'Negra' },
+                    { id: 'mulata', title: 'Parda/mulata' },
+                    { id: 'amarela', title: 'Amarela' },
+                    { id: 'indigena', title: 'Indígena ou de origem indígena' },
+                  ]}
+                  
+                />
+              </DivBoxColumn>
+            </DivBoxRow>
+
+            <DivBoxRow>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="estadocivil"
+                  label="*Estado Civil"
+                  options={[
+                    { id: 'solteira', title: 'Solteira' },
+                    { id: 'casada', title: 'Casada' },
+                    { id: 'divorciada', title: 'Divorciada' },
+                    { id: 'viuva', title: 'Viúva' },
+                  ]}
+                  
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="escolaridade"
+                  label="Escolaridade"
+                  options={[
+                    { id: 'nenhuma', title: 'Nenhuma' },
+                    { id: 'ensinofundamental', title: 'Ensino Fundamental' },
+                    { id: 'ensinomedio', title: 'Ensino Médio' },
+                    { id: 'tecnico', title: 'Ensino Médio - Técnico' },
+                    { id: 'ensinosuperior', title: 'Ensino Superior' },
+                  ]}
+                  
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <ReactSelect
+                  name="rendafamiliar"
+                  label="*Renda familiar"
+                  options={[
+                    { id: 'ate2sm', title: 'Até 2 SM' },
+                    { id: 'de2a5sm', title: 'De 2 a 5 SM' },
+                    { id: 'maisde5sm', title: 'Mais de 5 SM' },
+                  ]}
+                  
+                />
+              </DivBoxColumn>
+            </DivBoxRow>
           <DivBoxColumn>
-            <label>
-              *Conhecimento sobre atitudes saudáveis
-            </label>
+            <label>*Doenças crônicas</label>
             <Input
               type="text"
-              name="conhecimentoatitudes"
-              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+              name="doencascronicas"
+              placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
               
             />
-
             <label>
-              *Aspectos culturais de origem
+              *Nível de dependência para Atividades Básicas para Vida
             </label>
             <Input
               type="text"
-              name="aspectosculturais"
+              name="niveldependencia"
               placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
               
             />
           </DivBoxColumn>
         </div>
-      </Form>
-      <CheckInTable studentId={student.id} />
-    </Container>
+        <div className="content" style={{padding: '0px 30px'}}>
+          <DivBoxColumn>  
+            <hr />
+            <h2>
+              Comportamento anterior:
+            </h2>
+            <label>
+              *Atividades de cuidado Corporal/estético
+            </label>
+            <Input
+              type="text"
+              name="atividadescuidado"
+              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+              
+            />
+            </DivBoxColumn>
+            <DivBoxRow>
+              <DivBoxColumn>
+                <label>
+                  *Atividades de saúde
+                </label>
+                <Input
+                  type="text"
+                  name="atividadessaude"
+                  placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                  
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>
+                  *Disponibilidade de tempo
+                </label>
+                <Input
+                  type="text"
+                  name="disponibilidadetempo"
+                  placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                  
+                />
+              </DivBoxColumn>
+            </DivBoxRow>
+            <DivBoxColumn>
+              <label>
+                *Conhecimento sobre atitudes saudáveis
+              </label>
+              <Input
+                type="text"
+                name="conhecimentoatitudes"
+                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                
+              />
+
+              <label>
+                *Aspectos culturais de origem
+              </label>
+              <Input
+                type="text"
+                name="aspectosculturais"
+                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                
+              />
+            </DivBoxColumn>
+          </div>
+        </Form>
+        <CheckInTable studentId={student.id} />
+      </Container>
+    </>
   );
 }
 
