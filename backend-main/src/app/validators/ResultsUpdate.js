@@ -14,24 +14,24 @@ export default async (req, res, next) => {
       .json({ error: 'Validation fails', messages: error.inner });
   }
 
-  const plan = await Results.findByPk(req.params.id);
+  const results = await Results.findByPk(req.params.id);
 
-  if (!plan) {
+  if (!results) {
     return res.status(404).json({
       error: 'Validation fails',
-      messages: [{ errors: ['Plan not found'] }],
+      messages: [{ errors: ['Results not found'] }],
     });
   }
 
   const { title } = req.body;
 
-  if (title && title !== plan.title) {
-    const planOld = await Results.findOne({ where: { title } });
+  if (title && title !== results.title) {
+    const resultsOld = await Results.findOne({ where: { title } });
 
-    if (planOld) {
+    if (resultsOld) {
       return res.status(400).json({
         error: 'Validation fails',
-        messages: [{ errors: ['Plan title not available'] }],
+        messages: [{ errors: ['Results title not available'] }],
       });
     }
   }

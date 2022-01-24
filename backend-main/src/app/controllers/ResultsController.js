@@ -27,7 +27,7 @@ class ResultsController {
     });
 
     return res.json({
-      plans: data.rows,
+      results: data.rows,
       page,
       last_page: Math.ceil(data.count / limit),
       total: data.count,

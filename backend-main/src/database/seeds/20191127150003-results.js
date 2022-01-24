@@ -4,22 +4,22 @@ module.exports = {
       'results',
       [
         {
-          title: 'Start',
+          title: 'Covid',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          title: 'Gold',
+          title: 'Depre',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          title: 'Diamond',
+          title: 'Prisão',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          title: 'Ruby',
+          title: 'Teste',
           created_at: new Date(),
           updated_at: new Date(),
         },

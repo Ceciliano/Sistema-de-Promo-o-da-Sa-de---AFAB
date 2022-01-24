@@ -31,8 +31,6 @@ export default function Results({ history, location }) {
   const [selectResultsToEdit, setSelectedResultsToEdit] = useState(null);
 
   const [titleOrder, setTitleOrder] = useState('asc');
-  const [durationOrder, setDurationOrder] = useState('');
-  const [priceOrder, setPriceOrder] = useState('');
 
   async function loadResults({
     page = 1,
@@ -88,8 +86,6 @@ export default function Results({ history, location }) {
         page,
         query: currentQuery,
         title: titleOrder,
-        duration: durationOrder,
-        price: priceOrder,
       });
     }
   }
@@ -102,8 +98,6 @@ export default function Results({ history, location }) {
         page,
         query: currentQuery,
         title: titleOrder,
-        duration: durationOrder,
-        price: priceOrder,
       });
     }
   }
@@ -117,7 +111,7 @@ export default function Results({ history, location }) {
   }
 
   function createSucesResults(res) {
-    const results = res.data;
+    const result = res.data;
     
     setCurrentQuery('');
     setCurrentPage(1);
@@ -125,8 +119,6 @@ export default function Results({ history, location }) {
     setIsLastPage(total + 1 <= limit);
     setTotal(total + 1);
     setTitleOrder('');
-    setDurationOrder('');
-    setPriceOrder('');
 
     const oldResults = results;
     if (oldResults.length >= limit) {
@@ -134,9 +126,9 @@ export default function Results({ history, location }) {
     }
 
     // TODO: Melhorar a exibição do results adicionado
-    setResults([...oldResults, results]);
+    setResults([...oldResults, result]);
 
-    toast.succes(`Resultso cadastrado com suceso! Título: ${results.title}`);
+    toast.success(`Resultso cadastrado com suceso! Título: ${result.title}`);
   }
 
   async function createResults(data) {
@@ -159,7 +151,7 @@ export default function Results({ history, location }) {
         if (response.data) {
           loadResults({ query: currentQuery });
 
-          toast.succes(
+          toast.success(
             `Resultso de título ${results.title} foi excluído com suceso!`
           );
         }
@@ -211,7 +203,7 @@ export default function Results({ history, location }) {
                   results.map(s => (s.id === res.data.id ? res.data : s))
                 );
                 setSelectedResultsToEdit(null);
-                toast.succes(`Aluno alterado com suceso! Nome: ${res.data.title}`);
+                toast.success(`Aluno alterado com suceso! Nome: ${res.data.title}`);
               })}
             handleClose={() => setSelectedResultsToEdit(null)}
           />
@@ -219,7 +211,7 @@ export default function Results({ history, location }) {
       </Modal>
 
       <Modal visible={showCreate}>
-        <Form title='Cadastro de Comportamentos/Aspectos' handleClose={handleClose} handleSave={_results => 
+        <Form title='Cadastro de Resultados' handleClose={handleClose} handleSave={_results => 
           createResults(_results).then(createSucesResults).then(handleClose)}
         />
       </Modal>

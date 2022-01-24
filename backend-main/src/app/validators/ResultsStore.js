@@ -14,12 +14,12 @@ export default async (req, res, next) => {
       .json({ error: 'Validation fails', messages: error.inner });
   }
 
-  const planCount = await Results.count({ where: { title: req.body.title } });
+  const resultsCount = await Results.count({ where: { title: req.body.title } });
 
-  if (planCount) {
+  if (resultsCount) {
     return res.status(400).json({
       error: 'Validation fails',
-      messages: [{ errors: ['Plan title not available'] }],
+      messages: [{ errors: ['Results title not available'] }],
     });
   }
 
