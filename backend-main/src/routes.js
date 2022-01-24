@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
+import ResultsController from './app/controllers/ResultsController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinController from './app/controllers/CheckinController';
@@ -20,6 +21,9 @@ import validateStudentDelete from './app/validators/StudentDelete';
 import validatePlanStore from './app/validators/PlanStore';
 import validatePlanUpdate from './app/validators/PlanUpdate';
 import validatePlanDelete from './app/validators/PlanDelete';
+import validateResultsStore from './app/validators/ResultsStore';
+import validateResultsUpdate from './app/validators/ResultsUpdate';
+import validateResultsDelete from './app/validators/ResultsDelete';
 import validateRegistrationStore from './app/validators/RegistrationStore';
 import validateRegistrationUpdate from './app/validators/RegistrationUpdate';
 import validateRegistrationDelete from './app/validators/RegistrationDelete';
@@ -85,6 +89,11 @@ routes.get('/plans', convertLimitToInt, PlanController.index);
 routes.post('/plans', validatePlanStore, PlanController.store);
 routes.put('/plans/:id', validatePlanUpdate, PlanController.update);
 routes.delete('/plans/:id', validatePlanDelete, PlanController.delete);
+
+routes.get('/results', convertLimitToInt, ResultsController.index);
+routes.post('/results', validateResultsStore, ResultsController.store);
+routes.put('/results/:id', validateResultsUpdate, ResultsController.update);
+routes.delete('/results/:id', validateResultsDelete, ResultsController.delete);
 
 routes.get('/registrations', convertLimitToInt, RegistrationController.index);
 routes.post(

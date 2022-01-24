@@ -1,8 +1,6 @@
 import HelpOrder from '../models/HelpOrder';
 import Student from '../models/Student';
 
-import AnswerHelpOrderMail from '../jobs/AnswerHelpOrderMail';
-
 class AnswerHelpOrderController {
   async store(req, res) {
     const helpOrder = await HelpOrder.findByPk(req.params.help_order_id);

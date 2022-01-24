@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom';
 import Dashboard from '~/pages/Dashboard';
 import Plan from '~/pages/Plan';
 import Registration from '~/pages/Registration';
+import Results from '~/pages/Results';
 import SignIn from '~/pages/SignIn';
 import Student from '~/pages/Student';
 import StudentShowEdit from '~/pages/Student/ShowEdit';
@@ -17,6 +18,7 @@ export default function Routes() {
       <Route path="/students" exact component={Student} isPrivate />
       <Route path="/students/show/edit" component={StudentShowEdit} isPrivate />
       <Route path="/plans" exact component={Plan} isPrivate />
+      <Route path="/results" component={Results} isPrivate />
       <Route path="/registrations" component={Registration} isPrivate />
     </Switch>
   );
