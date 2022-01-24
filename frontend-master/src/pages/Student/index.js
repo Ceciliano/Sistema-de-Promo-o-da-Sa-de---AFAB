@@ -32,6 +32,7 @@ export default function Student({ history, location }) {
   const [loadingPage, setLoadingPage] = useState(false);
 
   const [nameOrder, setNameOrder] = useState('asc');
+  const [telefoneOrder, setTelefoneOrder] = useState('asc');
   const [doencascronicasOrder, setDoencascronicasOrder] = useState('');
   const [birthdayOrder, setBirthdayOrder] = useState('');
 
@@ -39,11 +40,12 @@ export default function Student({ history, location }) {
     page = 1,
     query = '',
     name = 'asc',
+    telefone = '',
     doencascronicas = '',
     birthday = '',
   } = {}) {
     const response = await api.get(
-      `/students?page=${page}&limit=${limit}&q=${query}&name=${name}&doencascronicas=${doencascronicas}&birthday=${birthday}`
+      `/students?page=${page}&limit=${limit}&q=${query}&name=${name}&telefone=${telefone}&doencascronicas=${doencascronicas}&birthday=${birthday}`
     );
 
     const {
@@ -95,6 +97,7 @@ export default function Student({ history, location }) {
         page,
         query: currentQuery,
         name: nameOrder,
+        telefone: telefoneOrder,
         doencascronicas: doencascronicasOrder,
         birthday: birthdayOrder,
       });
@@ -110,6 +113,7 @@ export default function Student({ history, location }) {
         page,
         query: currentQuery,
         name: nameOrder,
+        telefone: telefoneOrder,
         doencascronicas: doencascronicasOrder,
         birthday: birthdayOrder,
       });
@@ -141,6 +145,7 @@ export default function Student({ history, location }) {
     setIsLastPage(total + 1 <= limit);
     setTotal(total + 1);
     setNameOrder('');
+    setTelefoneOrder('');
     setDoencascronicasOrder('');
     setBirthdayOrder('');
 
@@ -152,7 +157,7 @@ export default function Student({ history, location }) {
     // TODO: Melhorar a exibição do student adicionado
     setStudents([...oldStudents, student]);
 
-    toast.success(`Aluno cadastrado com sucesso! Nome: ${student.name}`);
+    toast.success(`Idosa cadastrada com sucesso! Nome: ${student.name}`);
   }
 
   async function handleDeleteStudent(student) {
@@ -168,7 +173,7 @@ export default function Student({ history, location }) {
           loadStudents({ query: currentQuery });
 
           toast.success(
-            `Aluno de nome ${student.name} foi excluído com sucesso!`
+            `Idosa de nome ${student.name} foi excluído com sucesso!`
           );
         }
       } catch (error) {
@@ -190,6 +195,7 @@ export default function Student({ history, location }) {
 
   function handleSortOrder(field, order) {
     let tempNameOrder = nameOrder;
+    let tempTelefoneOrder = telefoneOrder;
     let tempDoencascronicasOrder = doencascronicasOrder;
     let tempBirthdayOrder = birthdayOrder;
 
@@ -203,6 +209,18 @@ export default function Student({ history, location }) {
       } else {
         setNameOrder('desc');
         tempNameOrder = 'desc';
+      }
+    }
+    if (field === 'telefone') {
+      if (order === tempTelefoneOrder) {
+        setTelefoneOrder('');
+        tempTelefoneOrder = '';
+      } else if (order === 'asc') {
+        setTelefoneOrder('asc');
+        tempTelefoneOrder = 'asc';
+      } else {
+        setTelefoneOrder('desc');
+        tempTelefoneOrder = 'desc';
       }
     }
     if (field === 'doencascronicas') {
@@ -234,6 +252,7 @@ export default function Student({ history, location }) {
       page: currentPage,
       query: currentQuery,
       name: tempNameOrder,
+      telefone: tempTelefoneOrder,
       doencascronicas: tempDoencascronicasOrder,
       birthday: tempBirthdayOrder,
     });
@@ -256,7 +275,7 @@ export default function Student({ history, location }) {
                   students.map(s => (s.id === res.data.id ? res.data : s))
                 );
                 setSelectedStudentToEdit(null);
-                toast.success(`Aluno alterado com sucesso! Nome: ${res.data.name}`);
+                toast.success(`Idosa alterada com sucesso! Nome: ${res.data.name}`);
               })}
             handleClose={() => setSelectedStudentToEdit(null)}
           />
@@ -346,6 +365,19 @@ export default function Student({ history, location }) {
                         />
                         Nome
                       </th>
+                      <th className="text-left">
+                        <MdArrowUpward
+                          color={telefoneOrder === 'desc' ? '#000' : '#ccc'}
+                          size={20}
+                          onClick={() => handleSortOrder('telefone', 'desc')}
+                        />
+                        <MdArrowDownward
+                          color={telefoneOrder === 'asc' ? '#000' : '#ccc'}
+                          size={20}
+                          onClick={() => handleSortOrder('telefone', 'asc')}
+                        />
+                        Telefone
+                      </th>
                       <th width="150">
                         <MdArrowUpward
                           color={birthdayOrder === 'desc' ? '#000' : '#ccc'}
@@ -387,6 +419,7 @@ export default function Student({ history, location }) {
                     {students.map(s => (
                       <tr key={s.id}>
                         <td>{s.name}</td>
+                        <td>{s.telefone}</td>
                         <td className="text-center">{s.age}</td>
                         <td>{s.doencascronicas}</td>
                         <td className="text-center">

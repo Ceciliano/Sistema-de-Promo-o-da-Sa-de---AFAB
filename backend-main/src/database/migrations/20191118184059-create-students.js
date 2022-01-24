@@ -28,6 +28,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      telefone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

@@ -17,6 +17,7 @@ class Student extends Model {
           },
         },
         atividades: Sequelize.STRING,
+        telefone: Sequelize.STRING,
         naturalidade: Sequelize.STRING,
         religiao: Sequelize.STRING,
         raca: Sequelize.STRING,

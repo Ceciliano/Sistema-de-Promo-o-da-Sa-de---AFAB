@@ -21,6 +21,7 @@ module.exports = {
         ),
         created_at: new Date(),
         updated_at: new Date(),
+        telefone: faker.phone.phoneNumber('(##)#####-####'),
         atividades: null,
         naturalidade: null,
         religiao: null,

@@ -9,9 +9,9 @@ class StudentController {
       page = 1,
       limit = 10,
       name = '',
+      telefone = '',
       doencascronicas = '',
       birthday = '',
-      active = 2,
     } = req.query;
 
     const order = [];
@@ -20,6 +20,9 @@ class StudentController {
     }
     if (birthday) {
       order.push(['birthday', birthday]);
+    }
+    if (telefone) {
+      order.push(['telefone', telefone]);
     }
     if (name) {
       order.push(['name', name]);
@@ -35,20 +38,6 @@ class StudentController {
         },
       },
     };
-
-    if (Number(active) === 0) {
-      whereQuery.where.id = {
-        [Op.notIn]: Sequelize.literal(
-          `(SELECT student_id FROM registrations WHERE registrations.end_date >= DATE_ADD(NOW(), INTERVAL 1 hour) AND registrations.start_date <= DATE_SUB(NOW(), INTERVAL 1 hour))`
-        ),
-      };
-    } else if (Number(active) === 1) {
-      whereQuery.where.id = {
-        [Op.in]: Sequelize.literal(
-          `(SELECT student_id FROM registrations WHERE registrations.end_date >= DATE_ADD(NOW(), INTERVAL 1 hour) AND registrations.start_date <= DATE_SUB(NOW(), INTERVAL 1 hour))`
-        ),
-      };
-    }
 
     const data = await Student.findAndCountAll({
       ...whereQuery,
@@ -75,6 +64,7 @@ class StudentController {
       weight,
       height,
       birthday,
+      telefone,
       atividades,
       naturalidade,
       religiao,
@@ -102,6 +92,7 @@ class StudentController {
       rendafamiliar,
       doencascronicas,
       niveldependencia,
+      telefone,
       birthday: new Date(
         Date.UTC(
           birthdayParsed.getFullYear(),
@@ -123,6 +114,7 @@ class StudentController {
       weight,
       height,
       birthday,
+      telefone,
       atividades,
       naturalidade,
       religiao,
@@ -139,6 +131,7 @@ class StudentController {
       email,
       weight,
       height,
+      telefone,
       atividades,
       naturalidade,
       religiao,
