@@ -3,7 +3,13 @@ import Respostas from '../models/Respostas';
 
 class RespostasController {
   async index(req, res) {
-    const { q: query = '', page = 1, limit = 10, title = '' } = req.query;
+    const {
+      q: query = '',
+      page = 1,
+      limit = 10,
+      title = '',
+      plan_id = '',
+    } = req.query;
 
     const order = [];
     if (title) {
@@ -17,6 +23,7 @@ class RespostasController {
         title: {
           [Op.like]: `%${query}%`,
         },
+        plan_id,
       },
       attributes: { exclude: ['createdAt', 'updatedAt'] },
       order,

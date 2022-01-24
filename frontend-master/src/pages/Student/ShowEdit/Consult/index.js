@@ -65,9 +65,9 @@ export default function ConsultForm({ title, name, handleSave, handleClose, oldC
     }
   }
 
-  function handleComportamentosChange(data) {
+  function handleComportamentosChange(data, id) {
     return new Promise((resolve, reject) => {
-      api.get(`/respostas?page=1&limit=100&q=${data}&active=0`)
+      api.get(`/respostas?page=1&limit=100&q=${data}&plan_id=${id}&active=0`)
         .then(result => {
           const { respostas } = result.data;
           if (respostas.length > 0) {
@@ -123,9 +123,9 @@ export default function ConsultForm({ title, name, handleSave, handleClose, oldC
                       </DivBoxColumn>
                       <DivBoxColumn>
                         <AssyncSelect
-                          name={`respostas.${0}.id`}
+                          name={`respostas.${p.id}.id`}
                           label="Resposta"
-                          promiseOptions={handleComportamentosChange}
+                          promiseOptions={data=>handleComportamentosChange(data, p.id)}
                         />
                       </DivBoxColumn>
                     </DivBoxRow>
