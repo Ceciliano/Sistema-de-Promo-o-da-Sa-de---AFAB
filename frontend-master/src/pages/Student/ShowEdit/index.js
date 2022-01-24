@@ -55,7 +55,7 @@ export default function ShowEdit({ history, location }) {
   });
 
   const [age, setAge] = useState(student.age);
-  const [showCreate, setShowCreate] = useState(false);
+  const [showCreate, setShowCreate] = useState(location.state.openConsult);
 
   function handleDatePickerChange(date) {
     setAge(differenceInYears(new Date(), date));

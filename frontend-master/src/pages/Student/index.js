@@ -185,11 +185,12 @@ export default function Student({ history, location }) {
     }
   }
 
-  function handleShowEdit(student) {
+  function handleShowEdit(student, openConsult) {
     console.tron.log('handleShowEdit', student);
     history.push('/students/show/edit', {
       student,
       currentPage,
+      openConsult
     });
   }
 
@@ -424,7 +425,7 @@ export default function Student({ history, location }) {
                             className="edit-button"
                             type="button"
                             onClick={() => {
-                              handleShowEdit(s);
+                              handleShowEdit(s,true);
                             }}
                           >
                             Consulta
@@ -434,7 +435,7 @@ export default function Student({ history, location }) {
                             className="neutral-button"
                             type="button"
                             onClick={() => {
-                              handleShowEdit(s);
+                              handleShowEdit(s,false);
                             }}
                           >
                             Editar
