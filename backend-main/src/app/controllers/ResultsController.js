@@ -58,8 +58,11 @@ class ResultsController {
     const newRecord = await Results.create({
       title,
     });
-
-    await newRecord.addRespostas(respostas);
+    const results = await Results.findByPk(respostas[0].id);
+    console.log(results);
+    await newRecord.addRespostas(results, {
+      through: { selfGranted: false },
+    });
 
     return res.json(newRecord);
   }

@@ -14,6 +14,11 @@ var schema = Yup.object().shape({
   title: Yup.string()
     .min(3, 'O Título deve ter no mínimo três letras')
     .required('O Título é obrigatório'),
+  respostas: Yup.array().of(
+    Yup.object().shape({
+      id: Yup.number(),
+    })
+  )
 });
 
 export default function EditForm({ title, handleSave, handleClose, oldResults }) {
@@ -55,13 +60,20 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
           const { plans } = result.data;
           if (plans.length > 0) {
             resolve(plans.map(s => ({ value: s.id, label: s.title })));
-          } else {
-            resolve([
-              {
-                value: 0,
-                label: 'Digite as primeiras letras do nome do aluno',
-              },
-            ]);
+          }
+        })
+        .catch(error => reject(error));
+    });
+  }
+
+  function handleComportamentosChange(data) {
+    return new Promise((resolve, reject) => {
+      api
+        .get(`/respostas?page=1&limit=100&q=${data}&active=0`)
+        .then(result => {
+          const { respostas } = result.data;
+          if (respostas.length > 0) {
+            resolve(respostas.map(s => ({ value: s.id, label: s.title })));
           }
         })
         .catch(error => reject(error));
@@ -120,12 +132,14 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
                           name="student_id"
                           label="Pergunta do Comportamentos/Aspectos"
                           promiseOptions={getPromisse}
+                          onChange={handleComportamentosChange}
                         />
                       </DivBoxColumn>
                       <DivBoxColumn>
-                        <ReactSelect
-                          name="resposta_id"
+                        <AssyncSelect
+                          name={`respostas.${i}.id`}
                           label="Resposta"
+                          promiseOptions={handleComportamentosChange}
                         />
                       </DivBoxColumn>
                     </DivBoxRow>

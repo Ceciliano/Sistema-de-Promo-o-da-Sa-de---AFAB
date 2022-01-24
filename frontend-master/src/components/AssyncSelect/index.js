@@ -12,6 +12,7 @@ export default function AssyncSelect({
   promiseOptions,
   options,
   disabled,
+  onChange=()=>{},
 }) {
   const ref = useRef(null);
   const { fieldName, registerField, error } = useField(name);
@@ -36,6 +37,7 @@ export default function AssyncSelect({
 
   function changeSelection(_value) {
     setValue(_value);
+    onChange(_value);
   }
 
   return (
