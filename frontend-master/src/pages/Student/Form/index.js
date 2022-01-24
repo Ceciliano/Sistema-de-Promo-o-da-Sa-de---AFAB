@@ -30,6 +30,7 @@ const schema = Yup.object().shape({
   height: Yup.number()
     .min(1.0, 'A Altura deve ser no mínimo de 1 metro')
     .required('A Altura é obrigatória'),
+  telefone: Yup.string(),
   atividades: Yup.string(),
   naturalidade: Yup.string(),
   religiao: Yup.string(),
@@ -48,6 +49,7 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
     birthday: new Date(),
     height: '',
     weight: '',
+    telefone: '',
     atividades: '',
     naturalidade: '',
     religiao: '',
@@ -145,6 +147,16 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
             <Input type="email" name="email" placeholder="exemplo@email.com" />
 
             <DivBoxRow>
+              <DivBoxColumn>
+                <label>
+                  Telefone
+                </label>
+                <InputMaskUnform
+                  name="telefone"
+                  mask="(99)99999-9999"
+                  type="text"
+                />
+              </DivBoxColumn>
               <DivBoxColumn>
                 <label>
                   Idade {age ? <span className="age">{age} anos</span> : null}
@@ -278,6 +290,7 @@ EditForm.propTypes = {
     birthday: PropTypes.string,
     weight: PropTypes.number,
     height: PropTypes.number,
+    telefone: PropTypes.string,
     atividades: PropTypes.string,
     naturalidade: PropTypes.string,
     religiao: PropTypes.string,

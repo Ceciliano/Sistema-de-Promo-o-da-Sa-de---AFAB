@@ -140,6 +140,18 @@ export default function ShowEdit({ history, location }) {
           <DivBoxRow>
             <DivBoxColumn>
               <label>
+                Telefone
+              </label>
+              <InputMaskUnform
+                name="telefone"
+                mask="(99)99999-9999"
+                type="text"
+                disabled={editMode ? 0 : 1}
+              />
+            </DivBoxColumn>
+
+            <DivBoxColumn>
+              <label>
                 Idade {age ? <span className="age">{age} anos</span> : null}
               </label>
               <DatePicker
