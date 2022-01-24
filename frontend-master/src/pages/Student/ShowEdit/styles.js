@@ -40,10 +40,10 @@ export const Container = styled.div`
         }
 
         button.save {
-          background: var(--color-primary);
+          background: var(--color-success);
 
           &:hover {
-            background: var(--color-primary-dark);
+            background: var(--color-success-dark);
           }
         }
 
@@ -66,6 +66,7 @@ export const Container = styled.div`
     }
 
     hr {
+      width: 100%;
       margin: 7px 0;
       border-top: 1px solid #ccc;
     }
@@ -105,7 +106,6 @@ export const DivBoxRow = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  flex-wrap: wrap;
 `;
 
 export const DivBoxColumn = styled.div`
@@ -113,7 +113,7 @@ export const DivBoxColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  min-width:300px;
+  width:100%;
   padding-left: 20px;
 
   label {

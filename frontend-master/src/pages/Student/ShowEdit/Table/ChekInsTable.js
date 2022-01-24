@@ -71,7 +71,7 @@ export default function CheckInsTable({ studentId }) {
   return (
     <Container>
       <h2>
-        Entradas:{' '}
+        Consultas:{' '}
         {checkins.length ? (
           checkins.length
         ) : (

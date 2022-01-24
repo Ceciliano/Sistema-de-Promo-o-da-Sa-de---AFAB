@@ -297,20 +297,82 @@ export default function ShowEdit({ history, location }) {
               />
             </DivBoxColumn>
           </DivBoxRow>
+        <DivBoxColumn>
+          <label>*Doenças crônicas</label>
+          <Input
+            type="text"
+            name="doencascronicas"
+            placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
+            
+          />
+          <label>
+            *Nível de dependência para Atividades Básicas para Vida
+          </label>
+          <Input
+            type="text"
+            name="niveldependencia"
+            placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+            
+          />
+        </DivBoxColumn>
+      </div>
+      <div className="content" style={{padding: '0px 30px'}}>
+        <DivBoxColumn>  
+          <hr />
+          <h2>
+            Comportamento anterior:
+          </h2>
+          <label>
+            *Atividades de cuidado Corporal/estético
+          </label>
+          <Input
+            type="text"
+            name="atividadescuidado"
+            placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+            
+          />
+          </DivBoxColumn>
+          <DivBoxRow>
+            <DivBoxColumn>
+              <label>
+                *Atividades de saúde
+              </label>
+              <Input
+                type="text"
+                name="atividadessaude"
+                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                
+              />
+            </DivBoxColumn>
+            <DivBoxColumn>
+              <label>
+                *Disponibilidade de tempo
+              </label>
+              <Input
+                type="text"
+                name="disponibilidadetempo"
+                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                
+              />
+            </DivBoxColumn>
+          </DivBoxRow>
           <DivBoxColumn>
-            <label>*Doenças crônicas</label>
-            <Input
-              type="text"
-              name="doencascronicas"
-              placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
-              
-            />
             <label>
-              *Nível de dependência para Atividades Básicas para Vida
+              *Conhecimento sobre atitudes saudáveis
             </label>
             <Input
               type="text"
-              name="niveldependencia"
+              name="conhecimentoatitudes"
+              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+              
+            />
+
+            <label>
+              *Aspectos culturais de origem
+            </label>
+            <Input
+              type="text"
+              name="aspectosculturais"
               placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
               
             />

@@ -112,10 +112,10 @@ export const TableBox = styled.div`
         }
 
         &.edit-button {
-          color: var(--color-success-dark);
+          color: var(--color-success);
 
           &:hover {
-            color: var(--color-info);
+            color: var(--color-success-dark);
           }
 
           &[disabled] {
@@ -287,6 +287,7 @@ export const ModalContent = styled.section`
     }
 
     hr {
+      width: 100%;
       margin: 7px 0;
       border-top: 1px solid #ccc;
     }
