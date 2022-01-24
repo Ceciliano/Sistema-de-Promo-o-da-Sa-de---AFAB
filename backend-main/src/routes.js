@@ -3,7 +3,7 @@ import { Router } from 'express';
 import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 import ResultsController from './app/controllers/ResultsController';
-import RespostaController from './app/controllers/RespostaController';
+import RespostasController from './app/controllers/RespostasController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinController from './app/controllers/CheckinController';
@@ -96,7 +96,7 @@ routes.post('/results', validateResultsStore, ResultsController.store);
 routes.put('/results/:id', validateResultsUpdate, ResultsController.update);
 routes.delete('/results/:id', validateResultsDelete, ResultsController.delete);
 
-routes.get('/respostas', convertLimitToInt, RespostaController.index);
+routes.get('/respostas', convertLimitToInt, RespostasController.index);
 
 routes.get('/registrations', convertLimitToInt, RegistrationController.index);
 routes.post(
