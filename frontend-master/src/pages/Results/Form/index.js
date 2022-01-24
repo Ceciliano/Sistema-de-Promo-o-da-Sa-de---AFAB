@@ -5,7 +5,10 @@ import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { Container, ModalContent } from '~/styles/styles';
+import { Container, DivBoxColumn, DivBoxRow, ModalContent } from '~/styles/styles';
+import AssyncSelect from '~/components/AssyncSelect';
+import ReactSelect from '~/components/ReactSelect';
+import api from '~/services/api';
 
 var schema = Yup.object().shape({
   title: Yup.string()
@@ -14,8 +17,8 @@ var schema = Yup.object().shape({
 });
 
 export default function EditForm({ title, handleSave, handleClose, oldResults }) {
-  const newResults = { title: '', respostas:[{ title: '' },{ title: '' }] }
-  const [results, ] = useState(oldResults? oldResults:newResults);
+  const newResults = { title: '', respostas:[{ title: '' }] }
+  const [results, setResults] = useState(oldResults? oldResults:newResults);
   const [errorApi, setErrorApi] = useState(null);
 
   useEffect(() => {
@@ -42,6 +45,36 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
       console.tron.log(error);
       setErrorApi(error);
     }
+  }
+
+  function getPromisse(inputValue) {
+    return new Promise((resolve, reject) => {
+      api
+        .get(`/plans?page=1&limit=100&q=${inputValue}&active=0`)
+        .then(result => {
+          const { plans } = result.data;
+          if (plans.length > 0) {
+            resolve(plans.map(s => ({ value: s.id, label: s.title })));
+          } else {
+            resolve([
+              {
+                value: 0,
+                label: 'Digite as primeiras letras do nome do aluno',
+              },
+            ]);
+          }
+        })
+        .catch(error => reject(error));
+    });
+  }
+
+  async function handleAddInput() {
+    setResults({ ...results, respostas: [...results.respostas, newResults.respostas[0]] });
+  }
+
+  async function handleLessInput(_item) {
+    results.respostas.splice(_item, 1);
+    setResults({ ...results });
   }
 
   return (
@@ -76,6 +109,46 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
           <div className="content">
             <label>Resultado</label>
             <Input type="text" name="title" />
+            <DivBoxRow>
+            {results.respostas && results.respostas.length > 0 && 
+              <DivBoxColumn>
+                {results.respostas.map(function(object, i){
+                  return(
+                    <DivBoxRow key={i}>
+                      <DivBoxColumn>
+                        <AssyncSelect
+                          name="student_id"
+                          label="Pergunta do Comportamentos/Aspectos"
+                          promiseOptions={getPromisse}
+                        />
+                      </DivBoxColumn>
+                      <DivBoxColumn>
+                        <ReactSelect
+                          name="resposta_id"
+                          label="Resposta"
+                        />
+                      </DivBoxColumn>
+                    </DivBoxRow>
+                  )
+                })}
+              </DivBoxColumn>}
+                {results.respostas && results.respostas.length > 1 &&
+                    <button
+                      className="delete-button"
+                      type="button"
+                      onClick={()=>handleLessInput(results.respostas.length-1)}
+                    >
+                      -
+                    </button>
+                }
+                <button
+                  className="neutral-button"
+                  type="button"
+                  onClick={handleAddInput}
+                >
+                  +
+                </button>
+            </DivBoxRow>
           </div>
         </Form>
       </ModalContent>

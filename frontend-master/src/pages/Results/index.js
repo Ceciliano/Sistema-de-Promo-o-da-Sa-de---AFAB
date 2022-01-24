@@ -11,7 +11,7 @@ import LoadingIndicator from '~/components/LoadingIndicator';
 import Modal from '~/components/Modal';
 import api from '~/services/api';
 import {
-  ButtonPagination, Content, DivBoxRow, EmptyTable, Header, Loading, TableBox
+  ButtonPagination, Content, DivBoxRow, EmptyTable, Header, Loading, TableBox, DivStartRow
 } from '~/styles/styles';
 import Form from './Form';
 
@@ -218,7 +218,7 @@ export default function Results({ history, location }) {
       
       <Content>
         <Header>
-          <h1>Resultados</h1>
+          <DivStartRow><h1>Gerenciando Resultados</h1></DivStartRow>
           <DivBoxRow>
             <button type="button" onClick={handleShowCreate}>
               <MdAdd color="#fff" size={20} />

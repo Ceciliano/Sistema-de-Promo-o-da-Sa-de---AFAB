@@ -11,7 +11,7 @@ import LoadingIndicator from '~/components/LoadingIndicator';
 import Modal from '~/components/Modal';
 import api from '~/services/api';
 import {
-  ButtonPagination, Content, DivBoxRow, EmptyTable, Header, Loading, TableBox
+  ButtonPagination, Content, DivBoxRow, EmptyTable, Header, Loading, TableBox, DivStartRow
 } from '~/styles/styles';
 import Form from './Form';
 
@@ -226,7 +226,9 @@ export default function Plan({ history, location }) {
       
       <Content>
         <Header>
-          <h1>Gerenciando Comportamentos/Aspectos</h1>
+          <DivStartRow>
+            <h1>Gerenciando Comportamentos/Aspectos</h1>
+          </DivStartRow>
           <DivBoxRow>
             <button type="button" onClick={handleShowCreate}>
               <MdAdd color="#fff" size={20} />

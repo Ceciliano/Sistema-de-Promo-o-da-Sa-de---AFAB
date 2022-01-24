@@ -11,6 +11,14 @@ class Results extends Model {
 
     return this;
   }
+
+  static associate(models) {
+    this.belongsToMany(models.Respostas, {
+      through: 'results_respostas',
+      as: 'respostas',
+      foreignKey: 'respostas_id',
+    });
+  }
 }
 
 export default Results;

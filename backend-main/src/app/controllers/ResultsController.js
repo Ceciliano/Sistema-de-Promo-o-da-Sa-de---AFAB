@@ -1,5 +1,6 @@
 import { Op } from 'sequelize';
 import Results from '../models/Results';
+import Respostas from '../models/Respostas';
 
 class ResultsController {
   async index(req, res) {
@@ -18,6 +19,12 @@ class ResultsController {
           [Op.like]: `%${query}%`,
         },
       },
+      include: [
+        {
+          model: Respostas,
+          as: 'respostas',
+        },
+      ],
       order,
       limit,
       offset: (page - 1) * limit,

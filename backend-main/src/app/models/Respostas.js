@@ -14,6 +14,11 @@ class Respostas extends Model {
 
   static associate(models) {
     this.belongsTo(models.Plan, { foreignKey: 'plan_id', as: 'plan' });
+    this.belongsToMany(models.Results, {
+      through: 'results_respostas',
+      as: 'results',
+      foreignKey: 'results_id',
+    });
   }
 }
 

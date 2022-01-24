@@ -389,10 +389,16 @@ export const ButtonSave = styled.button`
     background: var(--color-primary);
   }
 `;
-
+export const DivStartRow = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+`;
 export const DivBoxRow = styled.div`
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  width: 100%;
 
   button {
     svg {
@@ -494,7 +500,6 @@ export const DivBoxColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 200px;
   width: 100%;
 
   label {
