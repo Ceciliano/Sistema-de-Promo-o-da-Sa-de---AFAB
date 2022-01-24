@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 30px;
-  max-width: 700px;
+  width: 100%;
   margin: 0 auto;
 
   form {
@@ -55,11 +55,11 @@ export const Container = styled.div`
           }
         }
 
-        button.edit {
-          background: var(--text-color-light);
+        button.consult {
+          background: var(--color-info-dark);
 
           &:hover {
-            background: var(--text-color-dark);
+            background: var(--color-info);
           }
         }
       }
@@ -72,6 +72,7 @@ export const Container = styled.div`
 
     div.content {
       padding: 30px;
+      background: #fff;
 
       label {
         display: block;
@@ -104,6 +105,7 @@ export const DivBoxRow = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 
 export const DivBoxColumn = styled.div`
@@ -111,7 +113,8 @@ export const DivBoxColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 200px;
+  min-width:300px;
+  padding-left: 20px;
 
   label {
     display: block;
@@ -125,9 +128,5 @@ export const DivBoxColumn = styled.div`
         font-weight: normal;
       }
     }
-  }
-
-  & + div {
-    padding-left: 20px;
   }
 `;

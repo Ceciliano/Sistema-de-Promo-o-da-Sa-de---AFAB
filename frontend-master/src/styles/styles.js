@@ -277,10 +277,10 @@ export const ModalContent = styled.section`
         }
 
         button.close {
-          background: var(--text-color-light);
+          background: var(--color-success);
 
           &:hover {
-            background: var(--text-color-dark);
+            background: var(--color-success-dark);
           }
         }
       }

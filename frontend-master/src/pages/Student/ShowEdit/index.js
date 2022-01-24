@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 import { parseISO, differenceInYears, subYears } from 'date-fns';
-import { MdDone, MdEdit, MdKeyboardArrowLeft } from 'react-icons/md';
+import { MdDone, MdExposure, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
@@ -12,6 +12,7 @@ import api from '~/services/api';
 import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
 import CheckInTable from './Table/ChekInsTable';
+import ReactSelect from '~/components/ReactSelect';
 
 import { Container, DivBoxRow, DivBoxColumn } from './styles';
 
@@ -31,6 +32,16 @@ const schema = Yup.object().shape({
   height: Yup.number()
     .min(1.0, 'A Altura deve ser no mínimo de 1 metro')
     .required('A Altura é obrigatória'),
+  telefone: Yup.string(),
+  atividades: Yup.string(),
+  naturalidade: Yup.string(),
+  religiao: Yup.string(),
+  raca: Yup.string(),
+  estadocivil: Yup.string(),
+  escolaridade: Yup.string(),
+  rendafamiliar: Yup.string(),
+  doencascronicas: Yup.string(),
+  niveldependencia: Yup.string(),
 });
 
 export default function ShowEdit({ history, location }) {
@@ -44,7 +55,6 @@ export default function ShowEdit({ history, location }) {
   });
 
   const [age, setAge] = useState(student.age);
-  const [editMode, setEditMode] = useState(false);
 
   function handleDatePickerChange(date) {
     setAge(differenceInYears(new Date(), date));
@@ -54,37 +64,49 @@ export default function ShowEdit({ history, location }) {
     history.push('/students', { currentPage: location.state.currentPage });
   }
 
-  async function handleSubmit({ name, email, birthday, weight, height }) {
-    if (editMode) {
-      height = (height * 100).toFixed(0);
-      weight = (weight * 100).toFixed(0);
+  async function handleSubmit({ 
+    name, 
+    email, 
+    birthday, 
+    weight, 
+    height,
+    telefone,
+    atividades,
+    naturalidade,
+    religiao,
+    raca,
+    estadocivil,
+    escolaridade,
+    rendafamiliar,
+    doencascronicas,
+    niveldependencia, }) {
+    height = (height * 100).toFixed(0);
+    weight = (weight * 100).toFixed(0);
 
-      try {
-        const response = await api.put(`/students/${student.id}`, {
-          name,
-          email,
-          birthday,
-          weight,
-          height,
-        });
-
-        setStudent(response.data);
-      } catch (error) {
-        console.tron.error(error);
-        toast.error('Erro ao editar o Aluno');
-      }
-
-      setEditMode(false);
-
-      console.tron.log('handleSubmit', {
+    try {
+      const response = await api.put(`/students/${student.id}`, {
         name,
         email,
         birthday,
         weight,
         height,
+        telefone,
+        atividades,
+        naturalidade,
+        religiao,
+        raca,
+        estadocivil,
+        escolaridade,
+        rendafamiliar,
+        doencascronicas,
+        niveldependencia,
       });
-    } else {
-      setEditMode(true);
+
+      setStudent(response.data);
+      toast.success(`Idosa alterada com sucesso! Nome: ${name}`);
+    } catch (error) {
+      console.tron.error(error);
+      toast.error('Erro ao editar o Aluno');
     }
   }
 
@@ -97,45 +119,45 @@ export default function ShowEdit({ history, location }) {
         context={{ age }}
       >
         <header>
-          <h1>Visualização/Edição</h1>
+          <h1>Consulta/Dados</h1>
           <div className="buttons">
             <button type="button" className="close" onClick={handleGoBack}>
               <MdKeyboardArrowLeft color="#fff" size={16} />
               Voltar
             </button>
 
-            {editMode ? (
-              <button type="submit" className="save">
-                <MdDone color="#fff" size={16} />
-                Salvar
-              </button>
-            ) : (
-              <button type="submit" className="edit">
-                <MdEdit color="#fff" size={16} />
-                Editar
-              </button>
-            )}
+            <button type="button" className="consult">
+              <MdExposure color="#fff" size={16} />
+              Consultar
+            </button>
+
+            <button type="submit" className="save">
+              <MdDone color="#fff" size={16} />
+              Salvar
+            </button>
           </div>
         </header>
 
         <hr />
 
         <div className="content">
-          <label>Nome Completo</label>
-          <Input
-            type="text"
-            name="name"
-            placeholder="John Doe"
-            disabled={editMode ? 0 : 1}
-          />
+          <DivBoxColumn>
+            <label>Nome Completo</label>
+            <Input
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              
+            />
 
-          <label>Endereço de e-mail</label>
-          <Input
-            type="email"
-            name="email"
-            placeholder="exemplo@email.com"
-            disabled={editMode ? 0 : 1}
-          />
+            <label>E-mail</label>
+            <Input
+              type="email"
+              name="email"
+              placeholder="exemplo@email.com"
+              
+            />
+          </DivBoxColumn>
 
           <DivBoxRow>
             <DivBoxColumn>
@@ -146,7 +168,7 @@ export default function ShowEdit({ history, location }) {
                 name="telefone"
                 mask="(99)99999-9999"
                 type="text"
-                disabled={editMode ? 0 : 1}
+                
               />
             </DivBoxColumn>
 
@@ -158,7 +180,7 @@ export default function ShowEdit({ history, location }) {
                 name="birthday"
                 defaultValue={student.birthday}
                 onChange={handleDatePickerChange}
-                disabled={editMode ? 0 : 1}
+                
               />
             </DivBoxColumn>
 
@@ -170,7 +192,7 @@ export default function ShowEdit({ history, location }) {
                 name="weight"
                 mask="999.9"
                 type="text"
-                disabled={editMode ? 0 : 1}
+                
               />
             </DivBoxColumn>
 
@@ -180,10 +202,119 @@ export default function ShowEdit({ history, location }) {
                 name="height"
                 mask="9.99"
                 type="text"
-                disabled={editMode ? 0 : 1}
+                
               />
             </DivBoxColumn>
           </DivBoxRow>
+          <DivBoxColumn>
+            <label>Atividades grupais de saúde</label>
+              <Input
+                type="text"
+                name="atividades"
+                placeholder="Dança, Passeios, Artesanato, Musculação"
+                
+              />
+          </DivBoxColumn>
+
+          <DivBoxRow>
+            <DivBoxColumn>
+              <label>Naturalidade</label>
+              <Input
+                type="text"
+                name="naturalidade"
+                placeholder="Brasileira"
+                
+              />
+            </DivBoxColumn>
+            <DivBoxColumn>
+              <ReactSelect
+                name="religiao"
+                label="*Religião/crença"
+                options={[
+                  { id: 'catolica', title: 'Católica' },
+                  { id: 'evangelica', title: 'Evangélica' },
+                  { id: 'espirita', title: 'Espírita' },
+                  { id: 'testemunhadejeova', title: 'Testemunha de Jeová' },
+                  { id: 'outras', title: 'Outras' },
+                ]}
+                
+              />
+            </DivBoxColumn>
+            <DivBoxColumn>
+              <ReactSelect
+                name="raca"
+                label="Raça/cor"
+                options={[
+                  { id: 'branca', title: 'Branca' },
+                  { id: 'negra', title: 'Negra' },
+                  { id: 'mulata', title: 'Parda/mulata' },
+                  { id: 'amarela', title: 'Amarela' },
+                  { id: 'indigena', title: 'Indígena ou de origem indígena' },
+                ]}
+                
+              />
+            </DivBoxColumn>
+          </DivBoxRow>
+
+          <DivBoxRow>
+            <DivBoxColumn>
+              <ReactSelect
+                name="estadocivil"
+                label="*Estado Civil"
+                options={[
+                  { id: 'solteira', title: 'Solteira' },
+                  { id: 'casada', title: 'Casada' },
+                  { id: 'divorciada', title: 'Divorciada' },
+                  { id: 'viuva', title: 'Viúva' },
+                ]}
+                
+              />
+            </DivBoxColumn>
+            <DivBoxColumn>
+              <ReactSelect
+                name="escolaridade"
+                label="Escolaridade"
+                options={[
+                  { id: 'nenhuma', title: 'Nenhuma' },
+                  { id: 'ensinofundamental', title: 'Ensino Fundamental' },
+                  { id: 'ensinomedio', title: 'Ensino Médio' },
+                  { id: 'tecnico', title: 'Ensino Médio - Técnico' },
+                  { id: 'ensinosuperior', title: 'Ensino Superior' },
+                ]}
+                
+              />
+            </DivBoxColumn>
+            <DivBoxColumn>
+              <ReactSelect
+                name="rendafamiliar"
+                label="*Renda familiar"
+                options={[
+                  { id: 'ate2sm', title: 'Até 2 SM' },
+                  { id: 'de2a5sm', title: 'De 2 a 5 SM' },
+                  { id: 'maisde5sm', title: 'Mais de 5 SM' },
+                ]}
+                
+              />
+            </DivBoxColumn>
+          </DivBoxRow>
+          <DivBoxColumn>
+            <label>*Doenças crônicas</label>
+            <Input
+              type="text"
+              name="doencascronicas"
+              placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
+              
+            />
+            <label>
+              *Nível de dependência para Atividades Básicas para Vida
+            </label>
+            <Input
+              type="text"
+              name="niveldependencia"
+              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+              
+            />
+          </DivBoxColumn>
         </div>
       </Form>
       <CheckInTable studentId={student.id} />

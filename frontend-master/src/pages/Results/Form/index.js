@@ -5,10 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import { Container, DivBoxColumn, DivBoxRow, ModalContent } from '~/styles/styles';
 import AssyncSelect from '~/components/AssyncSelect';
-import ReactSelect from '~/components/ReactSelect';
 import api from '~/services/api';
+import { Container, DivBoxColumn, DivBoxRow, ModalContent } from '~/styles/styles';
 
 var schema = Yup.object().shape({
   title: Yup.string()

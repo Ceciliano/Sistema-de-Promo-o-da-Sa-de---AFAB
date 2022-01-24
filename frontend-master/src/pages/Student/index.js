@@ -365,7 +365,7 @@ export default function Student({ history, location }) {
                         />
                         Nome
                       </th>
-                      <th className="text-left">
+                      <th width="150">
                         <MdArrowUpward
                           color={telefoneOrder === 'desc' ? '#000' : '#ccc'}
                           size={20}
@@ -438,7 +438,7 @@ export default function Student({ history, location }) {
                             className="neutral-button"
                             type="button"
                             onClick={() => {
-                              handleShowModalEdit(s);
+                              handleShowEdit(s);
                             }}
                           >
                             Editar

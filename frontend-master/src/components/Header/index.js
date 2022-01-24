@@ -25,7 +25,6 @@ export default function Header() {
           <NavLink to="/students">Idosas</NavLink>
           <NavLink to="/plans">Comportamentos e Aspectos</NavLink>
           <NavLink to="/results">Resultados</NavLink>
-          <NavLink to="/registrations">Modelo</NavLink>
         </nav>
 
         <aside>
