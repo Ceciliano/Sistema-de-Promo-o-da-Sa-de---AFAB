@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import User from '../app/models/User';
 import Student from '../app/models/Student';
 import Plan from '../app/models/Plan';
+import Results from '../app/models/Results';
 import Registration from '../app/models/Registration';
 import Checkin from '../app/models/Checkin';
 import HelpOrder from '../app/models/HelpOrder';
@@ -14,6 +15,7 @@ const models = [
   User,
   Student,
   Plan,
+  Results,
   Registration,
   Checkin,
   HelpOrder,

@@ -16,7 +16,7 @@ import {
 import Form from './Form';
 
 
-export default function Plan({ history, location }) {
+export default function Results({ history, location }) {
   const limit = 20;
   const timer = useRef(null);
 
@@ -26,25 +26,25 @@ export default function Plan({ history, location }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentQuery, setCurrentQuery] = useState('');
   const [total, setTotal] = useState(0);
-  const [plans, setPlans] = useState([]);
+  const [results, setResults] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
-  const [selectPlanToEdit, setSelectedPlanToEdit] = useState(null);
+  const [selectResultsToEdit, setSelectedResultsToEdit] = useState(null);
 
   const [titleOrder, setTitleOrder] = useState('asc');
   const [durationOrder, setDurationOrder] = useState('');
   const [priceOrder, setPriceOrder] = useState('');
 
-  async function loadPlans({
+  async function loadResults({
     page = 1,
     query = '',
     title = 'asc',
   } = {}) {
     const response = await api.get(
-      `/plans?page=${page}&limit=${limit}&q=${query}&title=${title}`
+      `/results?page=${page}&limit=${limit}&q=${query}&title=${title}`
     );
 
     const {
-      plans: _plans,
+      results: _results,
       page: _page,
       total: _total,
       last_page: _lastPage,
@@ -53,7 +53,7 @@ export default function Plan({ history, location }) {
     setIsFirstPage(Number(page) === 1);
     setIsLastPage(Number(page) === _lastPage);
 
-    setPlans(_plans);
+    setResults(_results);
     setTotal(_total);
     setCurrentPage(_page);
     setLoading(false);
@@ -66,7 +66,7 @@ export default function Plan({ history, location }) {
       setCurrentPage(_page);
     }
     setLoading(true);
-    loadPlans({ page: _page });
+    loadResults({ page: _page });
   }, []); // eslint-disable-line
 
   function handleQueryChange(event) {
@@ -76,7 +76,7 @@ export default function Plan({ history, location }) {
     setCurrentQuery(_query);
 
     timer.current = setTimeout(() => {
-      loadPlans({ query: _query });
+      loadResults({ query: _query });
     }, 600);
   }
 
@@ -84,7 +84,7 @@ export default function Plan({ history, location }) {
     if (!isFirstPage) {
       const page = Number(currentPage) - 1;
       setCurrentPage(page);
-      loadPlans({
+      loadResults({
         page,
         query: currentQuery,
         title: titleOrder,
@@ -98,7 +98,7 @@ export default function Plan({ history, location }) {
     if (!isLastPage) {
       const page = Number(currentPage) + 1;
       setCurrentPage(page);
-      loadPlans({
+      loadResults({
         page,
         query: currentQuery,
         title: titleOrder,
@@ -116,8 +116,8 @@ export default function Plan({ history, location }) {
     setShowCreate(false);
   }
 
-  function createSucessPlan(res) {
-    const plan = res.data;
+  function createSucesResults(res) {
+    const results = res.data;
     
     setCurrentQuery('');
     setCurrentPage(1);
@@ -128,45 +128,45 @@ export default function Plan({ history, location }) {
     setDurationOrder('');
     setPriceOrder('');
 
-    const oldPlans = plans;
-    if (oldPlans.length >= limit) {
-      oldPlans.pop();
+    const oldResults = results;
+    if (oldResults.length >= limit) {
+      oldResults.pop();
     }
 
-    // TODO: Melhorar a exibição do plan adicionado
-    setPlans([...oldPlans, plan]);
+    // TODO: Melhorar a exibição do results adicionado
+    setResults([...oldResults, results]);
 
-    toast.success(`Plano cadastrado com sucesso! Título: ${plan.title}`);
+    toast.succes(`Resultso cadastrado com suceso! Título: ${results.title}`);
   }
 
-  async function createPlan(data) {
-    return api.post('/plans', data);
+  async function createResults(data) {
+    return api.post('/results', data);
   }
 
-  async function updatePlan(id, data) {
-    return await api.put(`/plans/${id}`, data);
+  async function updateResults(id, data) {
+    return await api.put(`/results/${id}`, data);
   }
 
-  async function handleDeletePlan(plan) {
+  async function handleDeleteResults(results) {
     if (
       // eslint-disable-next-line no-alert
       window.confirm(
-        'Tem certeza que deseja excluir o plano?\nEsta ação é irreversível!'
+        'Tem certeza que deseja excluir o resultso?\nEsta ação é irreversível!'
       )
     ) {
       try {
-        const response = await api.delete(`/plans/${plan.id}`);
+        const response = await api.delete(`/results/${results.id}`);
         if (response.data) {
-          loadPlans({ query: currentQuery });
+          loadResults({ query: currentQuery });
 
-          toast.success(
-            `Plano de título ${plan.title} foi excluído com sucesso!`
+          toast.succes(
+            `Resultso de título ${results.title} foi excluído com suceso!`
           );
         }
       } catch (error) {
         console.tron.log(error);
         toast.error(
-          `Plano não excluído: ${error.response.data.messages[0].errors[0]}`
+          `Resultso não excluído: ${error.response.data.mesages[0].errors[0]}`
         );
       }
     }
@@ -187,40 +187,40 @@ export default function Plan({ history, location }) {
         tempTitleOrder = 'desc';
       }
     }
-    loadPlans({
+    loadResults({
       page: currentPage,
       query: currentQuery,
       title: tempTitleOrder,
     });
   }
 
-  function handleShowModalEdit(plan) {
-    setSelectedPlanToEdit(plan);
+  function handleShowModalEdit(results) {
+    setSelectedResultsToEdit(results);
   }
 
   return (
     <>
-      <Modal visible={selectPlanToEdit !== null}>
-        {selectPlanToEdit ? (
+      <Modal visible={selectResultsToEdit !== null}>
+        {selectResultsToEdit ? (
           <Form
             title='Alterar Cadastro Comportamentos/Aspectos'
-            oldPlan={selectPlanToEdit}
-            handleSave={_plan => 
-              updatePlan(selectPlanToEdit.id, _plan).then(res =>{
-                setPlans(
-                  plans.map(s => (s.id === res.data.id ? res.data : s))
+            oldResults={selectResultsToEdit}
+            handleSave={_results => 
+              updateResults(selectResultsToEdit.id, _results).then(res =>{
+                setResults(
+                  results.map(s => (s.id === res.data.id ? res.data : s))
                 );
-                setSelectedPlanToEdit(null);
-                toast.success(`Aluno alterado com sucesso! Nome: ${res.data.title}`);
+                setSelectedResultsToEdit(null);
+                toast.succes(`Aluno alterado com suceso! Nome: ${res.data.title}`);
               })}
-            handleClose={() => setSelectedPlanToEdit(null)}
+            handleClose={() => setSelectedResultsToEdit(null)}
           />
         ) : null}
       </Modal>
 
       <Modal visible={showCreate}>
-        <Form title='Cadastro de Comportamentos/Aspectos' handleClose={handleClose} handleSave={_plan => 
-          createPlan(_plan).then(createSucessPlan).then(handleClose)}
+        <Form title='Cadastro de Comportamentos/Aspectos' handleClose={handleClose} handleSave={_results => 
+          createResults(_results).then(createSucesResults).then(handleClose)}
         />
       </Modal>
       
@@ -237,7 +237,7 @@ export default function Plan({ history, location }) {
               <MdSearch color="#444" size={16} />
               <input
                 type="text"
-                placeholder="Buscar plano"
+                placeholder="Buscar resultso"
                 onChange={handleQueryChange}
                 disabled={loading ? 1 : 0}
               />
@@ -298,7 +298,7 @@ export default function Plan({ history, location }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {plans.map(s => (
+                    {results.map(s => (
                       <tr key={s.id}>
                         <td>{s.title}</td>
                         <td className="text-center">
@@ -315,7 +315,7 @@ export default function Plan({ history, location }) {
                             className="delete-button"
                             type="button"
                             onClick={() => {
-                              handleDeletePlan(s);
+                              handleDeleteResults(s);
                             }}
                           >
                             Apagar
@@ -338,7 +338,7 @@ export default function Plan({ history, location }) {
   );
 }
 
-Plan.propTypes = {
+Results.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -349,6 +349,6 @@ Plan.propTypes = {
   }),
 };
 
-Plan.defaultProps = {
+Results.defaultProps = {
   location: {},
 };

@@ -1,7 +1,7 @@
 module.exports = {
   up: queryInterface => {
     return queryInterface.bulkInsert(
-      'plans',
+      'results',
       [
         {
           title: 'Start',
