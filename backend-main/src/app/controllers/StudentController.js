@@ -1,5 +1,5 @@
-import Sequelize, { Op } from 'sequelize';
 import { parseISO } from 'date-fns';
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 class StudentController {
@@ -74,6 +74,11 @@ class StudentController {
       rendafamiliar,
       doencascronicas,
       niveldependencia,
+      atividadescuidado,
+      atividadessaude,
+      disponibilidadetempo,
+      conhecimentoatitudes,
+      aspectosculturais,
     } = req.body;
 
     const birthdayParsed = parseISO(birthday);
@@ -93,6 +98,11 @@ class StudentController {
       doencascronicas,
       niveldependencia,
       telefone,
+      atividadescuidado,
+      atividadessaude,
+      disponibilidadetempo,
+      conhecimentoatitudes,
+      aspectosculturais,
       birthday: new Date(
         Date.UTC(
           birthdayParsed.getFullYear(),
@@ -124,6 +134,11 @@ class StudentController {
       rendafamiliar,
       doencascronicas,
       niveldependencia,
+      atividadescuidado,
+      atividadessaude,
+      disponibilidadetempo,
+      conhecimentoatitudes,
+      aspectosculturais,
     } = req.body;
 
     await student.update({
@@ -142,6 +157,11 @@ class StudentController {
       doencascronicas,
       niveldependencia,
       birthday,
+      atividadescuidado,
+      atividadessaude,
+      disponibilidadetempo,
+      conhecimentoatitudes,
+      aspectosculturais,
     });
 
     return res.json(student);

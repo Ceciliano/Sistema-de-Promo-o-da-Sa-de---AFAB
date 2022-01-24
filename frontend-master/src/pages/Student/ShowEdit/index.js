@@ -42,6 +42,11 @@ const schema = Yup.object().shape({
   rendafamiliar: Yup.string(),
   doencascronicas: Yup.string(),
   niveldependencia: Yup.string(),
+  atividadescuidado: Yup.string(),
+  atividadessaude: Yup.string(),
+  disponibilidadetempo: Yup.string(),
+  conhecimentoatitudes: Yup.string(),
+  aspectosculturais: Yup.string(),
 });
 
 export default function ShowEdit({ history, location }) {
@@ -80,6 +85,11 @@ export default function ShowEdit({ history, location }) {
     escolaridade,
     rendafamiliar,
     doencascronicas,
+    atividadescuidado,
+    atividadessaude,
+    disponibilidadetempo,
+    conhecimentoatitudes,
+    aspectosculturais,
     niveldependencia, }) {
     height = (height * 100).toFixed(0);
     weight = (weight * 100).toFixed(0);
@@ -101,6 +111,11 @@ export default function ShowEdit({ history, location }) {
         rendafamiliar,
         doencascronicas,
         niveldependencia,
+        atividadescuidado,
+        atividadessaude,
+        disponibilidadetempo,
+        conhecimentoatitudes,
+        aspectosculturais,
       });
 
       setStudent(response.data);

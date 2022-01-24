@@ -31,6 +31,11 @@ module.exports = {
         rendafamiliar: null,
         doencascronicas: null,
         niveldependencia: null,
+        atividadescuidado: null,
+        atividadessaude: null,
+        disponibilidadetempo: null,
+        conhecimentoatitudes: null,
+        aspectosculturais: null,
       };
     });
 

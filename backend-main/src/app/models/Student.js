@@ -26,6 +26,11 @@ class Student extends Model {
         rendafamiliar: Sequelize.STRING,
         doencascronicas: Sequelize.STRING,
         niveldependencia: Sequelize.STRING,
+        atividadescuidado: Sequelize.STRING,
+        atividadessaude: Sequelize.STRING,
+        disponibilidadetempo: Sequelize.STRING,
+        conhecimentoatitudes: Sequelize.STRING,
+        aspectosculturais: Sequelize.STRING,
       },
       { sequelize }
     );
