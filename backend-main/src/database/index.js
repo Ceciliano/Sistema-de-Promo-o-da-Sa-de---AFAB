@@ -8,8 +8,12 @@ import Registration from '../app/models/Registration';
 import Checkin from '../app/models/Checkin';
 import HelpOrder from '../app/models/HelpOrder';
 import Respostas from '../app/models/Respostas';
+import Consult from '../app/models/Consult';
+import ConsultResposta from '../app/models/ConsultResposta';
+
 
 import databaseConfig from '../config/database';
+import Consult from '../app/models/Consult';
 
 const models = [
   User,
@@ -20,6 +24,8 @@ const models = [
   Checkin,
   HelpOrder,
   Respostas,
+  Consult,
+  ConsultResposta
 ];
 
 class Database {

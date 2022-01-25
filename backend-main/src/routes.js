@@ -5,6 +5,7 @@ import StudentController from './app/controllers/StudentController';
 import ResultsController from './app/controllers/ResultsController';
 import RespostasController from './app/controllers/RespostasController';
 import PlanController from './app/controllers/PlanController';
+import ConsultController from './app/controllers/ConsultController';
 import RegistrationController from './app/controllers/RegistrationController';
 import CheckinController from './app/controllers/CheckinController';
 import HelpOrderController from './app/controllers/HelpOrderController';
@@ -97,6 +98,8 @@ routes.put('/results/:id', validateResultsUpdate, ResultsController.update);
 routes.delete('/results/:id', validateResultsDelete, ResultsController.delete);
 
 routes.get('/respostas', convertLimitToInt, RespostasController.index);
+
+routes.get('/students/:student_id/consult', ConsultController.index);
 
 routes.get('/registrations', convertLimitToInt, RegistrationController.index);
 routes.post(
