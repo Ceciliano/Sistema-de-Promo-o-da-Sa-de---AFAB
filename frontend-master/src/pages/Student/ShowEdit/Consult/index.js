@@ -18,7 +18,7 @@ var schema = Yup.object().shape({
   )
 });
 
-export default function ConsultForm({ title, name, handleSave, handleClose, oldConsults }) {
+export default function ConsultForm({ title, name, student_id, handleSave, handleClose, oldConsults }) {
   const newConsults = { title: '', respostas:[{ title: '' }] }
   const [consults, setConsults] = useState(oldConsults? oldConsults:newConsults);
   const [perguntas, setPerguntas] = useState([{title:'teste'}]);
@@ -58,7 +58,7 @@ export default function ConsultForm({ title, name, handleSave, handleClose, oldC
 
   async function handleInternalSave(data) {
     try {
-      handleSave(data);
+      handleSave({...data, student_id: student_id});
     } catch (error) {
       console.tron.log(error);
       setErrorApi(error);
@@ -115,22 +115,22 @@ export default function ConsultForm({ title, name, handleSave, handleClose, oldC
               </Loading>
             ) : (
               <>
-                {perguntas.map(p => (
-                  <DivBoxRow key={p.id}>
+                {perguntas.map(function(p, i){
+                  return <DivBoxRow key={i}>
                     <DivBoxRow>
                       <DivBoxColumn>
                         {p.title}
                       </DivBoxColumn>
                       <DivBoxColumn>
                         <AssyncSelect
-                          name={`respostas.${p.id}.id`}
+                          name={`respostas.${i}.id`}
                           label="Resposta"
                           promiseOptions={data=>handleComportamentosChange(data, p.id)}
                         />
                       </DivBoxColumn>
                     </DivBoxRow>
                   </DivBoxRow>
-                ))}
+                })}
               </>
             )}
           </div>
@@ -142,6 +142,7 @@ export default function ConsultForm({ title, name, handleSave, handleClose, oldC
 
 ConsultForm.propTypes = {
   title: PropTypes.string,
+  student_id: PropTypes.number,
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
   selectResults: PropTypes.shape({

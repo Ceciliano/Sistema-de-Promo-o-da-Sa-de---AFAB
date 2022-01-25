@@ -1,4 +1,7 @@
 import Consult from '../models/Consult';
+import ConsultResposta from '../models/ConsultResposta';
+import Respostas from '../models/Respostas';
+import Plan from '../models/Plan';
 
 class ConsultController {
   async index(req, res) {
@@ -20,30 +23,31 @@ class ConsultController {
   }
 
   async store(req, res) {
-    const { title } = req.body;
+    const { respostas, student_id } = req.body;
+
     const newRecord = await Consult.create({
-      title,
+      result: 'test',
+      student_id,
+    });
+
+    respostas.map(async key => {
+      const resposta = await Respostas.findByPk(key.id, {
+        include: [
+          {
+            model: Plan,
+            as: 'plan',
+          },
+        ],
+      });
+
+      await ConsultResposta.create({
+        resposta: resposta.dataValues.title,
+        pergunta: resposta.dataValues.plan.dataValues.title,
+        consult_id: newRecord.dataValues.id,
+      });
     });
 
     return res.json(newRecord);
-  }
-
-  async update(req, res) {
-    const plan = await Consult.findByPk(req.params.id);
-
-    const { title } = req.body;
-
-    await plan.update({
-      title,
-    });
-
-    return res.json(plan);
-  }
-
-  async delete(req, res) {
-    const deletedRows = await Consult.destroy({ where: { id: req.params.id } });
-
-    return res.json({ deletedRows });
   }
 }
 

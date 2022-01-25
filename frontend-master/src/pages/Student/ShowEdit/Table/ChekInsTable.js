@@ -48,7 +48,7 @@ export default function CheckInsTable({ studentId }) {
             <table>
               <thead>
                 <tr>
-                  <th class="text-left" width="220">
+                  <th className="text-left" width="220">
                     Data
                   </th>
                   <th className="text-left">

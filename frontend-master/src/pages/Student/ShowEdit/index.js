@@ -135,8 +135,7 @@ export default function ShowEdit({ history, location }) {
   }
 
   async function createStundent(data) {
-    console.log(data);
-    return api.post('/students', data);
+    return api.post('/students/consults', data);
   }
 
   function createSucessStudent(res) {
@@ -146,7 +145,7 @@ export default function ShowEdit({ history, location }) {
   return (
     <>
      <Modal visible={showCreate}>
-        <ConsultForm title='Consultar' name={student.name} handleClose={handleClose} handleSave={_consult => 
+        <ConsultForm title='Consultar' student_id={student.id} name={student.name} handleClose={handleClose} handleSave={_consult => 
           createStundent(_consult).then(createSucessStudent).then(handleClose)}
         />
       </Modal>

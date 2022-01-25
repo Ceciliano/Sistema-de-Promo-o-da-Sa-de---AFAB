@@ -20,6 +20,7 @@ import validateSessionStore from './app/validators/SessionStore';
 import validateStudentStore from './app/validators/StudentStore';
 import validateStudentUpdate from './app/validators/StudentUpdate';
 import validateStudentDelete from './app/validators/StudentDelete';
+import validateConsultStore from './app/validators/ConsultStore';
 import validatePlanStore from './app/validators/PlanStore';
 import validatePlanUpdate from './app/validators/PlanUpdate';
 import validatePlanDelete from './app/validators/PlanDelete';
@@ -100,6 +101,11 @@ routes.delete('/results/:id', validateResultsDelete, ResultsController.delete);
 routes.get('/respostas', convertLimitToInt, RespostasController.index);
 
 routes.get('/students/:student_id/consults', ConsultController.index);
+routes.post(
+  '/students/consults',
+  validateConsultStore,
+  ConsultController.store
+);
 
 routes.get('/registrations', convertLimitToInt, RegistrationController.index);
 routes.post(
