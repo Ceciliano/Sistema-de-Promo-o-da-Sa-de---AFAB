@@ -14,7 +14,7 @@ class ConsultController {
     });
 
     return res.json({
-      consult: data.rows,
+      consults: data.rows,
       total: data.count,
     });
   }

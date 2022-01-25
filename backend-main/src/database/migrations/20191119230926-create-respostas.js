@@ -10,7 +10,6 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
       },
       plan_id: {
         type: Sequelize.INTEGER,

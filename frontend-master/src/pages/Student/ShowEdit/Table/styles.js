@@ -2,10 +2,17 @@ import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   background: #fff;
-  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px 30px 10px 50px;
+  margin: 15px 0px;
+
+  hr {
+    width: 100%;
+    margin: 7px 0;
+    border-top: 1px solid #ccc;
+  }
 
   h2 {
     align-self: flex-start;
@@ -15,6 +22,125 @@ export const Container = styled.div`
       font-size: 1.4rem;
       font-weight: normal;
       margin-left: 15px;
+    }
+  }
+`;
+
+export const TableBox = styled.div`
+  background: #fff;
+  border-radius: 4px;
+  padding: 0px 15px;
+  width: 100%;
+
+  .text-right {
+    text-align: right;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-center {
+    text-align: center;
+  }
+
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      color: var(--text-color-light);
+
+      span {
+        + span {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+
+    tr {
+      line-height: 30px;
+    }
+
+    tbody tr {
+      &:hover {
+        background: #eee;
+        color: var(--text-color);
+      }
+
+      color: var(--text-color-table);
+    }
+
+    th {
+      padding: 5px;
+      text-transform: uppercase;
+      font-weight: bold;
+
+      svg {
+        padding-top: 6px;
+        cursor: pointer;
+
+        + svg {
+          margin-right: 6px;
+        }
+      }
+    }
+
+    td {
+      padding: 5px 10px;
+      button {
+        border: 0;
+        background: transparent;
+        font-size: 12px;
+
+        + button {
+          margin-left: 10px;
+        }
+
+        &.edit-button {
+          color: var(--color-success);
+
+          &:hover {
+            color: var(--color-success-dark);
+          }
+
+          &[disabled] {
+            color: rgba(0, 0, 0, 0.3);
+            cursor: not-allowed;
+          }
+        }
+        &.neutral-button {
+          color: var(--color-info-dark);
+
+          &:hover {
+            color: var(--color-info);
+          }
+
+          &[disabled] {
+            color: rgba(0, 0, 0, 0.3);
+            cursor: not-allowed;
+          }
+        }
+        &.delete-button {
+          color: var(--color-error-dark);
+          &:hover {
+            color: var(--color-error);
+          }
+
+          &[disabled] {
+            color: rgba(0, 0, 0, 0.3);
+            cursor: not-allowed;
+          }
+        }
+      }
     }
   }
 `;

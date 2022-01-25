@@ -99,7 +99,7 @@ routes.delete('/results/:id', validateResultsDelete, ResultsController.delete);
 
 routes.get('/respostas', convertLimitToInt, RespostasController.index);
 
-routes.get('/students/:student_id/consult', ConsultController.index);
+routes.get('/students/:student_id/consults', ConsultController.index);
 
 routes.get('/registrations', convertLimitToInt, RegistrationController.index);
 routes.post(

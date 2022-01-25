@@ -135,18 +135,19 @@ export default function ShowEdit({ history, location }) {
   }
 
   async function createStundent(data) {
+    console.log(data);
     return api.post('/students', data);
   }
 
   function createSucessStudent(res) {
-    toast.success(`Idosa cadastrada com sucesso! Nome: ${student.name}`);
+    toast.success(`Consulta realizada com sucesso! Nome: ${student.name}`);
   }
   
   return (
     <>
      <Modal visible={showCreate}>
-        <ConsultForm title='Consultar' name={student.name} handleClose={handleClose} handleSave={_student => 
-          createStundent(_student).then(createSucessStudent).then(handleClose)}
+        <ConsultForm title='Consultar' name={student.name} handleClose={handleClose} handleSave={_consult => 
+          createStundent(_consult).then(createSucessStudent).then(handleClose)}
         />
       </Modal>
       <Container>
@@ -354,7 +355,7 @@ export default function ShowEdit({ history, location }) {
             />
           </DivBoxColumn>
         </div>
-        <div className="content" style={{padding: '0px 30px'}}>
+        <div className="content">
           <DivBoxColumn>  
             <hr />
             <h2>
