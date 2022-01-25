@@ -354,7 +354,7 @@ export default function ShowEdit({ history, location }) {
             />
           </DivBoxColumn>
         </div>
-        <div className="content">
+        <div className="content" style={{padding: '0 30px 30px'}}>
           <DivBoxColumn>  
             <hr />
             <h2>

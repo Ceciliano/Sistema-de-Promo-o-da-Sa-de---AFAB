@@ -20,14 +20,14 @@ var schema = Yup.object().shape({
 
 export default function ConsultForm({ title, name, student_id, handleSave, handleClose, oldConsults }) {
   const newConsults = { title: '', respostas:[{ title: '' }] }
-  const [consults, setConsults] = useState(oldConsults? oldConsults:newConsults);
+  const [consults, ] = useState(oldConsults? oldConsults:newConsults);
   const [perguntas, setPerguntas] = useState([{title:'teste'}]);
   const [errorApi, setErrorApi] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadPerguntas();
-  }, []);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     if (errorApi) {
@@ -44,7 +44,7 @@ export default function ConsultForm({ title, name, student_id, handleSave, handl
         toast.error(`Resultado não cadastrado: ${errorApi}`);
       }
     }
-  }, [errorApi]);
+  }, [errorApi]); // eslint-disable-line
 
   async function loadPerguntas() {
     const response = await api.get(`/plans?page=1&limit=100&q=&name=`);
