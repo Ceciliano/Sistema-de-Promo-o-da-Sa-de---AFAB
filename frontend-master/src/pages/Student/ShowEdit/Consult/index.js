@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Form } from '@rocketseat/unform';
+import { Form, Input} from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
@@ -15,10 +15,12 @@ var schema = Yup.object().shape({
     Yup.object().shape({
       id: Yup.number(),
     })
-  )
+  ),
+  baixocontrole: Yup.string(),
+  autocontrole: Yup.string(),
 });
 
-export default function ConsultForm({ title, name, student_id, handleSave, handleClose, oldConsults }) {
+export default function ConsultForm({ name, student_id, handleSave, handleClose, oldConsults }) {
   const newConsults = { title: '', respostas:[{ title: '' }] }
   const [consults, ] = useState(oldConsults? oldConsults:newConsults);
   const [perguntas, setPerguntas] = useState([{title:'teste'}]);
@@ -87,7 +89,7 @@ export default function ConsultForm({ title, name, student_id, handleSave, handl
           onSubmit={handleInternalSave}
         >
           <header>
-            <h1>{title}</h1>
+            <h1>{name}</h1>
             <div className="buttons">
               <button
                 type="button"
@@ -108,15 +110,15 @@ export default function ConsultForm({ title, name, student_id, handleSave, handl
           <hr />
 
           <div className="content">
-            <h1>{name}</h1>
             {loading ? (
               <Loading>
                 <LoadingIndicator size={40} />
               </Loading>
             ) : (
               <>
+                 <h1>Conhecimentos e aspectos específicos da conduta</h1>
                 {perguntas.map(function(p, i){
-                  return <DivBoxRow key={i}>
+                  return <DivBoxRow key={i} style={{padding: '5px 0'}}>
                     <DivBoxRow>
                       <DivBoxColumn>
                         {p.title}
@@ -124,7 +126,6 @@ export default function ConsultForm({ title, name, student_id, handleSave, handl
                       <DivBoxColumn>
                         <AssyncSelect
                           name={`respostas.${i}.id`}
-                          label="Resposta"
                           promiseOptions={data=>handleComportamentosChange(data, p.id)}
                         />
                       </DivBoxColumn>
@@ -134,6 +135,39 @@ export default function ConsultForm({ title, name, student_id, handleSave, handl
               </>
             )}
           </div>
+
+          <div className="content" style={{padding: '0 30px 30px'}}>
+            <hr />
+            <h1>Resultado da Conduta:</h1>
+            <DivBoxRow>
+              <DivBoxRow>
+                <DivBoxColumn>
+                  Baixo controle:
+                </DivBoxColumn>
+                <DivBoxColumn>
+                  <Input
+                    type="text"
+                    name="baixocontrole"
+                    placeholder="Dança, Passeios, Artesanato, Musculação"
+                  />
+                </DivBoxColumn>
+              </DivBoxRow>
+            </DivBoxRow>
+            <DivBoxRow>
+              <DivBoxRow>
+                <DivBoxColumn>
+                  Auto controle:
+                </DivBoxColumn>
+                <DivBoxColumn>
+                  <Input
+                    type="text"
+                    name="autocontrole"
+                    placeholder="Dança, Passeios, Artesanato, Musculação"
+                  />
+                </DivBoxColumn>
+              </DivBoxRow>
+            </DivBoxRow>
+          </div>
         </Form>
       </ModalContent>
     </Container>
@@ -141,12 +175,14 @@ export default function ConsultForm({ title, name, student_id, handleSave, handl
 }
 
 ConsultForm.propTypes = {
-  title: PropTypes.string,
+  name: PropTypes.string,
   student_id: PropTypes.number,
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
-  selectResults: PropTypes.shape({
+  oldConsults: PropTypes.shape({
     title: PropTypes.string,
     respostas: PropTypes.array,
+    baixocontrole: PropTypes.string,
+    autocontrole: PropTypes.string,
   })
 };
