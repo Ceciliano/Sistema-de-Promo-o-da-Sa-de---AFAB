@@ -203,7 +203,7 @@ export default function Plan({ history, location }) {
       <Modal visible={selectPlanToEdit !== null}>
         {selectPlanToEdit ? (
           <Form
-            title='Alterar Cadastro Comportamentos/Aspectos'
+            title='Alterar Cadastro Conhecimento Específicos'
             oldPlan={selectPlanToEdit}
             handleSave={_plan => 
               updatePlan(selectPlanToEdit.id, _plan).then(res =>{
@@ -219,7 +219,7 @@ export default function Plan({ history, location }) {
       </Modal>
 
       <Modal visible={showCreate}>
-        <Form title='Cadastro de Comportamentos/Aspectos' handleClose={handleClose} handleSave={_plan => 
+        <Form title='Cadastro de Conhecimento Específicos' handleClose={handleClose} handleSave={_plan => 
           createPlan(_plan).then(createSucessPlan).then(handleClose)}
         />
       </Modal>
@@ -227,7 +227,7 @@ export default function Plan({ history, location }) {
       <Content>
         <Header>
           <DivStartRow>
-            <h1>Gerenciando Comportamentos/Aspectos</h1>
+            <h1>Gerenciando Conhecimento Específicos</h1>
           </DivStartRow>
           <DivBoxRow>
             <button type="button" onClick={handleShowCreate}>
@@ -294,7 +294,7 @@ export default function Plan({ history, location }) {
                           size={20}
                           onClick={() => handleSortOrder('title', 'asc')}
                         />
-                        PERGUNTA DO COMPORTAMENTOS/ASPECTOS
+                        PERGUNTA DO Conhecimento específicos da conduta
                       </th>
                       <th width="120" />
                     </tr>

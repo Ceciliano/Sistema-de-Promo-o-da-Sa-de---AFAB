@@ -88,7 +88,7 @@ export default function EditForm({ title, handleSave, handleClose, oldPlan }) {
           <hr />
 
           <div className="content">
-            <label>Pergunta do Comportamentos/Aspectos</label>
+            <label>Pergunta do Conhecimento Específicos da conduta</label>
             <Input type="text" name="title" />
             <DivBoxRow>
               {plan.respostas.map(function(object, i){

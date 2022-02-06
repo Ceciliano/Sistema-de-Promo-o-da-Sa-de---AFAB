@@ -130,7 +130,8 @@ export default function ShowEdit({ history, location }) {
     setShowCreate(true);
   }
 
-  function handleClose() {
+  function handleClose(_consult) {
+    console.log(_consult);
     setShowCreate(false);
   }
 
@@ -146,7 +147,7 @@ export default function ShowEdit({ history, location }) {
     <>
      <Modal visible={showCreate}>
         <ConsultForm student_id={student.id} name={student.name} handleClose={handleClose} handleSave={_consult => 
-          createStundent(_consult).then(createSucessStudent).then(handleClose)}
+          createStundent(_consult).then(createSucessStudent).then(handleClose(_consult))}
         />
       </Modal>
       <Container>
@@ -157,7 +158,7 @@ export default function ShowEdit({ history, location }) {
           context={{ age }}
         >
           <header>
-            <h1>Consulta/Dados</h1>
+            <h1>Fatores pessoas</h1>
             <div className="buttons">
               <button type="button" className="close" onClick={handleGoBack}>
                 <MdKeyboardArrowLeft color="#fff" size={16} />
@@ -166,7 +167,7 @@ export default function ShowEdit({ history, location }) {
 
               <button type="button" className="consult" onClick={handleShowCreate}>
                 <MdExposure color="#fff" size={16} />
-                Consultar
+                Iniciar
               </button>
 
               <button type="submit" className="save">

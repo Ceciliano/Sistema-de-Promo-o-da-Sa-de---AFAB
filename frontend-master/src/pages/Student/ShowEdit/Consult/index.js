@@ -116,7 +116,7 @@ export default function ConsultForm({ name, student_id, handleSave, handleClose,
               </Loading>
             ) : (
               <>
-                 <h1>Conhecimentos e aspectos específicos da conduta</h1>
+                 <h1>Conhecimentos específicos da conduta</h1>
                 {perguntas.map(function(p, i){
                   return <DivBoxRow key={i} style={{padding: '5px 0'}}>
                     <DivBoxRow>
@@ -138,7 +138,7 @@ export default function ConsultForm({ name, student_id, handleSave, handleClose,
 
           <div className="content" style={{padding: '0 30px 30px'}}>
             <hr />
-            <h1>Resultado da Conduta:</h1>
+            <h1>Exigências imediatas:</h1>
             <DivBoxRow>
               <DivBoxRow>
                 <DivBoxColumn>
