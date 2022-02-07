@@ -16,7 +16,7 @@ class RespostasController {
       order.push(['title', title]);
     }
     if (!order.length) {
-      order.push(['title', 'asc']);
+      order.push(['id', 'asc']);
     }
     const data = await Respostas.findAndCountAll({
       where: {

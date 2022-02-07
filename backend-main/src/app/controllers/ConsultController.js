@@ -23,13 +23,11 @@ class ConsultController {
   }
 
   async store(req, res) {
-    const { respostas, student_id, baixocontrole, autocontrole } = req.body;
-    
+    const { respostas, student_id } = req.body;
+
     const newRecord = await Consult.create({
       result: 'test',
       student_id,
-      baixocontrole,
-      autocontrole,
     });
 
     respostas.map(async key => {

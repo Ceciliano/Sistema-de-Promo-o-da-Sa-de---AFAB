@@ -11,14 +11,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      baixocontrole: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      autocontrole: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

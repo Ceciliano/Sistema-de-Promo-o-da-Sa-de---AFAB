@@ -5,8 +5,6 @@ class Consult extends Model {
     super.init(
       {
         result: Sequelize.STRING,
-        baixocontrole: Sequelize.STRING,
-        autocontrole: Sequelize.STRING,
       },
       { sequelize }
     );

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Form, Input} from '@rocketseat/unform';
+import { Form } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
@@ -16,8 +16,6 @@ var schema = Yup.object().shape({
       id: Yup.number(),
     })
   ),
-  baixocontrole: Yup.string(),
-  autocontrole: Yup.string(),
 });
 
 export default function ConsultForm({ name, student_id, handleSave, handleClose, oldConsults }) {
@@ -49,7 +47,7 @@ export default function ConsultForm({ name, student_id, handleSave, handleClose,
   }, [errorApi]); // eslint-disable-line
 
   async function loadPerguntas() {
-    const response = await api.get(`/plans?page=1&limit=100&q=&name=`);
+    const response = await api.get(`/plans?page=1&limit=100&q=&name=&id=asc`);
     const {
       plans: _plans,
     } = response.data;
@@ -116,7 +114,7 @@ export default function ConsultForm({ name, student_id, handleSave, handleClose,
               </Loading>
             ) : (
               <>
-                 <h1>Conhecimentos específicos da conduta</h1>
+                 <h1 style={{color:'#a55ced'}}>Conhecimentos Específicos do Comportamento</h1>
                 {perguntas.map(function(p, i){
                   return <DivBoxRow key={i} style={{padding: '5px 0'}}>
                     <DivBoxRow>
@@ -136,38 +134,6 @@ export default function ConsultForm({ name, student_id, handleSave, handleClose,
             )}
           </div>
 
-          <div className="content" style={{padding: '0 30px 30px'}}>
-            <hr />
-            <h1>Exigências imediatas:</h1>
-            <DivBoxRow>
-              <DivBoxRow>
-                <DivBoxColumn>
-                  Baixo controle:
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <Input
-                    type="text"
-                    name="baixocontrole"
-                    placeholder="Dança, Passeios, Artesanato, Musculação"
-                  />
-                </DivBoxColumn>
-              </DivBoxRow>
-            </DivBoxRow>
-            <DivBoxRow>
-              <DivBoxRow>
-                <DivBoxColumn>
-                  Auto controle:
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <Input
-                    type="text"
-                    name="autocontrole"
-                    placeholder="Dança, Passeios, Artesanato, Musculação"
-                  />
-                </DivBoxColumn>
-              </DivBoxRow>
-            </DivBoxRow>
-          </div>
         </Form>
       </ModalContent>
     </Container>
@@ -182,7 +148,5 @@ ConsultForm.propTypes = {
   oldConsults: PropTypes.shape({
     title: PropTypes.string,
     respostas: PropTypes.array,
-    baixocontrole: PropTypes.string,
-    autocontrole: PropTypes.string,
   })
 };

@@ -6,14 +6,13 @@ import React, { useState } from 'react';
 import { MdDone, MdExposure, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
 import Modal from '~/components/Modal';
 import ReactSelect from '~/components/ReactSelect';
 import api from '~/services/api';
-import ConsultForm from './Consult';
-import { Container, DivBoxColumn, DivBoxRow } from './styles';
-import CheckInTable from './Table/ChekInsTable';
+import ConsultForm from '../Consult';
+import { Container, DivBoxColumn, DivBoxRow } from '../styles';
+import CheckInTable from '../Table/ChekInsTable';
 
 
 const schema = Yup.object().shape({
@@ -49,7 +48,7 @@ const schema = Yup.object().shape({
   aspectosculturais: Yup.string(),
 });
 
-export default function ShowEdit({ history, location }) {
+export default function ShowResult({ history, location }) {
   const [student, setStudent] = useState({
     ...location.state.student,
     birthday: parseISO(location.state.student.birthday),
@@ -61,10 +60,6 @@ export default function ShowEdit({ history, location }) {
 
   const [age, setAge] = useState(student.age);
   const [showCreate, setShowCreate] = useState(location.state.openConsult);
-
-  function handleDatePickerChange(date) {
-    setAge(differenceInYears(new Date(), date));
-  }
 
   function handleGoBack() {
     history.push('/students', { currentPage: location.state.currentPage });
@@ -126,16 +121,7 @@ export default function ShowEdit({ history, location }) {
     }
   }
 
-  async function handleShowCreate() {
-    setShowCreate(true);
-  }
-
   function handleClose(_consult) {
-    console.log(_consult);
-    setShowCreate(false);
-  }
-
-  function handleResult(_consult) {
     console.log(_consult);
     setShowCreate(false);
 
@@ -157,7 +143,7 @@ export default function ShowEdit({ history, location }) {
     <>
      <Modal visible={showCreate}>
         <ConsultForm student_id={student.id} name={student.name} handleClose={handleClose} handleSave={_consult => 
-          createStundent(_consult).then(createSucessStudent).then(handleResult(_consult))}
+          createStundent(_consult).then(createSucessStudent).then(handleClose(_consult))}
         />
       </Modal>
       <Container>
@@ -168,16 +154,11 @@ export default function ShowEdit({ history, location }) {
           context={{ age }}
         >
           <header>
-            <h1 style={{color:'#f79b39'}}>Fatores pessoas</h1>
+            <h1 style={{color:'#f79b39'}}></h1>
             <div className="buttons">
               <button type="button" className="close" onClick={handleGoBack}>
                 <MdKeyboardArrowLeft color="#fff" size={16} />
                 Voltar
-              </button>
-
-              <button type="button" className="consult" onClick={handleShowCreate}>
-                <MdExposure color="#fff" size={16} />
-                Iniciar
               </button>
 
               <button type="submit" className="save">
@@ -190,6 +171,9 @@ export default function ShowEdit({ history, location }) {
           <hr />
 
           <div className="content">
+            <h2 style={{color:'#f79b39'}}>
+              Fatores pessoas:
+            </h2>
             <DivBoxColumn>
               <label>Nome Completo</label>
               <Input
@@ -211,13 +195,12 @@ export default function ShowEdit({ history, location }) {
             <DivBoxRow>
               <DivBoxColumn>
                 <label>
-                  Telefone
+                  Telefone:
                 </label>
                 <InputMaskUnform
                   name="telefone"
                   mask="(99)99999-9999"
                   type="text"
-                  
                 />
               </DivBoxColumn>
 
@@ -225,12 +208,6 @@ export default function ShowEdit({ history, location }) {
                 <label>
                   Idade {age ? <span className="age">{age} anos</span> : null}
                 </label>
-                <DatePicker
-                  name="birthday"
-                  defaultValue={student.birthday}
-                  onChange={handleDatePickerChange}
-                  
-                />
               </DivBoxColumn>
 
               <DivBoxColumn>
@@ -241,7 +218,6 @@ export default function ShowEdit({ history, location }) {
                   name="weight"
                   mask="999.9"
                   type="text"
-                  
                 />
               </DivBoxColumn>
 
@@ -365,9 +341,11 @@ export default function ShowEdit({ history, location }) {
             />
           </DivBoxColumn>
         </div>
-        <div className="content" style={{padding: '0 30px 30px'}}>
+        <Container>
+        </Container>
+          <hr />
+          <div className="content">
           <DivBoxColumn>  
-            <hr />
             <h2 style={{color:'#f79b39'}}>
               Comportamento anterior:
             </h2>
@@ -434,7 +412,7 @@ export default function ShowEdit({ history, location }) {
   );
 }
 
-ShowEdit.propTypes = {
+ShowResult.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
