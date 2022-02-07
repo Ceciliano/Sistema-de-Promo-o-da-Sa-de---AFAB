@@ -71,9 +71,26 @@ export const Container = styled.div`
       border-top: 1px solid #ccc;
     }
 
+    div.arrow{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      div.seta{
+        width: 0; 
+        border:solid transparent;
+        border-width: 30px;
+        border-top-color: #000;
+        border-bottom-width:0;
+      }
+    }
+
     div.content {
       padding: 30px;
       background: #fff;
+      margin: 10px;
+      width: 100%;
 
       label {
         display: block;
@@ -105,7 +122,6 @@ export const Container = styled.div`
 export const DivBoxRow = styled.div`
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
 `;
 
 export const DivBoxColumn = styled.div`
