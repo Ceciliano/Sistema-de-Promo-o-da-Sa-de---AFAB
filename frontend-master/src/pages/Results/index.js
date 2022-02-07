@@ -195,7 +195,7 @@ export default function Results({ history, location }) {
       <Modal visible={selectResultsToEdit !== null}>
         {selectResultsToEdit ? (
           <Form
-            title='Alterar Cadastro Conhecimento Específicos'
+            title='Alterar Cadastro Conhecimentos Específicos'
             oldResults={selectResultsToEdit}
             handleSave={_results => 
               updateResults(selectResultsToEdit.id, _results).then(res =>{
