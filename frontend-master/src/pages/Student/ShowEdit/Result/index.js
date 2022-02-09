@@ -172,7 +172,7 @@ export default function ShowResult({ history, location }) {
           <DivBoxRow>
             <div className="content" style={{background:'#fff0c4'}}>
               <h2>
-                Fatores pessoas:
+                Fatores pessoais:
               </h2>
               <DivBoxColumn>
                 <label>Nome Completo</label>

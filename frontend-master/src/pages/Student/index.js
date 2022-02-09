@@ -280,7 +280,7 @@ export default function Student({ history, location }) {
       </Modal>
 
       <Modal visible={showCreate}>
-        <Form title='Cadastrar Idosa' handleClose={handleClose} handleSave={_student => 
+        <Form title='Fatores pessoais' handleClose={handleClose} handleSave={_student => 
           createStundent(_student).then(createSucessStudent).then(handleClose)}
         />
       </Modal>

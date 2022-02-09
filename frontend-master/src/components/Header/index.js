@@ -23,7 +23,7 @@ export default function Header() {
             <span className="logoText">Sistema de Promoção da Saúde - AFAB</span>
           </Link>
           <NavLink to="/students">Idosas</NavLink>
-          <NavLink to="/plans">Conhecimentos específicos</NavLink>
+          <NavLink to="/plans">Conhecimentos Específicos do Comportamento</NavLink>
           <NavLink to="/results">Resultados</NavLink>
         </nav>
 

@@ -32,8 +32,8 @@ export default function CheckInsTable({ studentId }) {
 
   return (
     <Container>
-      <h2>
-        Consultas:{' '}
+      <h2 style={{color:'#6fd971'}}>
+        Histórico dos resultatos:{' '}
       </h2>
 
       {loading ? (

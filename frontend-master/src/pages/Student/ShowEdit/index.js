@@ -168,7 +168,7 @@ export default function ShowEdit({ history, location }) {
           context={{ age }}
         >
           <header>
-            <h1 style={{color:'#f79b39'}}>Fatores pessoas</h1>
+            <h1 style={{color:'#f79b39'}}>Fatores pessoais</h1>
             <div className="buttons">
               <button type="button" className="close" onClick={handleGoBack}>
                 <MdKeyboardArrowLeft color="#fff" size={16} />
