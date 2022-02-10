@@ -59,7 +59,8 @@ class ResultsController {
       title,
       comportamento,
     });
-    const results = await Results.findByPk(respostas[0].id);
+    const results = await Respostas.findByPk(respostas[0].id);
+    console.log(results);
     await newRecord.addRespostas(results, {
       through: { selfGranted: false },
     });
@@ -69,11 +70,16 @@ class ResultsController {
 
   async update(req, res) {
     const results = await Results.findByPk(req.params.id);
-    const { title, comportamento } = req.body;
+    const { title, comportamento, respostas } = req.body;
 
     await results.update({
       title,
       comportamento,
+    });
+
+    const resultsResposta = await Respostas.findByPk(respostas[0].id);
+    await results.addRespostas(resultsResposta, {
+      through: { selfGranted: false },
     });
 
     return res.json(results);
