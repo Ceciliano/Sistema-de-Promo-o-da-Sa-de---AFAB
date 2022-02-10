@@ -1,4 +1,3 @@
-import Results from '../models/Results';
 const Yup = require('yup');
 
 export default async (req, res, next) => {
@@ -12,15 +11,6 @@ export default async (req, res, next) => {
     return res
       .status(400)
       .json({ error: 'Validation fails', messages: error.inner });
-  }
-
-  const resultsCount = await Results.count({ where: { title: req.body.title } });
-
-  if (resultsCount) {
-    return res.status(400).json({
-      error: 'Validation fails',
-      messages: [{ errors: ['Results title not available'] }],
-    });
   }
 
   return next();

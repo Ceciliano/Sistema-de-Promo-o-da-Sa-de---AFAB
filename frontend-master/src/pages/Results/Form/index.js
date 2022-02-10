@@ -13,6 +13,9 @@ var schema = Yup.object().shape({
   title: Yup.string()
     .min(3, 'O Título deve ter no mínimo três letras')
     .required('O Título é obrigatório'),
+  comportamento: Yup.string()
+    .min(3, 'O Título deve ter no mínimo três letras')
+    .required('O Título é obrigatório'),
   respostas: Yup.array().of(
     Yup.object().shape({
       id: Yup.number(),
@@ -21,7 +24,7 @@ var schema = Yup.object().shape({
 });
 
 export default function EditForm({ title, handleSave, handleClose, oldResults }) {
-  const newResults = { title: '', respostas:[{ title: '' }] }
+  const newResults = { title: '', comportamento: '' , respostas:[{ title: '', opcoes: []},] }
   const [results, setResults] = useState(oldResults? oldResults:newResults);
   const [errorApi, setErrorApi] = useState(null);
 
@@ -68,7 +71,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
   function handleComportamentosChange(data) {
     return new Promise((resolve, reject) => {
       api
-        .get(`/respostas?page=1&limit=100&q=${data}&active=0`)
+        .get(`/respostas?page=1&limit=100&q=&active=0&plan_id=${data.value}`)
         .then(result => {
           const { respostas } = result.data;
           if (respostas.length > 0) {
@@ -77,6 +80,11 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
         })
         .catch(error => reject(error));
     });
+  }
+
+  async function handleAddOpton(id, options) {
+    results.respostas[id].opcoes = options;
+    setResults({ ...results, respostas: [...results.respostas] });
   }
 
   async function handleAddInput() {
@@ -118,8 +126,10 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
           <hr />
 
           <div className="content">
-            <label>Resultado</label>
+            <label>Compromisso com o plano de ação:</label>
             <Input type="text" name="title" />
+            <label>Comportamento promotor de saúde:</label>
+            <Input type="text" name="comportamento" />
             <DivBoxRow>
             {results.respostas.length > 0 && 
               <DivBoxColumn>
@@ -131,16 +141,18 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
                           name="student_id"
                           label="Pergunta do Comportamentos/Aspectos"
                           promiseOptions={getPromisse}
-                          onChange={handleComportamentosChange}
+                          onChange={data => handleComportamentosChange(data).then(result => handleAddOpton(i,result))}
                         />
                       </DivBoxColumn>
+                      {object.opcoes.length > 1 &&
                       <DivBoxColumn>
                         <AssyncSelect
                           name={`respostas.${i}.id`}
                           label="Resposta"
-                          promiseOptions={handleComportamentosChange}
+                          options={object.opcoes}
                         />
                       </DivBoxColumn>
+                      }
                     </DivBoxRow>
                   )
                 })}
@@ -171,6 +183,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
 
 EditForm.propTypes = {
   title: PropTypes.string,
+  comportamento: PropTypes.string,
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
   selectResults: PropTypes.shape({

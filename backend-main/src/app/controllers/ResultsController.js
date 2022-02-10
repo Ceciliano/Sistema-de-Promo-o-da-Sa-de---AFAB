@@ -54,12 +54,12 @@ class ResultsController {
   }
 
   async store(req, res) {
-    const { title, respostas } = req.body;
+    const { title, comportamento, respostas } = req.body;
     const newRecord = await Results.create({
       title,
+      comportamento,
     });
     const results = await Results.findByPk(respostas[0].id);
-    console.log(results);
     await newRecord.addRespostas(results, {
       through: { selfGranted: false },
     });
@@ -69,10 +69,11 @@ class ResultsController {
 
   async update(req, res) {
     const results = await Results.findByPk(req.params.id);
-    const { title } = req.body;
+    const { title, comportamento } = req.body;
 
     await results.update({
       title,
+      comportamento,
     });
 
     return res.json(results);
