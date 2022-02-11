@@ -227,7 +227,7 @@ export default function Plan({ history, location }) {
       <Content>
         <Header>
           <DivStartRow>
-            <h1>Gerenciando Conhecimentos Específicos do Comportamento</h1>
+            <h1>Conhecimentos Específicos do Comportamento</h1>
           </DivStartRow>
           <DivBoxRow>
             <button type="button" onClick={handleShowCreate}>

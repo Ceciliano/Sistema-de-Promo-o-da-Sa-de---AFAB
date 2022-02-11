@@ -287,7 +287,7 @@ export default function Student({ history, location }) {
 
       <Content>
         <Header>
-          <DivStartRow><h1>Gerenciando Idosas</h1></DivStartRow>
+          <DivStartRow><h1>Idosas</h1></DivStartRow>
           <DivBoxRow>
             <button type="button" onClick={handleShowCreate}>
               <MdAdd color="#fff" size={20} />

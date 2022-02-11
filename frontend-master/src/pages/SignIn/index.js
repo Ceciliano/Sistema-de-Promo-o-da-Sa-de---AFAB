@@ -27,9 +27,9 @@ export default function SignIn() {
   return (
     <>
       <div className="logo">
-        <img src={logo} alt="" />
+        <img src={logo}/>
       </div>
-      <span className="logo">Sistema de Promoção da Saúde AFAB</span>
+      <span className="logo">Sistema de Promoção da Saúde - AFAB</span>
       <Form schema={schema} onSubmit={handleSubmit}>
         <label htmlFor="email">Seu e-mail</label>
         <Input type="email" name="email" placeholder="Email" value="admin@gympoint.com" />

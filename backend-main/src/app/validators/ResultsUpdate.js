@@ -23,18 +23,5 @@ export default async (req, res, next) => {
     });
   }
 
-  const { title } = req.body;
-
-  if (title && title !== results.title) {
-    const resultsOld = await Results.findOne({ where: { title } });
-
-    if (resultsOld) {
-      return res.status(400).json({
-        error: 'Validation fails',
-        messages: [{ errors: ['Results title not available'] }],
-      });
-    }
-  }
-
   return next();
 };

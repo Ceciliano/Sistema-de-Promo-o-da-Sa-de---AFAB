@@ -93,11 +93,7 @@ export default function ChekinsByDay() {
                     </Day>
                   ))}
                 </BoxGrid>
-              ) : (
-                <EmptyList>
-                  <p>Sem entradas nos últimos 84 dias</p>
-                </EmptyList>
-              )}
+              ) : ''}
             </CSSTransition>
           )
         )}

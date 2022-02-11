@@ -218,7 +218,7 @@ export default function Results({ history, location }) {
       
       <Content>
         <Header>
-          <DivStartRow><h1>Gerenciando Resultados</h1></DivStartRow>
+          <DivStartRow><h1>Resultados</h1></DivStartRow>
           <DivBoxRow>
             <button type="button" onClick={handleShowCreate}>
               <MdAdd color="#fff" size={20} />

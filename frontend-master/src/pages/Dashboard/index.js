@@ -1,17 +1,16 @@
 import React from 'react';
-
-import CheckinsByDay from './CheckinsByDay';
-import CheckinsByHour from './CheckinsByHour';
-import BirthdaysList from './BirthdaysList';
-
+import { DivStartRow, Header } from '~/styles/styles';
 import { Container } from './styles';
+import logo from '~/assets/logo/logo@1x.png';
 
 export default function Dashboard() {
   return (
     <Container>
-      <CheckinsByDay />
-      <CheckinsByHour />
-      <BirthdaysList />
+      <Header>
+          <DivStartRow>
+            <h1>Bem-vindo ao Sistema de Promoção da Saúde - AFAB!</h1>
+          </DivStartRow>
+      </Header>
     </Container>
   );
 }
