@@ -77,10 +77,10 @@ class ResultsController {
       comportamento,
     });
 
-    const resultsResposta = await Respostas.findByPk(respostas[0].id);
-    await results.addRespostas(resultsResposta, {
-      through: { selfGranted: false },
-    });
+    // const resultsResposta = await Respostas.findByPk(respostas[0].id);
+    // await results.addRespostas(resultsResposta, {
+    //   through: { selfGranted: false },
+    // });
 
     return res.json(results);
   }

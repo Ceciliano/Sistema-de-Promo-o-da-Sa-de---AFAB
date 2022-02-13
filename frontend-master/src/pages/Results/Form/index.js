@@ -13,9 +13,6 @@ var schema = Yup.object().shape({
   title: Yup.string()
     .min(3, 'O Título deve ter no mínimo três letras')
     .required('O Título é obrigatório'),
-  comportamento: Yup.string()
-    .min(3, 'O Título deve ter no mínimo três letras')
-    .required('O Título é obrigatório'),
   respostas: Yup.array().of(
     Yup.object().shape({
       id: Yup.number(),
@@ -24,7 +21,7 @@ var schema = Yup.object().shape({
 });
 
 export default function EditForm({ title, handleSave, handleClose, oldResults }) {
-  const newResults = { title: '', comportamento: '' , respostas:[{ title: '', opcoes: []},] }
+  const newResults = { title: '', respostas:[{ title: '', opcoes: []},] }
   const [results, setResults] = useState(oldResults? oldResults:newResults);
   const [errorApi, setErrorApi] = useState(null);
 
@@ -128,8 +125,6 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
           <div className="content">
             <label>Compromisso com o plano de ação:</label>
             <Input type="text" name="title" />
-            <label>Comportamento promotor de saúde:</label>
-            <Input type="text" name="comportamento" />
             <DivBoxRow>
             {results.respostas.length > 0 && 
               <DivBoxColumn>
@@ -183,7 +178,6 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
 
 EditForm.propTypes = {
   title: PropTypes.string,
-  comportamento: PropTypes.string,
   handleClose: PropTypes.func.isRequired,
   handleSave: PropTypes.func.isRequired,
   selectResults: PropTypes.shape({
