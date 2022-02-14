@@ -264,7 +264,7 @@ export default function Student({ history, location }) {
       <Modal visible={selectStudentToEdit !== null}>
         {selectStudentToEdit ? (
           <Form
-            title='Alterar Cadastro Idosa'
+            title='Alterar Idosa'
             oldStudent={selectStudentToEdit}
             handleSave={_student => 
               updateStundent(selectStudentToEdit.id, _student).then(res =>{

@@ -203,7 +203,7 @@ export default function Plan({ history, location }) {
       <Modal visible={selectPlanToEdit !== null}>
         {selectPlanToEdit ? (
           <Form
-            title='Alterar Cadastro Conhecimentos Específicos do Comportamento'
+            title='Alterar Conhecimentos Específicos do Comportamento'
             oldPlan={selectPlanToEdit}
             handleSave={_plan => 
               updatePlan(selectPlanToEdit.id, _plan).then(res =>{

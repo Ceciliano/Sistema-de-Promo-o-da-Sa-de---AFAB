@@ -195,7 +195,7 @@ export default function Results({ history, location }) {
       <Modal visible={selectResultsToEdit !== null}>
         {selectResultsToEdit ? (
           <Form
-            title='Alterar Cadastro de Resultados'
+            title='Alterar Resultados'
             oldResults={selectResultsToEdit}
             handleSave={_results => 
               updateResults(selectResultsToEdit.id, _results).then(res =>{
