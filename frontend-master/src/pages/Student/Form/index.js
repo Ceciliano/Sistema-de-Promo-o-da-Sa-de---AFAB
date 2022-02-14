@@ -266,12 +266,12 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
               placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
             />
             <label>
-              *Nível de dependência para Atividades Básicas para Vida
+              *Desenvolve Atividades Instrumentais de Vida Diária (AIVD)
             </label>
             <Input
               type="text"
               name="niveldependencia"
-              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+              placeholder=""
             />
             <ReactSelect
               name="comportamentoanterior"

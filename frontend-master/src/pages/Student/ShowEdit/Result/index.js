@@ -332,12 +332,12 @@ export default function ShowResult({ history, location }) {
                 disabled={true}
               />
               <label>
-                *Nível de dependência para Atividades Básicas para Vida
+                *Desenvolve Atividades Instrumentais de Vida Diária (AIVD)
               </label>
               <Input
                 type="text"
                 name="niveldependencia"
-                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+                placeholder=""
                 disabled={true}
               />
             </DivBoxColumn>
@@ -373,7 +373,7 @@ export default function ShowResult({ history, location }) {
                 <Input
                   type="text"
                   name="name"
-                  value={"Sim - Prazer de viver"}
+                  value={"Sim - Prazer de viver, Sim - Melhora disposição, Sim - sente-se saudável"}
                   disabled={true}
                 />
               </DivBoxColumn>
@@ -382,7 +382,7 @@ export default function ShowResult({ history, location }) {
                 <Input
                   type="text"
                   name="name"
-                  value={"Aderir/ Manter a alimentação"}
+                  value={"Aderir/ Manter a alimentação, Recurso financeiro, Falta de apoio da família"}
                   disabled={true}
                 />
               </DivBoxColumn>
@@ -391,7 +391,7 @@ export default function ShowResult({ history, location }) {
                 <Input
                   type="text"
                   name="name"
-                  value={"Sim"}
+                  value={"Não"}
                   disabled={true}
                 />
               </DivBoxColumn>
@@ -400,7 +400,7 @@ export default function ShowResult({ history, location }) {
                 <Input
                   type="text"
                   name="name"
-                  value={"Alegria"}
+                  value={"Alegria, Bem-estar"}
                   disabled={true}
                 />
               </DivBoxColumn>
@@ -409,7 +409,7 @@ export default function ShowResult({ history, location }) {
                 <Input
                   type="text"
                   name="name"
-                  value={"Amigos"}
+                  value={"Amigos, Filhos, ACS, medo de adoecer"}
                   disabled={true}
                 />
               </DivBoxColumn>
@@ -418,7 +418,7 @@ export default function ShowResult({ history, location }) {
                 <Input
                   type="text"
                   name="name"
-                  value={"Programas de televisão"}
+                  value={"Programas de televisão, Grupos/palestras na ESF, Academia Carioca"}
                   disabled={true}
                 />
               </DivBoxColumn>

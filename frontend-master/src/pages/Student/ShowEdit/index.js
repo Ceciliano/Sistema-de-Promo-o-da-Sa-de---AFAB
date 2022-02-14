@@ -355,12 +355,12 @@ export default function ShowEdit({ history, location }) {
               
             />
             <label>
-              *Nível de dependência para Atividades Básicas para Vida
+              *Desenvolve Atividades Instrumentais de Vida Diária (AIVD)
             </label>
             <Input
               type="text"
               name="niveldependencia"
-              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
+              placeholder=""
               
             />
           </DivBoxColumn>
