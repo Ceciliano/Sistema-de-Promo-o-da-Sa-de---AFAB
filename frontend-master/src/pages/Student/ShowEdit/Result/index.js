@@ -348,72 +348,127 @@ export default function ShowResult({ history, location }) {
                 disabled={true}
               />
             </DivBoxColumn>
-          </div>
-          <div className="content"  style={{background:'#fff0c4'}}>
             <DivBoxColumn>  
-              <h2 >
+              <h2 style={{color:'#f79b39'}}>
                 Comportamento anterior:
               </h2>
-              <label>
-                *Atividades de cuidado Corporal/estético
-              </label>
-              <Input
-                type="text"
-                name="atividadescuidado"
-                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                
+              <ReactSelect
+                name="comportamentoanterior"
+                value={'consumoalimentos'}
+                options={[
+                  { id: 'consumoalimentos', title: 'Alimentação/Nutrição: Consumo de alimentos ricos em açúcar e gordura.' },
+                  { id: 'ingestahidrica', title: 'Alimentação/Nutrição: Ingesta hídrica reduzida.' },
+                  { id: 'limitacosesfisicas', title: 'Prática Corporal/ Atividade física: Limitações físicas pela doença crônica.' },
+                  { id: 'ausenciaatividade', title: 'Prática Corporal/ Atividade física: Ausência de atividade física.' },
+                  { id: 'rendainsuficiente', title: 'Tratamento medicamentoso: Renda insuficiente para custeio com tratamento.' },
+                  { id: 'dificuldadeaceitacao', title: 'Tratamento medicamentoso: Dificuldade de aceitação ao medicamento.' },
+                  { id: 'usidetabaco', title: 'Uso de tabaco /outras drogas.' },
+                ]}
+                disabled={true}
               />
-              </DivBoxColumn>
-              <DivBoxRow>
-                <DivBoxColumn>
-                  <label>
-                    *Atividades de saúde
-                  </label>
-                  <Input
-                    type="text"
-                    name="atividadessaude"
-                    placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                    
-                  />
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <label>
-                    *Disponibilidade de tempo
-                  </label>
-                  <Input
-                    type="text"
-                    name="disponibilidadetempo"
-                    placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                    
-                  />
-                </DivBoxColumn>
-              </DivBoxRow>
+            </DivBoxColumn>
+          </div>
+          </DivBoxRow>          
+          <div class="arrow"><div class="seta"></div></div>
+          <DivBoxRow>
+            <div className="content" style={{background:'#ecd9ff'}}>
+              <h2>
+                Conhecimentos Específicos do Comportamento
+              </h2>
               <DivBoxColumn>
-                <label>
-                  *Conhecimento sobre atitudes saudáveis
-                </label>
+                <label>Benefícios percebidos no comportamento: Percebe benefícios quando executa o cuidado com a saúde?</label>
                 <Input
                   type="text"
-                  name="conhecimentoatitudes"
-                  placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                  
+                  name="name"
+                  value={"Sim - Prazer de viver"}
+                  disabled={true}
                 />
-
-                <label>
-                  *Aspectos culturais de origem
-                </label>
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>Barreiras percebidas para a ação: O que a impede de realizar o cuidado com a saúde?</label>
                 <Input
                   type="text"
-                  name="aspectosculturais"
-                  placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                  
+                  name="name"
+                  value={"Aderir/ Manter a alimentação"}
+                  disabled={true}
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>Autoeficácia Percebida: Sente-se capaz de superar as barreiras e realizar o cuidado com a saúde?</label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={"Sim"}
+                  disabled={true}
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>Sentimentos presenciados ao realizar comportamento:</label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={"Alegria"}
+                  disabled={true}
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>Influências Interpessoais: O que influencia para que adote os cuidados com a saúde?</label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={"Amigos"}
+                  disabled={true}
+                />
+              </DivBoxColumn>
+              <DivBoxColumn>
+                <label>Situações que influenciam: Quais locais que encontra informações e orientações de saúde?</label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={"Programas de televisão"}
+                  disabled={true}
                 />
               </DivBoxColumn>
             </div>
           </DivBoxRow>
-          <hr />
           <div class="arrow"><div class="seta"></div></div>
-          <CheckInTable studentId={student.id} />
+          <DivBoxRow>
+            <div className="content" style={{background:'#ccffcc'}}>
+              <h2>
+                Resultado do comportamento
+              </h2>
+                <DivBoxRow>
+                  <DivBoxColumn>
+                    <label>Exigências imediatas - Baixo controle</label>
+                    <Input
+                      type="text"
+                      name="name1"
+                    />
+                  </DivBoxColumn>
+                  <DivBoxColumn>
+                    <label>Exigências imediatas - Baixo controle</label>
+                    <Input
+                      type="email"
+                      name="email2"
+                    />
+                  </DivBoxColumn>
+                </DivBoxRow>
+                <DivBoxColumn>
+                  <label>Compromisso com o plano de ação:</label>
+                  <Input
+                    type="text"
+                    name="name3"
+                  />
+                </DivBoxColumn>
+                <DivBoxColumn>
+                  <label>Comportamento promotor de saúde:</label>
+                  <Input
+                    type="text"
+                    name="name4"
+                  />
+                </DivBoxColumn>
+            </div>
+          </DivBoxRow>
         </Form>
       </Container>
     </>

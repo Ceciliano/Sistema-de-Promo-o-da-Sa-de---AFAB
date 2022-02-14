@@ -273,6 +273,19 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
               name="niveldependencia"
               placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
             />
+            <ReactSelect
+              name="comportamentoanterior"
+              label="Comportamento anterior:"
+              options={[
+                { id: 'consumoalimentos', title: 'Alimentação/Nutrição: Consumo de alimentos ricos em açúcar e gordura.' },
+                { id: 'ingestahidrica', title: 'Alimentação/Nutrição: Ingesta hídrica reduzida.' },
+                { id: 'limitacosesfisicas', title: 'Prática Corporal/ Atividade física: Limitações físicas pela doença crônica.' },
+                { id: 'ausenciaatividade', title: 'Prática Corporal/ Atividade física: Ausência de atividade física.' },
+                { id: 'rendainsuficiente', title: 'Tratamento medicamentoso: Renda insuficiente para custeio com tratamento.' },
+                { id: 'dificuldadeaceitacao', title: 'Tratamento medicamentoso: Dificuldade de aceitação ao medicamento.' },
+                { id: 'usidetabaco', title: 'Uso de tabaco /outras drogas.' },
+              ]}
+            />
           </div>
         </Form>
       </ModalContent>

@@ -373,9 +373,13 @@ export default function ShowEdit({ history, location }) {
             <ReactSelect
               name="comportamentoanterior"
               options={[
-                { id: 'ate2sm', title: 'Até 2 SM' },
-                { id: 'de2a5sm', title: 'De 2 a 5 SM' },
-                { id: 'maisde5sm', title: 'Mais de 5 SM' },
+                { id: 'consumoalimentos', title: 'Alimentação/Nutrição: Consumo de alimentos ricos em açúcar e gordura.' },
+                { id: 'ingestahidrica', title: 'Alimentação/Nutrição: Ingesta hídrica reduzida.' },
+                { id: 'limitacosesfisicas', title: 'Prática Corporal/ Atividade física: Limitações físicas pela doença crônica.' },
+                { id: 'ausenciaatividade', title: 'Prática Corporal/ Atividade física: Ausência de atividade física.' },
+                { id: 'rendainsuficiente', title: 'Tratamento medicamentoso: Renda insuficiente para custeio com tratamento.' },
+                { id: 'dificuldadeaceitacao', title: 'Tratamento medicamentoso: Dificuldade de aceitação ao medicamento.' },
+                { id: 'usidetabaco', title: 'Uso de tabaco /outras drogas.' },
               ]}
             />
             </DivBoxColumn>

@@ -294,7 +294,7 @@ export default function Plan({ history, location }) {
                           size={20}
                           onClick={() => handleSortOrder('title', 'asc')}
                         />
-                        PERGUNTA DO Conhecimentos específicos do Comportamento
+                        Conhecimentos específicos do Comportamento
                       </th>
                       <th width="120" />
                     </tr>

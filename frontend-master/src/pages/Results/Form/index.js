@@ -134,7 +134,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
                       <DivBoxColumn>
                         <AssyncSelect
                           name="student_id"
-                          label="Pergunta do Comportamentos/Aspectos"
+                          label="Comportamentos/Aspectos"
                           promiseOptions={getPromisse}
                           onChange={data => handleComportamentosChange(data).then(result => handleAddOpton(i,result))}
                         />

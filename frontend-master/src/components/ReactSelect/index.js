@@ -11,6 +11,7 @@ export default function ReactSelect({
   options,
   onChange,
   disabled,
+  value,
   ...rest
 }) {
   const ref = useRef(null);
@@ -34,8 +35,9 @@ export default function ReactSelect({
   }, [ref.current, fieldName]); // eslint-disable-line
 
   function getDefaultValue() {
-    if (!defaultValue) return null;
-    return options.find(option => option.id === defaultValue);
+    if (defaultValue) return options.find(option => option.id === defaultValue);
+    if (value) return options.find(option => option.id === value);
+    return null;
   }
 
   return (
