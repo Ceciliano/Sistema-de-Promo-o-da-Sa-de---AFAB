@@ -428,7 +428,7 @@ export default function Student({ history, location }) {
                               handleShowEdit(s,true);
                             }}
                           >
-                            Iniciar
+                            Aplicar
                           </button>
                           <button
                             disabled={loadingPage ? 1 : 0}

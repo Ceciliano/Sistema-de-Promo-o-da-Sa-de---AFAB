@@ -177,7 +177,7 @@ export default function ShowEdit({ history, location }) {
 
               <button type="button" className="consult" onClick={handleShowCreate}>
                 <MdExposure color="#fff" size={16} />
-                Iniciar
+                Aplicar
               </button>
 
               <button type="submit" className="save">
@@ -382,7 +382,7 @@ export default function ShowEdit({ history, location }) {
                 { id: 'usidetabaco', title: 'Uso de tabaco /outras drogas.' },
               ]}
             />
-            </DivBoxColumn>
+          </DivBoxColumn>
           </div>
         </Form>
         <CheckInTable studentId={student.id} />

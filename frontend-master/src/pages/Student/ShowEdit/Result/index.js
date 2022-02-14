@@ -12,7 +12,6 @@ import ReactSelect from '~/components/ReactSelect';
 import api from '~/services/api';
 import ConsultForm from '../Consult';
 import { Container, DivBoxColumn, DivBoxRow } from '../styles';
-import CheckInTable from '../Table/ChekInsTable';
 
 
 const schema = Yup.object().shape({
@@ -52,10 +51,6 @@ export default function ShowResult({ history, location }) {
   const [student, setStudent] = useState({
     ...location.state.student,
     birthday: parseISO(location.state.student.birthday),
-    height: Number(location.state.student.height / 100).toFixed(2),
-    weight: `00${Number(location.state.student.weight / 100).toFixed(
-      2
-    )}`.substr(-6),
   });
 
   const [age, ] = useState(student.age);
@@ -86,8 +81,6 @@ export default function ShowResult({ history, location }) {
     conhecimentoatitudes,
     aspectosculturais,
     niveldependencia, }) {
-    height = (height * 100).toFixed(0);
-    weight = (weight * 100).toFixed(0);
 
     try {
       const response = await api.put(`/students/${student.id}`, {
