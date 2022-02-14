@@ -13,7 +13,7 @@ import truncate from '../util/truncate';
 
 const user = {
   name: 'Administrador',
-  email: 'admin@gympoint.com',
+  email: 'enfermeiro@gmail.com',
   password: '123456',
 };
 

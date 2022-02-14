@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { Form, Input } from '@rocketseat/unform';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
-
-import { signInRequest } from '~/store/modules/auth/actions';
-
 import logo from '~/assets/logo/logo@1x.png';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -27,12 +25,12 @@ export default function SignIn() {
   return (
     <>
       <div className="logo">
-        <img src={logo}/>
+        <img src={logo} alt='logo'/>
       </div>
       <span className="logo">Sistema de Promoção da Saúde - AFAB</span>
       <Form schema={schema} onSubmit={handleSubmit}>
         <label htmlFor="email">Seu e-mail</label>
-        <Input type="email" name="email" placeholder="Email" value="admin@gympoint.com" />
+        <Input type="email" name="email" placeholder="Email" value="enfermeiro@gmail.com" />
 
         <label htmlFor="password">Sua senha</label>
         <Input type="password" name="password" placeholder="Senha" value="123456"/>

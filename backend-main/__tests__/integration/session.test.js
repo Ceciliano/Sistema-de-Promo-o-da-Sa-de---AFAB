@@ -4,7 +4,7 @@ import app from '../../src/app';
 
 const user = {
   name: 'Administrador',
-  email: 'admin@gympoint.com',
+  email: 'enfermeiro@gmail.com',
   password: '123456',
 };
 
