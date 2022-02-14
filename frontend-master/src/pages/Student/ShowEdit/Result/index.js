@@ -432,14 +432,14 @@ export default function ShowResult({ history, location }) {
               </h2>
                 <DivBoxRow>
                   <DivBoxColumn>
-                    <label>Exigências imediatas - Baixo controle</label>
+                    <label>Ações imediatas de Baixo controle</label>
                     <Input
                       type="text"
                       name="name1"
                     />
                   </DivBoxColumn>
                   <DivBoxColumn>
-                    <label>Exigências imediatas - Baixo controle</label>
+                    <label>Ações imediatas de Alto controle (preferenciais)</label>
                     <Input
                       type="email"
                       name="email2"

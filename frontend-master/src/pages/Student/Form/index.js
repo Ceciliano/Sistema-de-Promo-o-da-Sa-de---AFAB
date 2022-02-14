@@ -132,7 +132,7 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
               </ButtonClose>
               <ButtonSave type="submit" className="save">
                 <MdDone color="#fff" size={16} />
-                Atualizar
+                Salvar
               </ButtonSave>
             </Buttons>
           </header>
