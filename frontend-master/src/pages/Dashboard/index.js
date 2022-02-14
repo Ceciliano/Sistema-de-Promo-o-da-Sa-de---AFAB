@@ -1,7 +1,6 @@
 import React from 'react';
 import { DivStartRow, Header } from '~/styles/styles';
 import { Container } from './styles';
-import logo from '~/assets/logo/logo@1x.png';
 
 export default function Dashboard() {
   return (

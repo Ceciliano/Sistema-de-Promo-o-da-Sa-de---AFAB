@@ -5,7 +5,6 @@ class Results extends Model {
     super.init(
       {
         title: Sequelize.STRING,
-        comportamento: Sequelize.STRING,
       },
       { sequelize }
     );

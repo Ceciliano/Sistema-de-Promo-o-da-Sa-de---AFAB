@@ -12,11 +12,6 @@ module.exports = {
         allowNull: false,
         unique: false,
       },
-      comportamento: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: false,
-      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

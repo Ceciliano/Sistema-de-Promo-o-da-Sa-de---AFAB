@@ -367,64 +367,17 @@ export default function ShowEdit({ history, location }) {
         </div>
         <div className="content" style={{padding: '0 30px 30px'}}>
           <DivBoxColumn>  
-            <hr />
             <h2 style={{color:'#f79b39'}}>
               Comportamento anterior:
             </h2>
-            <label>
-              *Atividades de cuidado Corporal/estético
-            </label>
-            <Input
-              type="text"
-              name="atividadescuidado"
-              placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-              
+            <ReactSelect
+              name="comportamentoanterior"
+              options={[
+                { id: 'ate2sm', title: 'Até 2 SM' },
+                { id: 'de2a5sm', title: 'De 2 a 5 SM' },
+                { id: 'maisde5sm', title: 'Mais de 5 SM' },
+              ]}
             />
-            </DivBoxColumn>
-            <DivBoxRow>
-              <DivBoxColumn>
-                <label>
-                  *Atividades de saúde
-                </label>
-                <Input
-                  type="text"
-                  name="atividadessaude"
-                  placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                  
-                />
-              </DivBoxColumn>
-              <DivBoxColumn>
-                <label>
-                  *Disponibilidade de tempo
-                </label>
-                <Input
-                  type="text"
-                  name="disponibilidadetempo"
-                  placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                  
-                />
-              </DivBoxColumn>
-            </DivBoxRow>
-            <DivBoxColumn>
-              <label>
-                *Conhecimento sobre atitudes saudáveis
-              </label>
-              <Input
-                type="text"
-                name="conhecimentoatitudes"
-                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                
-              />
-
-              <label>
-                *Aspectos culturais de origem
-              </label>
-              <Input
-                type="text"
-                name="aspectosculturais"
-                placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                
-              />
             </DivBoxColumn>
           </div>
         </Form>

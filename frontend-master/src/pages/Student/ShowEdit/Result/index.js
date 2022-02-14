@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Form, Input } from '@rocketseat/unform';
-import { differenceInYears, parseISO, subYears } from 'date-fns';
-import { margin } from 'polished';
+import { parseISO, subYears } from 'date-fns';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { MdDone, MdExposure, MdKeyboardArrowLeft } from 'react-icons/md';
+import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import InputMaskUnform from '~/components/InputMaskUnform';
@@ -59,7 +58,7 @@ export default function ShowResult({ history, location }) {
     )}`.substr(-6),
   });
 
-  const [age, setAge] = useState(student.age);
+  const [age, ] = useState(student.age);
   const [showCreate, setShowCreate] = useState(location.state.openConsult);
 
   function handleGoBack() {
@@ -180,7 +179,7 @@ export default function ShowResult({ history, location }) {
                   type="text"
                   name="name"
                   placeholder="John Doe"
-                  
+                  disabled={true}
                 />
 
                 <label>E-mail</label>
@@ -188,7 +187,7 @@ export default function ShowResult({ history, location }) {
                   type="email"
                   name="email"
                   placeholder="exemplo@email.com"
-                  
+                  disabled={true}
                 />
               </DivBoxColumn>
 
@@ -201,13 +200,21 @@ export default function ShowResult({ history, location }) {
                     name="telefone"
                     mask="(99)99999-9999"
                     type="text"
+                    disabled={true}
                   />
                 </DivBoxColumn>
 
                 <DivBoxColumn>
                   <label>
-                    Idade {age ? <span className="age">{age} anos</span> : null}
+                    Idade 
                   </label>
+                  <Input
+                  type="text"
+                  name="age"
+                  value={age ? age + ' anos' : null}
+                  placeholder="exemplo@email.com"
+                  disabled={true}
+                />
                 </DivBoxColumn>
 
                 <DivBoxColumn>
@@ -218,6 +225,7 @@ export default function ShowResult({ history, location }) {
                     name="weight"
                     mask="999.9"
                     type="text"
+                    disabled={true}
                   />
                 </DivBoxColumn>
 
@@ -227,7 +235,7 @@ export default function ShowResult({ history, location }) {
                     name="height"
                     mask="9.99"
                     type="text"
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
               </DivBoxRow>
@@ -237,7 +245,7 @@ export default function ShowResult({ history, location }) {
                     type="text"
                     name="atividades"
                     placeholder="Dança, Passeios, Artesanato, Musculação"
-                    
+                    disabled={true}
                   />
               </DivBoxColumn>
 
@@ -248,7 +256,7 @@ export default function ShowResult({ history, location }) {
                     type="text"
                     name="naturalidade"
                     placeholder="Brasileira"
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
                 <DivBoxColumn>
@@ -262,7 +270,7 @@ export default function ShowResult({ history, location }) {
                       { id: 'testemunhadejeova', title: 'Testemunha de Jeová' },
                       { id: 'outras', title: 'Outras' },
                     ]}
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
                 <DivBoxColumn>
@@ -276,7 +284,7 @@ export default function ShowResult({ history, location }) {
                       { id: 'amarela', title: 'Amarela' },
                       { id: 'indigena', title: 'Indígena ou de origem indígena' },
                     ]}
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
               </DivBoxRow>
@@ -292,7 +300,7 @@ export default function ShowResult({ history, location }) {
                       { id: 'divorciada', title: 'Divorciada' },
                       { id: 'viuva', title: 'Viúva' },
                     ]}
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
                 <DivBoxColumn>
@@ -306,7 +314,7 @@ export default function ShowResult({ history, location }) {
                       { id: 'tecnico', title: 'Ensino Médio - Técnico' },
                       { id: 'ensinosuperior', title: 'Ensino Superior' },
                     ]}
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
                 <DivBoxColumn>
@@ -318,7 +326,7 @@ export default function ShowResult({ history, location }) {
                       { id: 'de2a5sm', title: 'De 2 a 5 SM' },
                       { id: 'maisde5sm', title: 'Mais de 5 SM' },
                     ]}
-                    
+                    disabled={true}
                   />
                 </DivBoxColumn>
               </DivBoxRow>
@@ -328,7 +336,7 @@ export default function ShowResult({ history, location }) {
                 type="text"
                 name="doencascronicas"
                 placeholder="Hipertensão Arterial, Diabettes tipo 1, Diabetes tipo 2"
-                
+                disabled={true}
               />
               <label>
                 *Nível de dependência para Atividades Básicas para Vida
@@ -337,7 +345,7 @@ export default function ShowResult({ history, location }) {
                 type="text"
                 name="niveldependencia"
                 placeholder="Escovar os dentes, Pentear os cabelos, Vestir-se, Tomar banho"
-                
+                disabled={true}
               />
             </DivBoxColumn>
           </div>

@@ -54,10 +54,9 @@ class ResultsController {
   }
 
   async store(req, res) {
-    const { title, comportamento, respostas } = req.body;
+    const { title, respostas } = req.body;
     const newRecord = await Results.create({
       title,
-      comportamento,
     });
     const results = await Respostas.findByPk(respostas[0].id);
     console.log(results);
@@ -70,11 +69,10 @@ class ResultsController {
 
   async update(req, res) {
     const results = await Results.findByPk(req.params.id);
-    const { title, comportamento, respostas } = req.body;
+    const { title, respostas } = req.body;
 
     await results.update({
       title,
-      comportamento,
     });
 
     // const resultsResposta = await Respostas.findByPk(respostas[0].id);
