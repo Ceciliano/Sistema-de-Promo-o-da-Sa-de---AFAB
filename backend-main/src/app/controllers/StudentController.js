@@ -74,11 +74,7 @@ class StudentController {
       rendafamiliar,
       doencascronicas,
       niveldependencia,
-      atividadescuidado,
-      atividadessaude,
-      disponibilidadetempo,
-      conhecimentoatitudes,
-      aspectosculturais,
+      comportamentoanterior,
     } = req.body;
 
     const birthdayParsed = parseISO(birthday);
@@ -98,11 +94,7 @@ class StudentController {
       doencascronicas,
       niveldependencia,
       telefone,
-      atividadescuidado,
-      atividadessaude,
-      disponibilidadetempo,
-      conhecimentoatitudes,
-      aspectosculturais,
+      comportamentoanterior,
       birthday: new Date(
         Date.UTC(
           birthdayParsed.getFullYear(),
@@ -134,11 +126,7 @@ class StudentController {
       rendafamiliar,
       doencascronicas,
       niveldependencia,
-      atividadescuidado,
-      atividadessaude,
-      disponibilidadetempo,
-      conhecimentoatitudes,
-      aspectosculturais,
+      comportamentoanterior,
     } = req.body;
 
     await student.update({
@@ -157,11 +145,7 @@ class StudentController {
       doencascronicas,
       niveldependencia,
       birthday,
-      atividadescuidado,
-      atividadessaude,
-      disponibilidadetempo,
-      conhecimentoatitudes,
-      aspectosculturais,
+      comportamentoanterior,
     });
 
     return res.json(student);

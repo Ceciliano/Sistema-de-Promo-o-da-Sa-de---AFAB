@@ -85,27 +85,7 @@ module.exports = {
         allowNull: true,
         unique: false,
       },
-      atividadescuidado: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
-      },
-      atividadessaude: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
-      },
-      disponibilidadetempo: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
-      },
-      conhecimentoatitudes: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        unique: false,
-      },
-      aspectosculturais: {
+      comportamentoanterior: {
         type: Sequelize.STRING,
         allowNull: true,
         unique: false,

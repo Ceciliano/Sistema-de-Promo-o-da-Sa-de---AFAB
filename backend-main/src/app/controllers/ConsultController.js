@@ -26,7 +26,6 @@ class ConsultController {
     const { respostas, student_id } = req.body;
 
     const newRecord = await Consult.create({
-      result: 'test',
       student_id,
     });
 
@@ -49,6 +48,23 @@ class ConsultController {
 
     return res.json(newRecord);
   }
+
+  async store(req, res) {
+    const { consult } = req.body;
+    const {  acaoImediataBaixoControle, compromisso,  comportamento,  acaoImediataAltoControle } = consult;
+    
+    const consultOld = await Consult.findByPk(req.params.id);
+
+    await consultOld.update({
+      acaoImediataBaixoControle,
+      compromisso,
+      comportamento,
+      acaoImediataAltoControle
+    });
+
+    return res.json(consult);
+  }
+  
 }
 
 export default new ConsultController();

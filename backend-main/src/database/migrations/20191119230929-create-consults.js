@@ -7,7 +7,19 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      result: {
+      acao_imediata_baixo_controle: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      compromisso: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      comportamento: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      acao_imediata_alto_controle: {
         type: Sequelize.STRING,
         allowNull: false,
       },

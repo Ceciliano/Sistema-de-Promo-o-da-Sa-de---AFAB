@@ -147,6 +147,7 @@ export default function ShowResult({ history, location }) {
           context={{ age }}
         >
           <header>
+            <h1>Resultado</h1>
             <div className="buttons">
               <button type="button" className="close" onClick={handleGoBack}>
                 <MdKeyboardArrowLeft color="#fff" size={16} />
@@ -346,7 +347,6 @@ export default function ShowResult({ history, location }) {
               </h2>
               <ReactSelect
                 name="comportamentoanterior"
-                value={'consumoalimentos'}
                 options={[
                   { id: 'consumoalimentos', title: 'Alimentação/Nutrição: Consumo de alimentos ricos em açúcar e gordura.' },
                   { id: 'ingestahidrica', title: 'Alimentação/Nutrição: Ingesta hídrica reduzida.' },
@@ -361,7 +361,7 @@ export default function ShowResult({ history, location }) {
             </DivBoxColumn>
           </div>
           </DivBoxRow>          
-          <div class="arrow"><div class="seta"></div></div>
+          <div className="arrow"><div className="seta"></div></div>
           <DivBoxRow>
             <div className="content" style={{background:'#ecd9ff'}}>
               <h2>
@@ -423,7 +423,7 @@ export default function ShowResult({ history, location }) {
               </DivBoxColumn>
             </div>
           </DivBoxRow>
-          <div class="arrow"><div class="seta"></div></div>
+          <div className="arrow"><div className="seta"></div></div>
           <DivBoxRow>
             <div className="content" style={{background:'#ccffcc'}}>
               <h2>

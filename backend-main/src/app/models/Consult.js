@@ -4,7 +4,10 @@ class Consult extends Model {
   static init(sequelize) {
     super.init(
       {
-        result: Sequelize.STRING,
+        acaoImediataBaixoControle: Sequelize.STRING,
+        compromisso: Sequelize.STRING,
+        comportamento: Sequelize.STRING,
+        acaoImediataAltoControle: Sequelize.STRING,
       },
       { sequelize }
     );
