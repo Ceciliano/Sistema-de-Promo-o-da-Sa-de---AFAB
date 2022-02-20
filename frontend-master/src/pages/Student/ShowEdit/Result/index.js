@@ -1,50 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Form, Input } from '@rocketseat/unform';
-import { parseISO, subYears } from 'date-fns';
+import { parseISO } from 'date-fns';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { MdDone, MdKeyboardArrowLeft } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import InputMaskUnform from '~/components/InputMaskUnform';
-import Modal from '~/components/Modal';
 import ReactSelect from '~/components/ReactSelect';
 import api from '~/services/api';
-import ConsultForm from '../Consult';
 import { Container, DivBoxColumn, DivBoxRow } from '../styles';
 
 
 const schema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, 'O Nome deve ter no mínimo três letras')
-    .required('O Nome é obrigatório'),
-  email: Yup.string()
-    .email('Use um email válido')
-    .required('O e-mail é obrigatório'),
-  birthday: Yup.date()
-    .required('A data de nascimento é obrigatória')
-    .max(subYears(new Date(), 10), 'Somente para maiores de 10 anos'),
-  weight: Yup.number()
-    .min(40.0, 'O Peso deve ser no mínimo de 35Kg')
-    .required('O Peso é obrigatório'),
-  height: Yup.number()
-    .min(1.0, 'A Altura deve ser no mínimo de 1 metro')
-    .required('A Altura é obrigatória'),
-  telefone: Yup.string(),
-  atividades: Yup.string(),
-  naturalidade: Yup.string(),
-  religiao: Yup.string(),
-  raca: Yup.string(),
-  estadocivil: Yup.string(),
-  escolaridade: Yup.string(),
-  rendafamiliar: Yup.string(),
-  doencascronicas: Yup.string(),
-  niveldependencia: Yup.string(),
-  atividadescuidado: Yup.string(),
-  atividadessaude: Yup.string(),
-  disponibilidadetempo: Yup.string(),
-  conhecimentoatitudes: Yup.string(),
-  aspectosculturais: Yup.string(),
+  acaoImediataBaixoControle: Yup.string(),
+  compromisso: Yup.string(),
+  comportamento: Yup.string(),
+  acaoImediataAltoControle: Yup.string(),
 });
 
 export default function ShowResult({ history, location }) {
@@ -54,91 +26,36 @@ export default function ShowResult({ history, location }) {
   });
 
   const [age, ] = useState(student.age);
-  const [showCreate, setShowCreate] = useState(location.state.openConsult);
 
   function handleGoBack() {
     history.push('/students', { currentPage: location.state.currentPage });
   }
 
   async function handleSubmit({ 
-    name, 
-    email, 
-    birthday, 
-    weight, 
-    height,
-    telefone,
-    atividades,
-    naturalidade,
-    religiao,
-    raca,
-    estadocivil,
-    escolaridade,
-    rendafamiliar,
-    doencascronicas,
-    atividadescuidado,
-    atividadessaude,
-    disponibilidadetempo,
-    conhecimentoatitudes,
-    aspectosculturais,
-    niveldependencia, }) {
+    acaoImediataBaixoControle,
+    compromisso,
+    comportamento,
+    acaoImediataAltoControle,
+   }) {
 
     try {
-      const response = await api.put(`/students/${student.id}`, {
-        name,
-        email,
-        birthday,
-        weight,
-        height,
-        telefone,
-        atividades,
-        naturalidade,
-        religiao,
-        raca,
-        estadocivil,
-        escolaridade,
-        rendafamiliar,
-        doencascronicas,
-        niveldependencia,
-        atividadescuidado,
-        atividadessaude,
-        disponibilidadetempo,
-        conhecimentoatitudes,
-        aspectosculturais,
+      const response = await api.put(`/students/consults/${student.id}`, {
+        acaoImediataBaixoControle,
+        compromisso,
+        comportamento,
+        acaoImediataAltoControle,
       });
 
       setStudent(response.data);
-      toast.success(`Idosa alterada com sucesso! Nome: ${name}`);
+      toast.success(`Idosa alterada com sucesso! Nome: ${student.name}`);
     } catch (error) {
       console.tron.error(error);
       toast.error('Erro ao editar o Idosa.');
     }
   }
 
-  function handleClose(_consult) {
-    console.log(_consult);
-    setShowCreate(false);
-
-    history.push('/students/show/result', {
-      student,
-      _consult,
-    });
-  }
-
-  async function createStundent(data) {
-    return api.post('/students/consults', data);
-  }
-
-  function createSucessStudent(res) {
-    toast.success(`Consulta realizada com sucesso! Nome: ${student.name}`);
-  }
-  
   return (
     <>
-     <Modal visible={showCreate}>
-        <ConsultForm student_id={student.id} name={student.name} handleClose={handleClose} handleSave={_consult => 
-          createStundent(_consult).then(createSucessStudent).then(handleClose(_consult))}
-        />
-      </Modal>
       <Container>
         <Form
           schema={schema}
@@ -434,14 +351,14 @@ export default function ShowResult({ history, location }) {
                     <label>Ações imediatas de Baixo controle</label>
                     <Input
                       type="text"
-                      name="name1"
+                      name="acaoImediataBaixoControle"
                     />
                   </DivBoxColumn>
                   <DivBoxColumn>
                     <label>Ações imediatas de Alto controle (preferenciais)</label>
                     <Input
-                      type="email"
-                      name="email2"
+                      type="text"
+                      name="acaoImediataAltoControle"
                     />
                   </DivBoxColumn>
                 </DivBoxRow>
@@ -449,14 +366,14 @@ export default function ShowResult({ history, location }) {
                   <label>Compromisso com o plano de ação:</label>
                   <Input
                     type="text"
-                    name="name3"
+                    name="compromisso"
                   />
                 </DivBoxColumn>
                 <DivBoxColumn>
                   <label>Comportamento promotor de saúde:</label>
                   <Input
                     type="text"
-                    name="name4"
+                    name="comportamento"
                   />
                 </DivBoxColumn>
             </div>

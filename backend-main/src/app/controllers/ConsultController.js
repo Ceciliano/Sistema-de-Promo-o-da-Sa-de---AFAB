@@ -49,10 +49,8 @@ class ConsultController {
     return res.json(newRecord);
   }
 
-  async store(req, res) {
-    const { consult } = req.body;
-    const {  acaoImediataBaixoControle, compromisso,  comportamento,  acaoImediataAltoControle } = consult;
-    
+  async result(req, res) {
+    const {  acaoImediataBaixoControle, compromisso,  comportamento,  acaoImediataAltoControle } = req.body;
     const consultOld = await Consult.findByPk(req.params.id);
 
     await consultOld.update({

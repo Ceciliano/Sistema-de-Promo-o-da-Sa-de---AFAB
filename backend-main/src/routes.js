@@ -106,6 +106,10 @@ routes.post(
   validateConsultStore,
   ConsultController.store
 );
+routes.put(
+  '/students/consults',
+  ConsultController.result
+);
 
 routes.get('/registrations', convertLimitToInt, RegistrationController.index);
 routes.post(
