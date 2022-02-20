@@ -12,12 +12,13 @@ export default function AssyncSelect({
   promiseOptions,
   options,
   disabled,
+  value,
   onChange=()=>{},
 }) {
   const ref = useRef(null);
   const { fieldName, registerField, error } = useField(name);
 
-  const [value, setValue] = useState('');
+  const [newValue, setValue] = useState(value? value:'');
 
   function parseSelectValue(selectRef) {
     return selectRef.props.value.value || '';
@@ -49,7 +50,7 @@ export default function AssyncSelect({
         ref={ref}
         // isClearable
         cacheOptions
-        value={value}
+        value={newValue}
         loadOptions={promiseOptions}
         defaultOptions={options}
         isDisabled={disabled}

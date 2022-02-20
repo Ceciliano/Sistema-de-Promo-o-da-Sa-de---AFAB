@@ -21,7 +21,7 @@ var schema = Yup.object().shape({
 });
 
 export default function EditForm({ title, handleSave, handleClose, oldResults }) {
-  const newResults = { title: '', respostas:[{ title: '', opcoes: []},] }
+  const newResults = { title: '', respostas:[{ title: '', plan:{ id: '', title: ''}, opcoes: []},] }
   const [results, setResults] = useState(oldResults? oldResults:newResults);
   const [errorApi, setErrorApi] = useState(null);
 
@@ -41,6 +41,9 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
       }
     }
   }, [errorApi]);
+
+  useEffect(() => {
+  }, [oldResults]);
 
   async function handleInternalSave(data) {
     try {
@@ -126,23 +129,24 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
             <label>Compromisso com o plano de ação:</label>
             <Input type="text" name="title" />
             <DivBoxRow>
-            {results.respostas.length > 0 && 
               <DivBoxColumn>
                 {results.respostas.map(function(object, i){
                   return(
                     <DivBoxRow key={i}>
                       <DivBoxColumn>
                         <AssyncSelect
+                          value = {object.plan.id && {value: object.plan.id, label: object.plan.title}}
                           name="student_id"
                           label="Comportamentos/Aspectos"
                           promiseOptions={getPromisse}
                           onChange={data => handleComportamentosChange(data).then(result => handleAddOpton(i,result))}
                         />
                       </DivBoxColumn>
-                      {object.opcoes.length > 1 &&
+                      {object.opcoes && object.opcoes.length > 0 &&
                       <DivBoxColumn>
                         <AssyncSelect
                           name={`respostas.${i}.id`}
+                          value = {object.id && {value: object.id, label: object.title}}
                           label="Resposta"
                           options={object.opcoes}
                         />
@@ -151,7 +155,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
                     </DivBoxRow>
                   )
                 })}
-              </DivBoxColumn>}
+              </DivBoxColumn>
                 {results.respostas.length > 1 &&
                     <button
                       className="delete-button"

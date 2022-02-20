@@ -16,7 +16,7 @@ class Results extends Model {
     this.belongsToMany(models.Respostas, {
       through: 'results_respostas',
       as: 'respostas',
-      foreignKey: 'respostas_id',
+      foreignKey: 'results_id',
     });
   }
 }
