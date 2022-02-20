@@ -179,7 +179,7 @@ export default function Student({ history, location }) {
       } catch (error) {
         console.tron.log(error);
         toast.error(
-          `Aluno não cadastrado: ${error.response.data.messages[0].errors[0]}`
+          `Idosa não cadastrada: ${error.response.data.messages[0].errors[0]}`
         );
       }
     }

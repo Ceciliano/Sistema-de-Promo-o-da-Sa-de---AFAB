@@ -76,5 +76,5 @@ AssyncSelect.propTypes = {
 
 AssyncSelect.defaultProps = {
   disabled: false,
-  options: true, // [{ id: 0, label: 'Digite as primeiras letras do nome do aluno' }],
+  options: true, 
 };

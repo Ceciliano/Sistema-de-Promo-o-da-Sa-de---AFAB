@@ -141,7 +141,6 @@ export default function Results({ history, location }) {
 
   async function handleDeleteResults(results) {
     if (
-      // eslint-disable-next-line no-alert
       window.confirm(
         'Tem certeza que deseja excluir o resultso?\nEsta ação é irreversível!'
       )
@@ -203,7 +202,7 @@ export default function Results({ history, location }) {
                   results.map(s => (s.id === res.data.id ? res.data : s))
                 );
                 setSelectedResultsToEdit(null);
-                toast.success(`Aluno alterado com suceso! Nome: ${res.data.title}`);
+                toast.success(`Resultado alterado com suceso! Nome: ${res.data.title}`);
               })}
             handleClose={() => setSelectedResultsToEdit(null)}
           />

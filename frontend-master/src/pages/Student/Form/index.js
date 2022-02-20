@@ -81,11 +81,11 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
           errorApi.response.data.messages[0].errors[0]
         ) {
           toast.error(
-            `Aluno não atualizado: ${errorApi.response.data.messages[0].errors[0]}`
+            `Idosa não atualizada: ${errorApi.response.data.messages[0].errors[0]}`
           );
         }
       } else {
-        toast.error(`Aluno não atualizado: ${errorApi}`);
+        toast.error(`Idosa não atualizada: ${errorApi}`);
       }
     }
   }, [errorApi]);

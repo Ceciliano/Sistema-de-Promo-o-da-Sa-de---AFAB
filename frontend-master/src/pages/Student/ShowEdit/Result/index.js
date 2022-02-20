@@ -110,7 +110,7 @@ export default function ShowResult({ history, location }) {
       toast.success(`Idosa alterada com sucesso! Nome: ${name}`);
     } catch (error) {
       console.tron.error(error);
-      toast.error('Erro ao editar o Aluno');
+      toast.error('Erro ao editar o Idosa.');
     }
   }
 
@@ -147,7 +147,6 @@ export default function ShowResult({ history, location }) {
           context={{ age }}
         >
           <header>
-            <h1 style={{color:'#f79b39'}}></h1>
             <div className="buttons">
               <button type="button" className="close" onClick={handleGoBack}>
                 <MdKeyboardArrowLeft color="#fff" size={16} />

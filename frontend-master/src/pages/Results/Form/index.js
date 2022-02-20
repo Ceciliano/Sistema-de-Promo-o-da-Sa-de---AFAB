@@ -22,8 +22,27 @@ var schema = Yup.object().shape({
 
 export default function EditForm({ title, handleSave, handleClose, oldResults }) {
   const newResults = { title: '', respostas:[{ title: '', plan:{ id: '', title: ''}, opcoes: []},] }
-  const [results, setResults] = useState(oldResults? oldResults:newResults);
   const [errorApi, setErrorApi] = useState(null);
+  
+  const [results, setResults] = useState( 
+    () => {
+      if(!oldResults) return newResults;
+      
+      oldResults.respostas.map((r, i) => {
+        return new Promise((resolve, reject) => {
+          api.get(`/respostas?page=1&limit=100&q=&active=0&plan_id=${r.plan.id}`)
+            .then(result => {
+              const { respostas } = result.data;
+              if (respostas.length > 0) {
+                resolve(respostas.map(s => ({ value: s.id, label: s.title })));
+              }
+            })
+            .catch(error => reject(error));
+        }).then(result => handleAddOpton(i, result));
+      });
+
+      return oldResults;
+  });
 
   useEffect(() => {
     if (errorApi) {
@@ -41,9 +60,6 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
       }
     }
   }, [errorApi]);
-
-  useEffect(() => {
-  }, [oldResults]);
 
   async function handleInternalSave(data) {
     try {
@@ -88,6 +104,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
   }
 
   async function handleAddInput() {
+    console.log(results);
     setResults({ ...results, respostas: [...results.respostas, newResults.respostas[0]] });
   }
 

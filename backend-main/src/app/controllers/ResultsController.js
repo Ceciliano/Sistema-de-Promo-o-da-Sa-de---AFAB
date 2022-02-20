@@ -58,10 +58,9 @@ class ResultsController {
     const newRecord = await Results.create({
       title,
     });
-    const results = await Respostas.findByPk(respostas[0].id);
-    console.log(results);
-    await newRecord.addRespostas(results, {
-      through: { selfGranted: false },
+    respostas.map(async key => {await newRecord.addRespostas(key.id, {
+        through: { selfGranted: false },
+      });
     });
 
     return res.json(newRecord);
@@ -71,17 +70,16 @@ class ResultsController {
     const results = await Results.findByPk(req.params.id);
     const { title, respostas } = req.body;
 
-    await results.update({
+    await results.destroy();
+    const newRecord = await Results.create({
       title,
     });
-
-    await results.addRespostas(respostas[0].id, {
-      through: { selfGranted: false },
-    }).catch(error => {
-      console.log(error);
+    respostas.map(async key => {await newRecord.addRespostas(key.id, {
+        through: { selfGranted: false },
+      });
     });
 
-    return res.json(results);
+    return res.json(newRecord);
   }
 
   async delete(req, res) {

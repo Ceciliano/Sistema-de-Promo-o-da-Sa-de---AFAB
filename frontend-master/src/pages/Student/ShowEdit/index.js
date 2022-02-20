@@ -122,7 +122,7 @@ export default function ShowEdit({ history, location }) {
       toast.success(`Idosa alterada com sucesso! Nome: ${name}`);
     } catch (error) {
       console.tron.error(error);
-      toast.error('Erro ao editar o Aluno');
+      toast.error('Erro ao editar o Idosa.');
     }
   }
 
