@@ -52,7 +52,7 @@ export default function CheckInsTable({ studentId }) {
                     Data
                   </th>
                   <th className="text-left">
-                    Resultado
+                    COMPROMISSO COM O PLANO DE AÇÃO
                   </th>
                 </tr>
               </thead>
@@ -60,7 +60,7 @@ export default function CheckInsTable({ studentId }) {
                 {consults.map(c => (
                   <tr key={c.id}>
                     <td>{c.createdAt}</td>
-                    <td>{c.result}</td>
+                    <td>{c.compromisso}</td>
                   </tr>
                 ))}
               </tbody>
