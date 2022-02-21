@@ -67,15 +67,31 @@ class ConsultController {
     return res.json(newRecord);
   }
 
-  async result(req, res) {
+  async update(req, res) {
     const {  acaoImediataBaixoControle, compromisso,  comportamento,  acaoImediataAltoControle } = req.body;
-    const consultOld = await Consult.findByPk(req.params.id);
+    const consult = await Consult.findByPk(req.params.id);
 
-    await consultOld.update({
+    await consult.update({
       acaoImediataBaixoControle,
       compromisso,
       comportamento,
       acaoImediataAltoControle
+    }).catch(error => {
+      console.log(error);
+      res.status(400).send(error);
+    })
+
+    return res.json(consult);
+  }
+
+  async result(req, res) {
+    const consult = await Consult.findByPk(req.params.id, {
+      include: [
+        {
+          model: ConsultResposta,
+          as: 'consult_resposta',
+        },
+      ],
     });
 
     return res.json(consult);

@@ -10,6 +10,7 @@ import DatePicker from '~/components/DatePicker';
 import InputMaskUnform from '~/components/InputMaskUnform';
 import Modal from '~/components/Modal';
 import ReactSelect from '~/components/ReactSelect';
+import Results from '~/pages/Results';
 import api from '~/services/api';
 import ConsultForm from './Consult';
 import { Container, DivBoxColumn, DivBoxRow } from './styles';
@@ -123,13 +124,13 @@ export default function ShowEdit({ history, location }) {
     setShowCreate(false);
   }
 
-  function handleResult(_consult) {
-    console.log(_consult);
+  function handleResult(res) {
     setShowCreate(false);
+    const {data} = res;
 
     history.push('/students/show/result', {
       student,
-      _consult,
+      data,
     });
   }
 
@@ -139,13 +140,14 @@ export default function ShowEdit({ history, location }) {
 
   function createSucessStudent(res) {
     toast.success(`Consulta realizada com sucesso! Nome: ${student.name}`);
+    return res;
   }
   
   return (
     <>
      <Modal visible={showCreate}>
         <ConsultForm student_id={student.id} name={student.name} handleClose={handleClose} handleSave={_consult => 
-          createStundent(_consult).then(createSucessStudent).then(handleResult(_consult))}
+          createStundent(_consult).then(createSucessStudent).then(handleResult)}
         />
       </Modal>
       <Container>

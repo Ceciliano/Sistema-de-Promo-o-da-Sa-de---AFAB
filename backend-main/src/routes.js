@@ -107,7 +107,12 @@ routes.post(
   ConsultController.store
 );
 routes.put(
-  '/students/consults',
+  '/students/consults/:id',
+  ConsultController.update
+);
+
+routes.get(
+  '/students/consults/:id',
   ConsultController.result
 );
 

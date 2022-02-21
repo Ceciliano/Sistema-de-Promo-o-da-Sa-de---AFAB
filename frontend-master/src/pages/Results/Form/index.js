@@ -27,7 +27,7 @@ export default function EditForm({ title, handleSave, handleClose, oldResults })
   const [results, setResults] = useState( 
     () => {
       if(!oldResults) return newResults;
-      
+
       oldResults.respostas.map((r, i) => {
         return new Promise((resolve, reject) => {
           api.get(`/respostas?page=1&limit=100&q=&active=0&plan_id=${r.plan.id}`)

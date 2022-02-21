@@ -128,6 +128,7 @@ export default function Results({ history, location }) {
     // TODO: Melhorar a exibição do results adicionado
     setResults([...oldResults, result]);
 
+    history.push('/results', { currentPage: location.state.currentPage });
     toast.success(`Resultso cadastrado com suceso! Título: ${result.title}`);
   }
 
@@ -202,6 +203,7 @@ export default function Results({ history, location }) {
                   results.map(s => (s.id === res.data.id ? res.data : s))
                 );
                 setSelectedResultsToEdit(null);
+                history.push('/results', { currentPage: location.state.currentPage });
                 toast.success(`Resultado alterado com suceso! Nome: ${res.data.title}`);
               })}
             handleClose={() => setSelectedResultsToEdit(null)}
