@@ -125,23 +125,25 @@ export default function ShowEdit({ history, location }) {
   }
 
   function handleResult(res) {
-    console.log(res);
     setShowCreate(false);
     const {data} = res;
+    const disabled = false;
 
     history.push('/students/show/result', {
       student,
       data,
+      disabled
     });
   }
 
 
   function handleDetail(data) {
-    console.log(data);
+    const disabled = true;
 
     history.push('/students/show/result', {
       student,
       data,
+      disabled
     });
   }
 

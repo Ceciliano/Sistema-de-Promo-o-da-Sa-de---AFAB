@@ -330,6 +330,7 @@ export default function ShowResult({ history, location }) {
                       <Input
                         type="text"
                         name="result.acaoImediataBaixoControle"
+                        disabled={location.state.disabled}
                       />
                     </DivBoxColumn>
                     <DivBoxColumn>
@@ -337,6 +338,7 @@ export default function ShowResult({ history, location }) {
                       <Input
                         type="text"
                         name="result.acaoImediataAltoControle"
+                        disabled={location.state.disabled}
                       />
                     </DivBoxColumn>
                   </DivBoxRow>
@@ -345,6 +347,7 @@ export default function ShowResult({ history, location }) {
                     <Input
                       type="text"
                       name="result.compromisso"
+                      disabled={location.state.disabled}
                     />
                   </DivBoxColumn>
                   <DivBoxColumn>
@@ -352,6 +355,7 @@ export default function ShowResult({ history, location }) {
                     <Input
                       type="text"
                       name="result.comportamento"
+                      disabled={location.state.disabled}
                     />
                   </DivBoxColumn>
               </div>
