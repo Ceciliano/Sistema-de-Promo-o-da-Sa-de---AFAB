@@ -2,3 +2,4 @@
 *.lock
 
 add .env
+node_modules
