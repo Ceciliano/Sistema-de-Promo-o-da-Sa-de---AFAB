@@ -38,7 +38,6 @@ export default function ShowResult({ history, location }) {
 
   async function loadResult() {
     const response = await api.get(`/students/consults/${location.state.data.id}`);
-    console.log(response);
     setStudent({...student, result:response.data});
     setLoading(false);
   }
@@ -304,60 +303,19 @@ export default function ShowResult({ history, location }) {
                 <h2>
                   Conhecimentos Específicos do Comportamento
                 </h2>
-                <DivBoxColumn>
-                  <label>Benefícios percebidos no comportamento: Percebe benefícios quando executa o cuidado com a saúde?</label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={"Sim - Prazer de viver, Sim - Melhora disposição, Sim - sente-se saudável"}
-                    disabled={true}
-                  />
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <label>Barreiras percebidas para a ação: O que a impede de realizar o cuidado com a saúde?</label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={"Aderir/ Manter a alimentação, Recurso financeiro, Falta de apoio da família"}
-                    disabled={true}
-                  />
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <label>Autoeficácia Percebida: Sente-se capaz de superar as barreiras e realizar o cuidado com a saúde?</label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={"Não"}
-                    disabled={true}
-                  />
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <label>Sentimentos presenciados ao realizar comportamento:</label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={"Alegria, Bem-estar"}
-                    disabled={true}
-                  />
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <label>Influências Interpessoais: O que influencia para que adote os cuidados com a saúde?</label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={"Amigos, Filhos, ACS, medo de adoecer"}
-                    disabled={true}
-                  />
-                </DivBoxColumn>
-                <DivBoxColumn>
-                  <label>Situações que influenciam: Quais locais que encontra informações e orientações de saúde?</label>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={"Programas de televisão, Grupos/palestras na ESF, Academia Carioca"}
-                    disabled={true}
-                  />
-                </DivBoxColumn>
+                {student.result.consults.map(function(p, i){
+                  return <DivBoxColumn key={i}>
+                    <label>
+                      {p.pergunta}
+                    </label>
+                    <Input
+                      type="text"
+                      name="name"
+                      value={p.resposta}
+                      disabled={true}
+                    />
+                  </DivBoxColumn>
+                })}
               </div>
             </DivBoxRow>
             <div className="arrow"><div className="seta"></div></div>
