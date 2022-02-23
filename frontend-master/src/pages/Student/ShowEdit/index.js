@@ -125,8 +125,19 @@ export default function ShowEdit({ history, location }) {
   }
 
   function handleResult(res) {
+    console.log(res);
     setShowCreate(false);
     const {data} = res;
+
+    history.push('/students/show/result', {
+      student,
+      data,
+    });
+  }
+
+
+  function handleDetail(data) {
+    console.log(data);
 
     history.push('/students/show/result', {
       student,
@@ -375,7 +386,7 @@ export default function ShowEdit({ history, location }) {
           </DivBoxColumn>
           </div>
         </Form>
-        <CheckInTable studentId={student.id} />
+        <CheckInTable studentId={student.id} handleDetail={handleDetail}/>
       </Container>
     </>
   );

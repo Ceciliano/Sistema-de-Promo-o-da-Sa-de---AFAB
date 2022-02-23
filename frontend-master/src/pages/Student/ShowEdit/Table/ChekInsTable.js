@@ -4,7 +4,7 @@ import api from '~/services/api';
 import { Container, TableBox } from './styles';
 import LoadingIndicator from '~/components/LoadingIndicator';
 
-export default function CheckInsTable({ studentId }) {
+export default function CheckInsTable({ studentId, handleDetail}) {
   const [consults, setConsults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
@@ -30,6 +30,10 @@ export default function CheckInsTable({ studentId }) {
     loadConsults();
   }, [studentId]);
 
+  function handleDetailConsult(res) {
+    handleDetail(res);
+  }
+
   return (
     <Container>
       <h2 style={{color:'#6fd971'}}>
@@ -54,6 +58,7 @@ export default function CheckInsTable({ studentId }) {
                   <th className="text-left">
                     COMPROMISSO COM O PLANO DE AÇÃO
                   </th>
+                  <th width="180" />
                 </tr>
               </thead>
               <tbody>
@@ -61,6 +66,17 @@ export default function CheckInsTable({ studentId }) {
                   <tr key={c.id}>
                     <td>{c.createdAt}</td>
                     <td>{c.compromisso}</td>
+                    <td className="text-center">
+                      <button
+                        className="edit-button"
+                        type="button"
+                        onClick={() => {
+                          handleDetailConsult(c);
+                        }}
+                      >
+                        Detalhar
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
