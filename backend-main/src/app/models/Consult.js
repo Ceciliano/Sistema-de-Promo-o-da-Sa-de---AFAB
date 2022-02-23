@@ -17,9 +17,8 @@ class Consult extends Model {
 
   static associate(models) {
     this.belongsTo(models.Student, { foreignKey: 'student_id', as: 'student' });
-    this.belongsToMany(models.ConsultResposta, {
-      through: 'consult_resposta',
-      as: 'consult',
+    this.hasMany(models.ConsultResposta, {
+      as: 'consults',
       foreignKey: 'consult_id',
     });
   }

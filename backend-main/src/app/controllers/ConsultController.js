@@ -76,10 +76,7 @@ class ConsultController {
       compromisso,
       comportamento,
       acaoImediataAltoControle
-    }).catch(error => {
-      console.log(error);
-      res.status(400).send(error);
-    })
+    });
 
     return res.json(consult);
   }
@@ -89,9 +86,15 @@ class ConsultController {
       include: [
         {
           model: ConsultResposta,
-          as: 'consult_resposta',
+          as: 'consults',
+          attributes: {
+            exclude: ['createdAt', 'updatedAt', 'consult_id'],
+          },
         },
       ],
+    }).catch(error => {
+      console.log(error);
+      res.status(400).send(error);
     });
 
     return res.json(consult);

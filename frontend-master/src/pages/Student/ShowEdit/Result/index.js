@@ -13,10 +13,13 @@ import { Container, DivBoxColumn, DivBoxRow } from '../styles';
 import LoadingIndicator from '~/components/LoadingIndicator';
 
 const schema = Yup.object().shape({
-  acaoImediataBaixoControle: Yup.string(),
-  compromisso: Yup.string(),
-  comportamento: Yup.string(),
-  acaoImediataAltoControle: Yup.string(),
+  result: Yup.object().shape({
+      acaoImediataBaixoControle: Yup.string(),
+      compromisso: Yup.string(),
+      comportamento: Yup.string(),
+      acaoImediataAltoControle: Yup.string(),
+    }
+  )
 });
 
 export default function ShowResult({ history, location }) {
@@ -44,12 +47,12 @@ export default function ShowResult({ history, location }) {
     history.push('/students', { currentPage: location.state.currentPage });
   }
 
-  async function handleSubmit({ 
-    acaoImediataBaixoControle,
-    compromisso,
-    comportamento,
-    acaoImediataAltoControle,
-   }) {
+  async function handleSubmit({ result }) {
+    const { 
+      acaoImediataBaixoControle,
+      compromisso,
+      comportamento,
+      acaoImediataAltoControle, } = result;
 
     try {
       const response = await api.put(`/students/consults/${location.state.data.id}`, {
@@ -368,14 +371,14 @@ export default function ShowResult({ history, location }) {
                       <label>Ações imediatas de Baixo controle</label>
                       <Input
                         type="text"
-                        name="acaoImediataBaixoControle"
+                        name="result.acaoImediataBaixoControle"
                       />
                     </DivBoxColumn>
                     <DivBoxColumn>
                       <label>Ações imediatas de Alto controle (preferenciais)</label>
                       <Input
                         type="text"
-                        name="acaoImediataAltoControle"
+                        name="result.acaoImediataAltoControle"
                       />
                     </DivBoxColumn>
                   </DivBoxRow>
@@ -383,14 +386,14 @@ export default function ShowResult({ history, location }) {
                     <label>Compromisso com o plano de ação:</label>
                     <Input
                       type="text"
-                      name="compromisso"
+                      name="result.compromisso"
                     />
                   </DivBoxColumn>
                   <DivBoxColumn>
                     <label>Comportamento promotor de saúde:</label>
                     <Input
                       type="text"
-                      name="comportamento"
+                      name="result.comportamento"
                     />
                   </DivBoxColumn>
               </div>
