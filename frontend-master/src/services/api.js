@@ -3,7 +3,7 @@ import axios from 'axios';
 const api = axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? 'https://apigp.mourabraz.com'
+      ? 'https://sistema-promocao-saude.herokuapp.com'
       : 'http://127.0.0.1:3333',
 });
 
