@@ -61,7 +61,7 @@ export default function ShowResult({ history, location }) {
         acaoImediataAltoControle,
       });
 
-      setStudent(response.data);
+      setStudent(...student, response.data);
       toast.success(`Idosa alterada com sucesso! Nome: ${student.name}`);
     } catch (error) {
       console.tron.error(error);
