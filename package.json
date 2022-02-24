@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "mourabraz@hotmail.com",
   "scripts": {
+    "start":"node dist/server.js",
     "dev": "node -r sucrase/register src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports",
     "dev-seed": "run-s unmigrate migrate seedall dev",
