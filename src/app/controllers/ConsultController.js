@@ -60,9 +60,10 @@ class ConsultController {
       res.status(400).send(error);
     })
 
-    newRecord.update({
-      compromisso: acertos[0].title
-    })
+    if(acertos[0])
+      newRecord.update({
+        compromisso: acertos[0].title
+      })
 
     return res.json(newRecord);
   }
