@@ -6,6 +6,7 @@
   "author": "mourabraz@hotmail.com",
   "scripts": {
     "dev": "node -r sucrase/register src/server.js",
+    "build": "sucrase ./src -d ./dist --transforms imports",
     "dev-seed": "run-s unmigrate migrate seedall dev",
     "seedprop": "run-s unmigrate migrate seedall",
     "debug": "node -r sucrase/register --inspect src/server.js",
