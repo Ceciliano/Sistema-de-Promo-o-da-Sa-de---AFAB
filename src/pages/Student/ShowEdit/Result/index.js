@@ -303,7 +303,7 @@ export default function ShowResult({ history, location }) {
                 <h2>
                   Conhecimentos Específicos do Comportamento
                 </h2>
-                {student.result.consults.map(function(p, i){
+                {student && student.result && student.result.consults && student.result.consults.map(function(p, i){
                   return <DivBoxColumn key={i}>
                     <label>
                       {p.pergunta}
