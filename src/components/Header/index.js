@@ -26,7 +26,6 @@ export default function Header() {
           <NavLink to="/plans">Cadastro dos Conhecimentos Específicos</NavLink>
           <NavLink to="/results">Cadastro dos Resultados</NavLink>
         </nav>
-
         <aside>
           <ButtonBox>
             <button type="button" onClick={handleSignOut}>
