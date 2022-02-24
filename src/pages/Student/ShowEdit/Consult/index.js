@@ -60,7 +60,6 @@ export default function ConsultForm({ name, student_id, handleSave, handleClose,
     try {
       handleSave({...data, student_id: student_id});
     } catch (error) {
-      console.tron.log(error);
       setErrorApi(error);
     }
   }

@@ -177,7 +177,6 @@ export default function Student({ history, location }) {
           );
         }
       } catch (error) {
-        console.tron.log(error);
         toast.error(
           `Idosa não cadastrada: ${error.response.data.messages[0].errors[0]}`
         );
@@ -186,7 +185,6 @@ export default function Student({ history, location }) {
   }
 
   function handleShowEdit(student, openConsult) {
-    console.tron.log('handleShowEdit', student);
     history.push('/students/show/edit', {
       student,
       currentPage,

@@ -101,7 +101,6 @@ export default function EditForm({ title, handleSave, handleClose, oldStudent })
 
       handleSave(data);
     } catch (error) {
-      console.tron.log(error);
       setErrorApi(error);
     }
   }

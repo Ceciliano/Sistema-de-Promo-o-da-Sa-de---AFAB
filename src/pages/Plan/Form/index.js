@@ -53,7 +53,6 @@ export default function EditForm({ title, handleSave, handleClose, oldPlan }) {
     try {
       handleSave(data);
     } catch (error) {
-      console.tron.log(error);
       setErrorApi(error);
     }
   }

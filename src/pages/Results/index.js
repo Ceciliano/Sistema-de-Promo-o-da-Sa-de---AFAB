@@ -156,7 +156,6 @@ export default function Results({ history, location }) {
           );
         }
       } catch (error) {
-        console.tron.log(error);
         toast.error(
           `Resultso não excluído: ${error.response.data.mesages[0].errors[0]}`
         );

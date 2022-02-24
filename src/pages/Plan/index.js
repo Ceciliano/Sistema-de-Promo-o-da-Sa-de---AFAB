@@ -164,7 +164,6 @@ export default function Plan({ history, location }) {
           );
         }
       } catch (error) {
-        console.tron.log(error);
         toast.error(
           `Plano não excluído: ${error.response.data.messages[0].errors[0]}`
         );
