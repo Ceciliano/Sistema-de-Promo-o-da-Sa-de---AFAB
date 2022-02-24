@@ -5,7 +5,7 @@
   "license": "MIT",
   "author": "mourabraz@hotmail.com",
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "node src/server.js",
     "dev-seed": "run-s unmigrate migrate seedall dev",
     "seedprop": "run-s unmigrate migrate seedall",
     "debug": "node -r sucrase/register --inspect src/server.js",
